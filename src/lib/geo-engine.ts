@@ -22,13 +22,16 @@ export interface ThanaFeature {
 }
 
 export interface LandmarkItem {
+  id?: string;
   name: string;
+  name_bn?: string;
   alt_names?: string[];
   thana: string;
   district: string;
   division?: string;
   lat: number;
   lng: number;
+  category?: string;
   type?: string;
 }
 
@@ -100,7 +103,7 @@ export async function initGeoEngine(): Promise<void> {
     let json: { features: ThanaFeature[] } | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v4');
+      const cache = await caches.open('geo-engine-v5');
       const cacheKey = '/geo/bd_thanas.min.geojson';
       let response = await cache.match(cacheKey);
 
@@ -125,6 +128,22 @@ export async function initGeoEngine(): Promise<void> {
       allTreeItems = [];
 
       json.features.forEach((f, i) => {
+        const props = f.properties as any;
+        if (props && Array.isArray(props.bbox) && props.bbox.length === 4) {
+          const [minX, minY, maxX, maxY] = props.bbox;
+          const center = Array.isArray(props.center) ? props.center : [(minX + maxX) / 2, (minY + maxY) / 2];
+          allTreeItems.push({
+            minX,
+            minY,
+            maxX,
+            maxY,
+            index: i,
+            centerX: center[0],
+            centerY: center[1]
+          });
+          return;
+        }
+
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
         const geom = f.geometry;
 
@@ -174,7 +193,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
     let landmarks: LandmarkItem[] | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v4');
+      const cache = await caches.open('geo-engine-v5');
       const cacheKey = '/geo/bd_landmarks.json';
       let response = await cache.match(cacheKey);
 
@@ -199,9 +218,11 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
       searchIndex = new Fuse(landmarks, {
         keys: [
           { name: 'name', weight: 0.5 },
+          { name: 'name_bn', weight: 0.45 },
           { name: 'alt_names', weight: 0.3 },
-          { name: 'thana', weight: 0.15 },
-          { name: 'district', weight: 0.1 },
+          { name: 'thana', weight: 0.25 },
+          { name: 'district', weight: 0.2 },
+          { name: 'category', weight: 0.1 },
           { name: 'type', weight: 0.1 }
         ],
         threshold: 0.38,

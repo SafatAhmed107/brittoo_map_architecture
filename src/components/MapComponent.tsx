@@ -239,6 +239,10 @@ export default function MapComponent() {
   const [selectedTuition, setSelectedTuition] = useState<TuitionItem | null>(null);
   const [activeTab, setActiveTab] = useState<'tutor' | 'guardian'>('tutor');
   const [radiusFilter, setRadiusFilter] = useState<number>(3000); // 3km default
+  const selectedCoordsRef = useRef(selectedCoords);
+  selectedCoordsRef.current = selectedCoords;
+  const radiusFilterRef = useRef(radiusFilter);
+  radiusFilterRef.current = radiusFilter;
   const [classFilter, setClassFilter] = useState<string>('ALL');
   const [showDeck, setShowDeck] = useState(true);
 
@@ -459,17 +463,17 @@ export default function MapComponent() {
     marker.on('dragend', () => {
       const lngLat = marker.getLngLat();
       handleLocationChange(lngLat.lng, lngLat.lat);
-      updateRadiusCircle(map, [lngLat.lng, lngLat.lat], radiusFilter);
+      updateRadiusCircle(map, [lngLat.lng, lngLat.lat], radiusFilterRef.current);
     });
 
     map.on('click', (e: maplibregl.MapMouseEvent) => {
       marker.setLngLat(e.lngLat);
       handleLocationChange(e.lngLat.lng, e.lngLat.lat);
-      updateRadiusCircle(map, [e.lngLat.lng, e.lngLat.lat], radiusFilter);
+      updateRadiusCircle(map, [e.lngLat.lng, e.lngLat.lat], radiusFilterRef.current);
     });
 
     map.on('load', () => {
-      updateRadiusCircle(map, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
+      updateRadiusCircle(map, [selectedCoordsRef.current.lng, selectedCoordsRef.current.lat], radiusFilterRef.current);
       setupMvtLayer(map);
     });
 
@@ -487,7 +491,7 @@ export default function MapComponent() {
       map.remove();
       mapRef.current = null;
     };
-  }, [handleLocationChange, selectedCoords.lat, selectedCoords.lng, fetchSystemStatus, updateRadiusCircle, setupMvtLayer, radiusFilter]);
+  }, []); // Mount strictly once
 
   // Sync radius circle when radiusFilter changes
   useEffect(() => {
@@ -496,10 +500,10 @@ export default function MapComponent() {
     }
   }, [radiusFilter, selectedCoords.lng, selectedCoords.lat, updateRadiusCircle]);
 
-  // Load tuition posts whenever location or radius filter changes
+  // Load tuition posts whenever location or radius filter changes (Debounced by 250ms)
   useEffect(() => {
     let isCancelled = false;
-    const loadData = async () => {
+    const timer = setTimeout(async () => {
       try {
         const url = `/api/tuitions?lat=${selectedCoords.lat}&lng=${selectedCoords.lng}&radius=${radiusFilter}`;
         const res = await fetch(url);
@@ -510,10 +514,11 @@ export default function MapComponent() {
       } catch (err) {
         console.warn('Failed to load tuitions:', err);
       }
-    };
-    loadData();
+    }, 250);
+
     return () => {
       isCancelled = true;
+      clearTimeout(timer);
     };
   }, [selectedCoords.lat, selectedCoords.lng, radiusFilter]);
 
@@ -725,6 +730,12 @@ export default function MapComponent() {
         </span>
       );
     }
+    if (type === 'hub') {
+      return <span className="badge badge-amber">Upazila Sadar</span>;
+    }
+    if (type === 'commercial') {
+      return <span className="badge badge-blue">Bazar / Hub</span>;
+    }
     return <span className="badge badge-cyan">{type}</span>;
   };
 
@@ -885,14 +896,19 @@ export default function MapComponent() {
                 onMouseEnter={() => setSelectedSearchIndex(idx)}
               >
                 <div>
-                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {item.name}
+                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                    <span>{item.name}</span>
+                    {item.name_bn && item.name_bn !== item.name && (
+                      <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 500 }}>
+                        ({item.name_bn})
+                      </span>
+                    )}
                   </div>
                   <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)', marginTop: 2 }}>
-                    {item.thana}, {item.district} ({item.division || 'Bangladesh'})
+                    {item.thana ? `${item.thana}, ` : ''}{item.district} {item.division ? `(${item.division})` : ''}
                   </div>
                 </div>
-                {getLandmarkBadge(item.type)}
+                {getLandmarkBadge(item.category || item.type)}
               </li>
             ))}
           </ul>

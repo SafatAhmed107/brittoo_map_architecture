@@ -460,3 +460,18 @@ input[type="range"].commute-slider::-webkit-slider-thumb:hover {
   animation: neon-pulse 2.2s infinite;
 }
 
+/* Canvas Filter for Seamless Themes (immune to ad-blockers) */
+[data-map-theme="dark"] .maplibregl-canvas {
+  filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(92%);
+}
+
+[data-map-theme="light"] .maplibregl-canvas {
+  filter: brightness(102%) contrast(98%);
+}
+
+[data-map-theme="streets"] .maplibregl-canvas,
+[data-map-theme="satellite"] .maplibregl-canvas {
+  filter: none;
+}
+
+

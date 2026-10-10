@@ -57,32 +57,54 @@ interface InvalidationTile {
   y: number;
 }
 
-type MapTheme = 'dark' | 'light' | 'streets' | 'satellite';
+type MapTheme = 'streets' | 'dark' | 'light' | 'satellite';
+
+const OSM_TILES = [
+  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
+];
 
 const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
-  dark: {
+  streets: {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'carto-dark': {
+      'osm-raster': {
         type: 'raster',
-        tiles: [
-          'https://a.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
-          'https://b.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
-          'https://c.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
-          'https://d.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'
-        ],
+        tiles: OSM_TILES,
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors'
+        attribution: '© OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'carto-dark-layer',
+        id: 'osm-layer',
         type: 'raster',
-        source: 'carto-dark',
+        source: 'osm-raster',
         minzoom: 0,
-        maxzoom: 20
+        maxzoom: 19
+      }
+    ]
+  },
+  dark: {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+      'osm-raster': {
+        type: 'raster',
+        tiles: OSM_TILES,
+        tileSize: 256,
+        attribution: '© OpenStreetMap contributors'
+      }
+    },
+    layers: [
+      {
+        id: 'osm-layer',
+        type: 'raster',
+        source: 'osm-raster',
+        minzoom: 0,
+        maxzoom: 19
       }
     ]
   },
@@ -90,35 +112,9 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'carto-voyager': {
-        type: 'raster',
-        tiles: [
-          'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-          'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-          'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-          'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
-        ],
-        tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors'
-      }
-    },
-    layers: [
-      {
-        id: 'carto-voyager-layer',
-        type: 'raster',
-        source: 'carto-voyager',
-        minzoom: 0,
-        maxzoom: 20
-      }
-    ]
-  },
-  streets: {
-    version: 8,
-    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-    sources: {
       'osm-raster': {
         type: 'raster',
-        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+        tiles: OSM_TILES,
         tileSize: 256,
         attribution: '© OpenStreetMap contributors'
       }
@@ -144,15 +140,6 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
         ],
         tileSize: 256,
         attribution: '© Esri, Maxar, Earthstar Geographics'
-      },
-      'carto-labels': {
-        type: 'raster',
-        tiles: [
-          'https://a.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
-          'https://b.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
-          'https://c.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png'
-        ],
-        tileSize: 256
       }
     },
     layers: [
@@ -160,13 +147,6 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
         id: 'esri-satellite-layer',
         type: 'raster',
         source: 'esri-satellite',
-        minzoom: 0,
-        maxzoom: 19
-      },
-      {
-        id: 'carto-labels-layer',
-        type: 'raster',
-        source: 'carto-labels',
         minzoom: 0,
         maxzoom: 19
       }
@@ -246,7 +226,7 @@ export default function MapComponent() {
   // Current Viewport Telemetry
   const [currentZoom, setCurrentZoom] = useState(14.5);
   const [currentTile, setCurrentTile] = useState({ z: 14, x: 12305, y: 7079 });
-  const [currentTheme, setCurrentTheme] = useState<MapTheme>('dark');
+  const [currentTheme, setCurrentTheme] = useState<MapTheme>('streets');
 
   // Search & Suggestions
   const [searchQuery, setSearchQuery] = useState('');
@@ -446,7 +426,7 @@ export default function MapComponent() {
 
     const map = new maplibregl.Map({
       container: mapContainer.current,
-      style: MAP_STYLES.dark,
+      style: MAP_STYLES.streets,
       center: [selectedCoords.lng, selectedCoords.lat],
       zoom: 14.5,
       pitch: 28,
@@ -581,16 +561,24 @@ export default function MapComponent() {
 
   // Switch Map Theme
   const handleThemeChange = (theme: MapTheme) => {
+    const prevTheme = currentTheme;
     setCurrentTheme(theme);
     setShowStyleMenu(false);
     if (!mapRef.current) return;
-    mapRef.current.setStyle(MAP_STYLES[theme]);
-    mapRef.current.once('style.load', () => {
-      if (mapRef.current) {
-        updateRadiusCircle(mapRef.current, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
-        setupMvtLayer(mapRef.current);
-      }
-    });
+
+    // streets, dark, and light share OSM tiles with CSS filter themes; only swap style for satellite
+    const needsStyleSwap = (theme === 'satellite' && prevTheme !== 'satellite') ||
+                           (theme !== 'satellite' && prevTheme === 'satellite');
+
+    if (needsStyleSwap) {
+      mapRef.current.setStyle(MAP_STYLES[theme]);
+      mapRef.current.once('style.load', () => {
+        if (mapRef.current) {
+          updateRadiusCircle(mapRef.current, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
+          setupMvtLayer(mapRef.current);
+        }
+      });
+    }
   };
 
   // Search input handler
@@ -741,7 +729,11 @@ export default function MapComponent() {
   };
 
   return (
-    <div data-theme={currentTheme === 'light' ? 'light' : 'dark'} style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+    <div
+      data-theme={currentTheme === 'light' ? 'light' : 'dark'}
+      data-map-theme={currentTheme}
+      style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#0b111e' }}
+    >
       {/* Map Canvas */}
       <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
 
@@ -1089,7 +1081,9 @@ export default function MapComponent() {
             }}
           >
             <Layers size={14} color="#a78bfa" />
-            <span style={{ textTransform: 'capitalize' }}>{currentTheme}</span>
+            <span style={{ textTransform: 'capitalize' }}>
+              {currentTheme === 'streets' ? 'Street View' : currentTheme}
+            </span>
           </button>
 
           {showStyleMenu && (
@@ -1108,10 +1102,10 @@ export default function MapComponent() {
               }}
             >
               {[
-                { id: 'dark' as MapTheme, name: 'Midnight High-Contrast', desc: 'Clear Night' },
-                { id: 'light' as MapTheme, name: 'Daylight Voyager', desc: 'Vibrant Day' },
-                { id: 'streets' as MapTheme, name: 'OpenStreetMap', desc: 'Standard' },
-                { id: 'satellite' as MapTheme, name: 'Satellite Aerial', desc: 'Imagery' }
+                { id: 'streets' as MapTheme, name: 'Street View (Standard)', desc: 'OpenStreetMap Live' },
+                { id: 'dark' as MapTheme, name: 'Midnight High-Contrast', desc: 'Dark Cartography' },
+                { id: 'light' as MapTheme, name: 'Daylight Voyager', desc: 'Bright & Crisp' },
+                { id: 'satellite' as MapTheme, name: 'Satellite Aerial', desc: 'Esri World Imagery' }
               ].map((item) => (
                 <button
                   key={item.id}

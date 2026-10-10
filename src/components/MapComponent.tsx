@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import * as pmtiles from 'pmtiles';
 import {
@@ -25,7 +25,13 @@ import {
   Phone,
   ChevronDown,
   ChevronUp,
-  Layers
+  Layers,
+  GraduationCap,
+  Building2,
+  Train,
+  Sliders,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 
 interface TuitionItem {
@@ -83,10 +89,13 @@ const QUICK_ZONES = [
   { name: 'Dhanmondi', lng: 90.3725, lat: 23.7533, zoom: 14.8 },
   { name: 'Mirpur 10', lng: 90.3697, lat: 23.8071, zoom: 14.8 },
   { name: 'Uttara', lng: 90.3980, lat: 23.8698, zoom: 14.5 },
-  { name: 'Gulshan', lng: 90.4142, lat: 23.7942, zoom: 14.8 },
+  { name: 'GEC (Ctg)', lng: 91.8215, lat: 22.3585, zoom: 14.5 },
   { name: 'RUET (Rajshahi)', lng: 88.6285, lat: 24.3636, zoom: 14.5 },
-  { name: 'GEC (Chittagong)', lng: 91.8215, lat: 22.3585, zoom: 14.5 },
-  { name: 'SUST (Sylhet)', lng: 91.8315, lat: 24.9175, zoom: 14.5 }
+  { name: 'SUST (Sylhet)', lng: 91.8315, lat: 24.9175, zoom: 14.5 },
+  { name: 'KUET (Khulna)', lng: 89.5024, lat: 22.8996, zoom: 14.5 },
+  { name: 'BM College (Barisal)', lng: 90.3548, lat: 22.7092, zoom: 14.5 },
+  { name: 'Rangpur Sadar', lng: 89.2605, lat: 25.7224, zoom: 14.5 },
+  { name: 'BAU (Mymensingh)', lng: 90.4345, lat: 24.7262, zoom: 14.5 }
 ];
 
 // Helper to generate a geodesic circle polygon for commute radius
@@ -145,7 +154,7 @@ export default function MapComponent() {
   });
 
   // Current Viewport Telemetry
-  const [currentZoom, setCurrentZoom] = useState(14);
+  const [currentZoom, setCurrentZoom] = useState(14.5);
   const [currentTile, setCurrentTile] = useState({ z: 14, x: 12305, y: 7079 });
   const [currentTheme, setCurrentTheme] = useState<MapTheme>('dark');
 
@@ -153,6 +162,7 @@ export default function MapComponent() {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState<LandmarkItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [selectedSearchIndex, setSelectedSearchIndex] = useState(-1);
 
   // Tuitions & Filter State
   const [tuitions, setTuitions] = useState<TuitionItem[]>([]);
@@ -160,6 +170,7 @@ export default function MapComponent() {
   const [activeTab, setActiveTab] = useState<'tutor' | 'guardian'>('tutor');
   const [radiusFilter, setRadiusFilter] = useState<number>(3000); // 3km default
   const [classFilter, setClassFilter] = useState<string>('ALL');
+  const [showDeck, setShowDeck] = useState(true);
 
   // "Post a Tuition" Modal State
   const [postFormOpen, setPostFormOpen] = useState(false);
@@ -184,7 +195,7 @@ export default function MapComponent() {
   }>({
     dbConnected: true,
     dbStatus: 'Supabase PostGIS Live',
-    postCount: 5,
+    postCount: 6,
     cfConfigured: false
   });
 
@@ -255,7 +266,7 @@ export default function MapComponent() {
       setSystemStats({
         dbConnected: data.database?.connected || false,
         dbStatus: data.database?.status || 'Active (Local Spatial Engine)',
-        postCount: data.database?.postCount || 5,
+        postCount: data.database?.postCount || 6,
         cfConfigured: data.cloudflare?.configured || false
       });
     } catch (e) {
@@ -263,8 +274,9 @@ export default function MapComponent() {
     }
   }, []);
 
-  // Update commute radius circle overlay on map
+  // Update commute radius circle overlay on map canvas
   const updateRadiusCircle = useCallback((map: maplibregl.Map, center: [number, number], radius: number) => {
+    if (!map.isStyleLoaded()) return;
     const circleData = createGeoJSONCircle(center, radius);
     const source = map.getSource('commute-radius') as maplibregl.GeoJSONSource | undefined;
 
@@ -294,7 +306,36 @@ export default function MapComponent() {
           'line-color': '#34d399',
           'line-width': 2,
           'line-dasharray': [2, 2],
-          'line-opacity': 0.8
+          'line-opacity': 0.85
+        }
+      });
+    }
+  }, []);
+
+  // Breakthrough 5: Attach PostGIS MVT Vector Tile Layer directly to MapLibre Canvas
+  const setupMvtLayer = useCallback((map: maplibregl.Map) => {
+    if (!map.isStyleLoaded()) return;
+
+    if (!map.getSource('tuitions-mvt')) {
+      const tileOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+      map.addSource('tuitions-mvt', {
+        type: 'vector',
+        tiles: [`${tileOrigin}/api/tiles/tuitions/{z}/{x}/{y}.pbf`],
+        minzoom: 10,
+        maxzoom: 16
+      });
+
+      map.addLayer({
+        id: 'tuitions-mvt-circles',
+        type: 'circle',
+        source: 'tuitions-mvt',
+        'source-layer': 'tuition_layer',
+        paint: {
+          'circle-color': '#10b981',
+          'circle-radius': 7.5,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.9
         }
       });
     }
@@ -330,14 +371,14 @@ export default function MapComponent() {
     el.className = 'custom-pin-user';
     el.innerHTML = `
       <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-        <div class="pulse-circle" style="position: absolute; width: 38px; height: 38px; border-radius: 50%; background: rgba(37,99,235,0.25);"></div>
-        <div style="width: 28px; height: 28px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: 2.5px solid #ffffff; border-radius: 50%; box-shadow: 0 4px 18px rgba(37,99,235,0.8); display: flex; align-items: center; justify-content: center; color: white;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="pulse-circle" style="position: absolute; width: 42px; height: 42px; border-radius: 50%; background: rgba(37,99,235,0.3);"></div>
+        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: 2.5px solid #ffffff; border-radius: 50%; box-shadow: 0 4px 20px rgba(37,99,235,0.9); display: flex; align-items: center; justify-content: center; color: white;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"/>
           </svg>
         </div>
-        <div style="position: absolute; top: 100%; width: 2px; height: 10px; background: #3b82f6;"></div>
-        <div style="position: absolute; top: calc(100% + 10px); width: 8px; height: 3px; background: rgba(0,0,0,0.4); border-radius: 50%;"></div>
+        <div style="position: absolute; top: 100%; width: 2.5px; height: 10px; background: #3b82f6;"></div>
+        <div style="position: absolute; top: calc(100% + 10px); width: 10px; height: 3px; background: rgba(0,0,0,0.5); border-radius: 50%;"></div>
       </div>
     `;
 
@@ -359,6 +400,7 @@ export default function MapComponent() {
 
     map.on('load', () => {
       updateRadiusCircle(map, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
+      setupMvtLayer(map);
     });
 
     map.on('move', () => {
@@ -375,7 +417,7 @@ export default function MapComponent() {
       map.remove();
       mapRef.current = null;
     };
-  }, [handleLocationChange, selectedCoords.lat, selectedCoords.lng, fetchSystemStatus, updateRadiusCircle, radiusFilter]);
+  }, [handleLocationChange, selectedCoords.lat, selectedCoords.lng, fetchSystemStatus, updateRadiusCircle, setupMvtLayer, radiusFilter]);
 
   // Sync radius circle when radiusFilter changes
   useEffect(() => {
@@ -405,6 +447,14 @@ export default function MapComponent() {
     };
   }, [selectedCoords.lat, selectedCoords.lng, radiusFilter]);
 
+  // Filtered tuition items based on curriculum
+  const filteredTuitions = useMemo(() => {
+    return tuitions.filter(t => {
+      if (classFilter === 'ALL') return true;
+      return t.class_level.toLowerCase().includes(classFilter.toLowerCase());
+    });
+  }, [tuitions, classFilter]);
+
   // Render tuition markers on map
   useEffect(() => {
     if (!mapRef.current) return;
@@ -412,16 +462,12 @@ export default function MapComponent() {
     tuitionMarkersRef.current.forEach(m => m.remove());
     tuitionMarkersRef.current = [];
 
-    const filtered = tuitions.filter(t => {
-      if (classFilter === 'ALL') return true;
-      return t.class_level.toLowerCase().includes(classFilter.toLowerCase());
-    });
-
-    filtered.forEach(tuition => {
+    filteredTuitions.forEach(tuition => {
       const el = document.createElement('div');
       el.className = 'tuition-marker';
+      const isSelected = selectedTuition?.id === tuition.id;
       el.innerHTML = `
-        <div style="background: rgba(11, 17, 30, 0.95); border: 2px solid #10b981; border-radius: 12px; padding: 4px 8px; box-shadow: 0 6px 18px rgba(16,185,129,0.45); display: flex; align-items: center; gap: 5px; color: #ffffff; font-family: var(--font-main);">
+        <div style="background: rgba(11, 17, 30, 0.96); border: ${isSelected ? '2.5px solid #34d399' : '2px solid #10b981'}; border-radius: 12px; padding: 4px 8px; box-shadow: 0 6px 20px ${isSelected ? 'rgba(52,211,153,0.7)' : 'rgba(16,185,129,0.45)'}; display: flex; align-items: center; gap: 5px; color: #ffffff; font-family: var(--font-main);">
           <span style="display: inline-block; width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span>
           <span style="font-weight: 800; font-size: 11px; letter-spacing: -0.3px;">৳${(tuition.salary_budget / 1000).toFixed(1)}k</span>
         </div>
@@ -441,7 +487,7 @@ export default function MapComponent() {
 
       tuitionMarkersRef.current.push(m);
     });
-  }, [tuitions, classFilter]);
+  }, [filteredTuitions, selectedTuition]);
 
   // Switch Map Theme
   const handleThemeChange = (theme: MapTheme) => {
@@ -452,6 +498,7 @@ export default function MapComponent() {
     mapRef.current.once('style.load', () => {
       if (mapRef.current) {
         updateRadiusCircle(mapRef.current, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
+        setupMvtLayer(mapRef.current);
       }
     });
   };
@@ -459,12 +506,13 @@ export default function MapComponent() {
   // Search input handler
   const handleSearchInput = (q: string) => {
     setSearchQuery(q);
+    setSelectedSearchIndex(-1);
     if (!q.trim()) {
       setSuggestions([]);
       setIsSearching(false);
       return;
     }
-    const results = searchPlaces(q, 7);
+    const results = searchPlaces(q, 8);
     setSuggestions(results);
     setIsSearching(true);
   };
@@ -482,12 +530,39 @@ export default function MapComponent() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isSearching || suggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedSearchIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedSearchIndex(prev => (prev > 0 ? prev - 1 : suggestions.length - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedSearchIndex >= 0 && selectedSearchIndex < suggestions.length) {
+        handleSelectLandmark(suggestions[selectedSearchIndex]);
+      }
+    } else if (e.key === 'Escape') {
+      setIsSearching(false);
+      setSuggestions([]);
+    }
+  };
+
   const handleQuickJump = (zone: typeof QUICK_ZONES[0]) => {
     if (mapRef.current && markerRef.current) {
       mapRef.current.flyTo({ center: [zone.lng, zone.lat], zoom: zone.zoom, pitch: 30, duration: 1600 });
       markerRef.current.setLngLat([zone.lng, zone.lat]);
       handleLocationChange(zone.lng, zone.lat);
       updateRadiusCircle(mapRef.current, [zone.lng, zone.lat], radiusFilter);
+    }
+  };
+
+  const handleSelectTuitionCard = (tuition: TuitionItem) => {
+    setSelectedTuition(tuition);
+    if (mapRef.current) {
+      mapRef.current.flyTo({ center: [tuition.lng, tuition.lat], zoom: 15.8, pitch: 35, duration: 1300 });
     }
   };
 
@@ -549,6 +624,32 @@ export default function MapComponent() {
     }
   };
 
+  const getLandmarkBadge = (type?: string) => {
+    if (!type) return <span className="badge badge-cyan">Landmark</span>;
+    if (type.includes('University')) {
+      return (
+        <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+          <GraduationCap size={11} /> {type}
+        </span>
+      );
+    }
+    if (type.includes('College')) {
+      return (
+        <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+          <Building2 size={11} /> {type}
+        </span>
+      );
+    }
+    if (type.includes('Metro')) {
+      return (
+        <span className="badge badge-blue" style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+          <Train size={11} /> {type}
+        </span>
+      );
+    }
+    return <span className="badge badge-cyan">{type}</span>;
+  };
+
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* Map Canvas */}
@@ -562,7 +663,7 @@ export default function MapComponent() {
           left: '50%',
           transform: 'translateX(-50%)',
           width: '94%',
-          maxWidth: '620px',
+          maxWidth: '680px',
           zIndex: 100,
           display: 'flex',
           flexDirection: 'column',
@@ -585,7 +686,8 @@ export default function MapComponent() {
             type="text"
             value={searchQuery}
             onChange={(e) => handleSearchInput(e.target.value)}
-            placeholder="Search landmark (e.g. BUET, Curzon, Dhanmondi, Mirpur 10)..."
+            onKeyDown={handleKeyDown}
+            placeholder="Search landmark (e.g. BUET, Curzon, Dhanmondi, SUST, GEC)..."
             style={{
               flex: 1,
               background: 'transparent',
@@ -603,13 +705,14 @@ export default function MapComponent() {
                 setSuggestions([]);
               }}
               style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+              aria-label="Clear search"
             >
               <X size={16} />
             </button>
           )}
 
           {/* Mode Switcher */}
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', gap: 2 }}>
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.45)', padding: '3px', borderRadius: '10px', gap: 2 }}>
             <button
               id="btn-tutor-mode"
               onClick={() => setActiveTab('tutor')}
@@ -617,7 +720,7 @@ export default function MapComponent() {
                 background: activeTab === 'tutor' ? '#2563eb' : 'transparent',
                 color: '#fff',
                 border: 'none',
-                padding: '5px 12px',
+                padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '12px',
                 fontWeight: 700,
@@ -625,7 +728,7 @@ export default function MapComponent() {
                 transition: 'background 0.15s ease'
               }}
             >
-              Tutor
+              Tutor Mode
             </button>
             <button
               id="btn-guardian-mode"
@@ -637,7 +740,7 @@ export default function MapComponent() {
                 background: activeTab === 'guardian' ? '#10b981' : 'transparent',
                 color: '#fff',
                 border: 'none',
-                padding: '5px 12px',
+                padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '12px',
                 fontWeight: 700,
@@ -650,7 +753,7 @@ export default function MapComponent() {
           </div>
         </div>
 
-        {/* Quick Jump Hotspot Chips */}
+        {/* Quick Jump Hotspot Chips across all 8 Divisions */}
         <div
           style={{
             display: 'flex',
@@ -679,7 +782,7 @@ export default function MapComponent() {
               borderRadius: 'var(--radius-md)',
               overflow: 'hidden',
               listStyle: 'none',
-              maxHeight: '320px',
+              maxHeight: '340px',
               overflowY: 'auto'
             }}
           >
@@ -694,20 +797,20 @@ export default function MapComponent() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
+                  background: selectedSearchIndex === idx ? 'rgba(37,99,235,0.22)' : 'transparent',
                   transition: 'background 0.15s ease'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                onMouseEnter={() => setSelectedSearchIndex(idx)}
               >
                 <div>
                   <div style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {item.name}
                   </div>
                   <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)', marginTop: 2 }}>
-                    {item.thana}, {item.district}
+                    {item.thana}, {item.district} ({item.division || 'Bangladesh'})
                   </div>
                 </div>
-                <span className="badge badge-cyan">{item.type || 'Landmark'}</span>
+                {getLandmarkBadge(item.type)}
               </li>
             ))}
           </ul>
@@ -718,7 +821,7 @@ export default function MapComponent() {
       <div
         style={{
           position: 'absolute',
-          top: 104,
+          top: 114,
           left: 16,
           zIndex: 90,
           display: 'flex',
@@ -743,7 +846,7 @@ export default function MapComponent() {
           }}
         >
           <Zap size={14} color="#10b981" />
-          <span>Reverse Geocoder: <strong style={{ color: '#34d399' }}>{locationInfo.executionMs.toFixed(3)} ms</strong></span>
+          <span>Ray-Cast: <strong style={{ color: '#34d399' }}>{locationInfo.executionMs.toFixed(3)} ms</strong></span>
           <span className="badge badge-emerald">0 Network</span>
           {showHud ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </button>
@@ -754,7 +857,7 @@ export default function MapComponent() {
             style={{
               padding: '16px',
               borderRadius: 'var(--radius-md)',
-              width: '310px',
+              width: '320px',
               display: 'flex',
               flexDirection: 'column',
               gap: 9,
@@ -763,11 +866,11 @@ export default function MapComponent() {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
               <span>Spatial Computation:</span>
-              <strong style={{ color: '#38bdf8' }}>Inline Ray-Cast + RBush</strong>
+              <strong style={{ color: '#38bdf8' }}>Inline Ray-Cast + RBush R-tree</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
               <span>Landmark Search:</span>
-              <strong style={{ color: '#a78bfa' }}>Fuse.js Client RAM</strong>
+              <strong style={{ color: '#a78bfa' }}>Fuse.js (123 Landmarks RAM)</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
               <span>Active Tile Index:</span>
@@ -785,7 +888,7 @@ export default function MapComponent() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
               <span>Edge Cache Policy:</span>
-              <strong style={{ color: '#38bdf8' }}>s-maxage=300 (SWR)</strong>
+              <strong style={{ color: '#38bdf8' }}>s-maxage=300 (SWR 600s)</strong>
             </div>
             {lastPurgedTiles.length > 0 && (
               <div style={{ marginTop: 4, padding: '8px', background: 'rgba(0,0,0,0.35)', borderRadius: '6px' }}>
@@ -803,14 +906,14 @@ export default function MapComponent() {
       <div
         style={{
           position: 'absolute',
-          top: 104,
+          top: 114,
           right: 16,
           zIndex: 90,
           display: 'flex',
           gap: 6
         }}
       >
-        {/* Commute Radius Filter */}
+        {/* Commute Radius Filter Pill */}
         <div
           className="glass-panel"
           style={{
@@ -845,7 +948,7 @@ export default function MapComponent() {
           </select>
         </div>
 
-        {/* Class Filter */}
+        {/* Class Curriculum Filter */}
         <div
           className="glass-panel"
           style={{
@@ -939,6 +1042,126 @@ export default function MapComponent() {
         </div>
       </div>
 
+      {/* Breakthrough 1.2: Commute Radius Ribbon & Deck (Tutors Browse Cards) */}
+      {activeTab === 'tutor' && showDeck && filteredTuitions.length > 0 && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 106,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '94%',
+            maxWidth: '880px',
+            zIndex: 85,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6
+          }}
+        >
+          {/* Deck Header & Counter */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '12px', color: '#94a3b8' }}>
+              <span className="badge badge-emerald">
+                🎯 {filteredTuitions.length} Tuitions within {(radiusFilter / 1000).toFixed(1)} km
+              </span>
+              <span>of {locationInfo.thana || 'Selected Pin'}</span>
+            </div>
+            <button
+              onClick={() => setShowDeck(!showDeck)}
+              style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: '11px' }}
+            >
+              <EyeOff size={13} /> Hide Deck
+            </button>
+          </div>
+
+          {/* Horizontal Scrollable Tuition Cards Ribbon */}
+          <div
+            style={{
+              display: 'flex',
+              gap: 12,
+              overflowX: 'auto',
+              padding: '4px 2px 8px 2px',
+              scrollbarWidth: 'none'
+            }}
+          >
+            {filteredTuitions.map((t) => {
+              const isSelected = selectedTuition?.id === t.id;
+              return (
+                <div
+                  key={t.id}
+                  className={`tuition-card ${isSelected ? 'active' : ''}`}
+                  onClick={() => handleSelectTuitionCard(t)}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <span className="badge badge-emerald" style={{ fontSize: '10px' }}>
+                      {t.distance_meters !== undefined ? `${(t.distance_meters / 1000).toFixed(1)} km away` : 'Nearby'}
+                    </span>
+                    <span style={{ fontSize: '14px', fontWeight: 800, color: '#34d399', letterSpacing: '-0.3px' }}>
+                      ৳{(t.salary_budget / 1000).toFixed(1)}k
+                    </span>
+                  </div>
+
+                  <div style={{ fontWeight: 800, fontSize: '13.5px', marginTop: 6, color: '#fff' }}>
+                    {t.class_level}
+                  </div>
+
+                  <div style={{ fontSize: '11.5px', color: '#94a3b8', marginTop: 2 }}>
+                    📍 {t.thana_name}, {t.district_name}
+                  </div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 8 }}>
+                    {t.subjects.slice(0, 2).map((s, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          background: 'rgba(255,255,255,0.06)',
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          fontSize: '10px',
+                          color: '#e2e8f0'
+                        }}
+                      >
+                        {s}
+                      </span>
+                    ))}
+                    {t.subjects.length > 2 && (
+                      <span style={{ fontSize: '10px', color: '#64748b', alignSelf: 'center' }}>
+                        +{t.subjects.length - 2}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Button to restore deck if hidden */}
+      {activeTab === 'tutor' && !showDeck && (
+        <button
+          onClick={() => setShowDeck(true)}
+          className="glass-panel"
+          style={{
+            position: 'absolute',
+            bottom: 104,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 85,
+            padding: '6px 14px',
+            borderRadius: 'var(--radius-full)',
+            fontSize: '12px',
+            color: '#34d399',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            cursor: 'pointer'
+          }}
+        >
+          <Eye size={14} /> Show {filteredTuitions.length} Nearby Tuitions
+        </button>
+      )}
+
       {/* Bottom Floating Bar: Selected Dropped Pin Info */}
       <footer
         className="glass-panel-elevated"
@@ -948,7 +1171,7 @@ export default function MapComponent() {
           left: '50%',
           transform: 'translateX(-50%)',
           width: '92%',
-          maxWidth: '580px',
+          maxWidth: '620px',
           borderRadius: 'var(--radius-lg)',
           padding: '14px 22px',
           zIndex: 90,
@@ -961,7 +1184,7 @@ export default function MapComponent() {
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 5 }}>
             <MapPin size={12} color="#38bdf8" />
-            <span style={{ fontWeight: 700, letterSpacing: '0.4px' }}>SELECTED PIN (DRAGGABLE)</span>
+            <span style={{ fontWeight: 700, letterSpacing: '0.4px' }}>SELECTED LOCATION</span>
             <span className="stat-mono" style={{ color: '#38bdf8', marginLeft: 4 }}>
               ({selectedCoords.lat.toFixed(4)}, {selectedCoords.lng.toFixed(4)})
             </span>
@@ -987,7 +1210,7 @@ export default function MapComponent() {
           id="btn-post-tuition-action"
           className="btn btn-emerald"
           onClick={() => setPostFormOpen(true)}
-          style={{ padding: '10px 18px' }}
+          style={{ padding: '10px 20px', fontWeight: 700 }}
         >
           <PlusCircle size={16} />
           <span>Post Tuition</span>
@@ -1000,16 +1223,16 @@ export default function MapComponent() {
           className="glass-panel-elevated animate-slide-up"
           style={{
             position: 'absolute',
-            bottom: 100,
+            bottom: 104,
             left: '50%',
             transform: 'translateX(-50%)',
             width: '92%',
             maxWidth: '540px',
             borderRadius: 'var(--radius-lg)',
-            padding: '20px',
+            padding: '22px',
             zIndex: 95,
             border: '1px solid rgba(16, 185, 129, 0.4)',
-            boxShadow: '0 16px 40px rgba(0,0,0,0.6)'
+            boxShadow: '0 16px 44px rgba(0,0,0,0.65)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -1025,6 +1248,9 @@ export default function MapComponent() {
               <h2 style={{ fontSize: '18px', fontWeight: 800, marginTop: 4, color: 'var(--text-primary)' }}>
                 {selectedTuition.class_level}
               </h2>
+              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: 2 }}>
+                📍 {selectedTuition.thana_name}, {selectedTuition.district_name}
+              </div>
             </div>
 
             <div style={{ textAlign: 'right' }}>
@@ -1107,7 +1333,7 @@ export default function MapComponent() {
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0,0,0,0.7)',
+            background: 'rgba(0,0,0,0.72)',
             backdropFilter: 'blur(10px)',
             zIndex: 150,
             display: 'flex',
@@ -1138,6 +1364,7 @@ export default function MapComponent() {
               <button
                 onClick={() => setPostFormOpen(false)}
                 style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+                aria-label="Close modal"
               >
                 <X size={20} />
               </button>

@@ -100,7 +100,7 @@ export async function initGeoEngine(): Promise<void> {
     let json: { features: ThanaFeature[] } | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v3');
+      const cache = await caches.open('geo-engine-v4');
       const cacheKey = '/geo/bd_thanas.min.geojson';
       let response = await cache.match(cacheKey);
 
@@ -174,7 +174,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
     let landmarks: LandmarkItem[] | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v3');
+      const cache = await caches.open('geo-engine-v4');
       const cacheKey = '/geo/bd_landmarks.json';
       let response = await cache.match(cacheKey);
 

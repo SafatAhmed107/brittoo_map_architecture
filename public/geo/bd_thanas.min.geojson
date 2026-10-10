@@ -1,1195 +1,4450 @@
 {
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Lalbagh",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.38,
-                            23.712
-                        ],
-                        [
-                            90.398,
-                            23.712
-                        ],
-                        [
-                            90.398,
-                            23.73
-                        ],
-                        [
-                            90.38,
-                            23.73
-                        ],
-                        [
-                            90.38,
-                            23.712
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Shahbagh",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.39,
-                            23.725
-                        ],
-                        [
-                            90.41,
-                            23.725
-                        ],
-                        [
-                            90.41,
-                            23.745
-                        ],
-                        [
-                            90.39,
-                            23.745
-                        ],
-                        [
-                            90.39,
-                            23.725
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Dhanmondi",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.365,
-                            23.735
-                        ],
-                        [
-                            90.385,
-                            23.735
-                        ],
-                        [
-                            90.385,
-                            23.762
-                        ],
-                        [
-                            90.365,
-                            23.762
-                        ],
-                        [
-                            90.365,
-                            23.735
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Ramna",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.398,
-                            23.735
-                        ],
-                        [
-                            90.415,
-                            23.735
-                        ],
-                        [
-                            90.415,
-                            23.755
-                        ],
-                        [
-                            90.398,
-                            23.755
-                        ],
-                        [
-                            90.398,
-                            23.735
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Paltan",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.408,
-                            23.728
-                        ],
-                        [
-                            90.422,
-                            23.728
-                        ],
-                        [
-                            90.422,
-                            23.742
-                        ],
-                        [
-                            90.408,
-                            23.742
-                        ],
-                        [
-                            90.408,
-                            23.728
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Motijheel",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.412,
-                            23.72
-                        ],
-                        [
-                            90.428,
-                            23.72
-                        ],
-                        [
-                            90.428,
-                            23.738
-                        ],
-                        [
-                            90.412,
-                            23.738
-                        ],
-                        [
-                            90.412,
-                            23.72
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Tejgaon",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.38,
-                            23.75
-                        ],
-                        [
-                            90.405,
-                            23.75
-                        ],
-                        [
-                            90.405,
-                            23.775
-                        ],
-                        [
-                            90.38,
-                            23.775
-                        ],
-                        [
-                            90.38,
-                            23.75
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Mohammadpur",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.345,
-                            23.745
-                        ],
-                        [
-                            90.37,
-                            23.745
-                        ],
-                        [
-                            90.37,
-                            23.778
-                        ],
-                        [
-                            90.345,
-                            23.778
-                        ],
-                        [
-                            90.345,
-                            23.745
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Mirpur",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.34,
-                            23.785
-                        ],
-                        [
-                            90.385,
-                            23.785
-                        ],
-                        [
-                            90.385,
-                            23.83
-                        ],
-                        [
-                            90.34,
-                            23.83
-                        ],
-                        [
-                            90.34,
-                            23.785
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Gulshan",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.405,
-                            23.77
-                        ],
-                        [
-                            90.428,
-                            23.77
-                        ],
-                        [
-                            90.428,
-                            23.805
-                        ],
-                        [
-                            90.405,
-                            23.805
-                        ],
-                        [
-                            90.405,
-                            23.77
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Banani",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.395,
-                            23.785
-                        ],
-                        [
-                            90.412,
-                            23.785
-                        ],
-                        [
-                            90.412,
-                            23.808
-                        ],
-                        [
-                            90.395,
-                            23.808
-                        ],
-                        [
-                            90.395,
-                            23.785
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Badda",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.42,
-                            23.76
-                        ],
-                        [
-                            90.445,
-                            23.76
-                        ],
-                        [
-                            90.445,
-                            23.79
-                        ],
-                        [
-                            90.42,
-                            23.79
-                        ],
-                        [
-                            90.42,
-                            23.76
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Bhatara",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.415,
-                            23.795
-                        ],
-                        [
-                            90.445,
-                            23.795
-                        ],
-                        [
-                            90.445,
-                            23.83
-                        ],
-                        [
-                            90.415,
-                            23.83
-                        ],
-                        [
-                            90.415,
-                            23.795
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Uttara",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.37,
-                            23.845
-                        ],
-                        [
-                            90.425,
-                            23.845
-                        ],
-                        [
-                            90.425,
-                            23.895
-                        ],
-                        [
-                            90.37,
-                            23.895
-                        ],
-                        [
-                            90.37,
-                            23.845
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Khilgaon",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.42,
-                            23.738
-                        ],
-                        [
-                            90.448,
-                            23.738
-                        ],
-                        [
-                            90.448,
-                            23.762
-                        ],
-                        [
-                            90.42,
-                            23.762
-                        ],
-                        [
-                            90.42,
-                            23.738
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Jatrabari",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.425,
-                            23.695
-                        ],
-                        [
-                            90.455,
-                            23.695
-                        ],
-                        [
-                            90.455,
-                            23.725
-                        ],
-                        [
-                            90.425,
-                            23.725
-                        ],
-                        [
-                            90.425,
-                            23.695
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Keraniganj",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.32,
-                            23.65
-                        ],
-                        [
-                            90.41,
-                            23.65
-                        ],
-                        [
-                            90.41,
-                            23.71
-                        ],
-                        [
-                            90.32,
-                            23.71
-                        ],
-                        [
-                            90.32,
-                            23.65
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Savar",
-                "district_name": "Dhaka",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.22,
-                            23.81
-                        ],
-                        [
-                            90.33,
-                            23.81
-                        ],
-                        [
-                            90.33,
-                            23.94
-                        ],
-                        [
-                            90.22,
-                            23.94
-                        ],
-                        [
-                            90.22,
-                            23.81
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Gazipur Sadar",
-                "district_name": "Gazipur",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.35,
-                            23.95
-                        ],
-                        [
-                            90.48,
-                            23.95
-                        ],
-                        [
-                            90.48,
-                            24.1
-                        ],
-                        [
-                            90.35,
-                            24.1
-                        ],
-                        [
-                            90.35,
-                            23.95
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Narayanganj Sadar",
-                "district_name": "Narayanganj",
-                "division_name": "Dhaka Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            90.45,
-                            23.58
-                        ],
-                        [
-                            90.55,
-                            23.58
-                        ],
-                        [
-                            90.55,
-                            23.68
-                        ],
-                        [
-                            90.45,
-                            23.68
-                        ],
-                        [
-                            90.45,
-                            23.58
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Boalia",
-                "district_name": "Rajshahi",
-                "division_name": "Rajshahi Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            88.57,
-                            24.35
-                        ],
-                        [
-                            88.62,
-                            24.35
-                        ],
-                        [
-                            88.62,
-                            24.385
-                        ],
-                        [
-                            88.57,
-                            24.385
-                        ],
-                        [
-                            88.57,
-                            24.35
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Motihar",
-                "district_name": "Rajshahi",
-                "division_name": "Rajshahi Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            88.618,
-                            24.35
-                        ],
-                        [
-                            88.67,
-                            24.35
-                        ],
-                        [
-                            88.67,
-                            24.39
-                        ],
-                        [
-                            88.618,
-                            24.39
-                        ],
-                        [
-                            88.618,
-                            24.35
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Rajpara",
-                "district_name": "Rajshahi",
-                "division_name": "Rajshahi Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            88.54,
-                            24.36
-                        ],
-                        [
-                            88.58,
-                            24.36
-                        ],
-                        [
-                            88.58,
-                            24.395
-                        ],
-                        [
-                            88.54,
-                            24.395
-                        ],
-                        [
-                            88.54,
-                            24.36
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Shah Makhdum",
-                "district_name": "Rajshahi",
-                "division_name": "Rajshahi Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            88.58,
-                            24.385
-                        ],
-                        [
-                            88.63,
-                            24.385
-                        ],
-                        [
-                            88.63,
-                            24.43
-                        ],
-                        [
-                            88.58,
-                            24.43
-                        ],
-                        [
-                            88.58,
-                            24.385
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Kotwali",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.82,
-                            22.33
-                        ],
-                        [
-                            91.85,
-                            22.33
-                        ],
-                        [
-                            91.85,
-                            22.36
-                        ],
-                        [
-                            91.82,
-                            22.36
-                        ],
-                        [
-                            91.82,
-                            22.33
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Panchlaish",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.805,
-                            22.355
-                        ],
-                        [
-                            91.845,
-                            22.355
-                        ],
-                        [
-                            91.845,
-                            22.39
-                        ],
-                        [
-                            91.805,
-                            22.39
-                        ],
-                        [
-                            91.805,
-                            22.355
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Double Mooring",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.795,
-                            22.315
-                        ],
-                        [
-                            91.825,
-                            22.315
-                        ],
-                        [
-                            91.825,
-                            22.345
-                        ],
-                        [
-                            91.795,
-                            22.345
-                        ],
-                        [
-                            91.795,
-                            22.315
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Halishahar",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.765,
-                            22.3
-                        ],
-                        [
-                            91.8,
-                            22.3
-                        ],
-                        [
-                            91.8,
-                            22.345
-                        ],
-                        [
-                            91.765,
-                            22.345
-                        ],
-                        [
-                            91.765,
-                            22.3
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Hathazari",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.75,
-                            22.44
-                        ],
-                        [
-                            91.85,
-                            22.44
-                        ],
-                        [
-                            91.85,
-                            22.54
-                        ],
-                        [
-                            91.75,
-                            22.54
-                        ],
-                        [
-                            91.75,
-                            22.44
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Raozan",
-                "district_name": "Chittagong",
-                "division_name": "Chittagong Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.9,
-                            22.42
-                        ],
-                        [
-                            92.02,
-                            22.42
-                        ],
-                        [
-                            92.02,
-                            22.55
-                        ],
-                        [
-                            91.9,
-                            22.55
-                        ],
-                        [
-                            91.9,
-                            22.42
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Kotwali",
-                "district_name": "Sylhet",
-                "division_name": "Sylhet Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.84,
-                            24.87
-                        ],
-                        [
-                            91.89,
-                            24.87
-                        ],
-                        [
-                            91.89,
-                            24.915
-                        ],
-                        [
-                            91.84,
-                            24.915
-                        ],
-                        [
-                            91.84,
-                            24.87
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Shah Poran",
-                "district_name": "Sylhet",
-                "division_name": "Sylhet Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            91.885,
-                            24.88
-                        ],
-                        [
-                            91.94,
-                            24.88
-                        ],
-                        [
-                            91.94,
-                            24.94
-                        ],
-                        [
-                            91.885,
-                            24.94
-                        ],
-                        [
-                            91.885,
-                            24.88
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Khulna Sadar",
-                "district_name": "Khulna",
-                "division_name": "Khulna Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            89.53,
-                            22.79
-                        ],
-                        [
-                            89.58,
-                            22.79
-                        ],
-                        [
-                            89.58,
-                            22.84
-                        ],
-                        [
-                            89.53,
-                            22.84
-                        ],
-                        [
-                            89.53,
-                            22.79
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "thana_name": "Sonadanga",
-                "district_name": "Khulna",
-                "division_name": "Khulna Division"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            89.51,
-                            22.81
-                        ],
-                        [
-                            89.55,
-                            22.81
-                        ],
-                        [
-                            89.55,
-                            22.855
-                        ],
-                        [
-                            89.51,
-                            22.855
-                        ],
-                        [
-                            89.51,
-                            22.81
-                        ]
-                    ]
-                ]
-            }
-        }
-    ]
-}e
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Lalbagh",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.38,
+              23.712
+            ],
+            [
+              90.398,
+              23.712
+            ],
+            [
+              90.398,
+              23.73
+            ],
+            [
+              90.38,
+              23.73
+            ],
+            [
+              90.38,
+              23.712
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Shahbagh",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.39,
+              23.725
+            ],
+            [
+              90.41,
+              23.725
+            ],
+            [
+              90.41,
+              23.745
+            ],
+            [
+              90.39,
+              23.745
+            ],
+            [
+              90.39,
+              23.725
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Dhanmondi",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.365,
+              23.735
+            ],
+            [
+              90.385,
+              23.735
+            ],
+            [
+              90.385,
+              23.76
+            ],
+            [
+              90.365,
+              23.76
+            ],
+            [
+              90.365,
+              23.735
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Ramna",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.398,
+              23.735
+            ],
+            [
+              90.418,
+              23.735
+            ],
+            [
+              90.418,
+              23.755
+            ],
+            [
+              90.398,
+              23.755
+            ],
+            [
+              90.398,
+              23.735
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Paltan",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.408,
+              23.728
+            ],
+            [
+              90.422,
+              23.728
+            ],
+            [
+              90.422,
+              23.742
+            ],
+            [
+              90.408,
+              23.742
+            ],
+            [
+              90.408,
+              23.728
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Motijheel",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.414,
+              23.722
+            ],
+            [
+              90.43,
+              23.722
+            ],
+            [
+              90.43,
+              23.738
+            ],
+            [
+              90.414,
+              23.738
+            ],
+            [
+              90.414,
+              23.722
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Tejgaon",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.382,
+              23.75
+            ],
+            [
+              90.402,
+              23.75
+            ],
+            [
+              90.402,
+              23.775
+            ],
+            [
+              90.382,
+              23.775
+            ],
+            [
+              90.382,
+              23.75
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Tejgaon Industrial Area",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.398,
+              23.76
+            ],
+            [
+              90.415,
+              23.76
+            ],
+            [
+              90.415,
+              23.778
+            ],
+            [
+              90.398,
+              23.778
+            ],
+            [
+              90.398,
+              23.76
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Gulshan",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.405,
+              23.78
+            ],
+            [
+              90.428,
+              23.78
+            ],
+            [
+              90.428,
+              23.805
+            ],
+            [
+              90.405,
+              23.805
+            ],
+            [
+              90.405,
+              23.78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Banani",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.395,
+              23.785
+            ],
+            [
+              90.41,
+              23.785
+            ],
+            [
+              90.41,
+              23.808
+            ],
+            [
+              90.395,
+              23.808
+            ],
+            [
+              90.395,
+              23.785
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Mirpur",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.35,
+              23.795
+            ],
+            [
+              90.38,
+              23.795
+            ],
+            [
+              90.38,
+              23.83
+            ],
+            [
+              90.35,
+              23.83
+            ],
+            [
+              90.35,
+              23.795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Pallabi",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.355,
+              23.82
+            ],
+            [
+              90.378,
+              23.82
+            ],
+            [
+              90.378,
+              23.845
+            ],
+            [
+              90.355,
+              23.845
+            ],
+            [
+              90.355,
+              23.82
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kafrul",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.375,
+              23.785
+            ],
+            [
+              90.395,
+              23.785
+            ],
+            [
+              90.395,
+              23.805
+            ],
+            [
+              90.375,
+              23.805
+            ],
+            [
+              90.375,
+              23.785
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Cantonment",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.385,
+              23.805
+            ],
+            [
+              90.408,
+              23.805
+            ],
+            [
+              90.408,
+              23.835
+            ],
+            [
+              90.385,
+              23.835
+            ],
+            [
+              90.385,
+              23.805
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Uttara",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.375,
+              23.85
+            ],
+            [
+              90.415,
+              23.85
+            ],
+            [
+              90.415,
+              23.89
+            ],
+            [
+              90.375,
+              23.89
+            ],
+            [
+              90.375,
+              23.85
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Uttarkhan",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.41,
+              23.865
+            ],
+            [
+              90.435,
+              23.865
+            ],
+            [
+              90.435,
+              23.895
+            ],
+            [
+              90.41,
+              23.895
+            ],
+            [
+              90.41,
+              23.865
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Dakshinkhan",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.405,
+              23.845
+            ],
+            [
+              90.43,
+              23.845
+            ],
+            [
+              90.43,
+              23.875
+            ],
+            [
+              90.405,
+              23.875
+            ],
+            [
+              90.405,
+              23.845
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bimanbandar",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.395,
+              23.835
+            ],
+            [
+              90.415,
+              23.835
+            ],
+            [
+              90.415,
+              23.86
+            ],
+            [
+              90.395,
+              23.86
+            ],
+            [
+              90.395,
+              23.835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Mohammadpur",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.345,
+              23.75
+            ],
+            [
+              90.37,
+              23.75
+            ],
+            [
+              90.37,
+              23.778
+            ],
+            [
+              90.345,
+              23.778
+            ],
+            [
+              90.345,
+              23.75
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Adabor",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.345,
+              23.768
+            ],
+            [
+              90.365,
+              23.768
+            ],
+            [
+              90.365,
+              23.788
+            ],
+            [
+              90.345,
+              23.788
+            ],
+            [
+              90.345,
+              23.768
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Hazaribagh",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.355,
+              23.725
+            ],
+            [
+              90.375,
+              23.725
+            ],
+            [
+              90.375,
+              23.745
+            ],
+            [
+              90.355,
+              23.745
+            ],
+            [
+              90.355,
+              23.725
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Chawkbazar",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.39,
+              23.71
+            ],
+            [
+              90.405,
+              23.71
+            ],
+            [
+              90.405,
+              23.725
+            ],
+            [
+              90.39,
+              23.725
+            ],
+            [
+              90.39,
+              23.71
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.4,
+              23.705
+            ],
+            [
+              90.412,
+              23.705
+            ],
+            [
+              90.412,
+              23.718
+            ],
+            [
+              90.4,
+              23.718
+            ],
+            [
+              90.4,
+              23.705
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sutrapur",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.41,
+              23.7
+            ],
+            [
+              90.425,
+              23.7
+            ],
+            [
+              90.425,
+              23.718
+            ],
+            [
+              90.41,
+              23.718
+            ],
+            [
+              90.41,
+              23.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Wari",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.412,
+              23.712
+            ],
+            [
+              90.428,
+              23.712
+            ],
+            [
+              90.428,
+              23.725
+            ],
+            [
+              90.412,
+              23.725
+            ],
+            [
+              90.412,
+              23.712
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Badda",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.418,
+              23.768
+            ],
+            [
+              90.44,
+              23.768
+            ],
+            [
+              90.44,
+              23.798
+            ],
+            [
+              90.418,
+              23.798
+            ],
+            [
+              90.418,
+              23.768
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bhatara",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.425,
+              23.795
+            ],
+            [
+              90.45,
+              23.795
+            ],
+            [
+              90.45,
+              23.825
+            ],
+            [
+              90.425,
+              23.825
+            ],
+            [
+              90.425,
+              23.795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Khilgaon",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.42,
+              23.742
+            ],
+            [
+              90.445,
+              23.742
+            ],
+            [
+              90.445,
+              23.765
+            ],
+            [
+              90.42,
+              23.765
+            ],
+            [
+              90.42,
+              23.742
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Rampura",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.415,
+              23.755
+            ],
+            [
+              90.435,
+              23.755
+            ],
+            [
+              90.435,
+              23.775
+            ],
+            [
+              90.415,
+              23.775
+            ],
+            [
+              90.415,
+              23.755
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sabujbagh",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.425,
+              23.73
+            ],
+            [
+              90.448,
+              23.73
+            ],
+            [
+              90.448,
+              23.75
+            ],
+            [
+              90.425,
+              23.75
+            ],
+            [
+              90.425,
+              23.73
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Jatrabari",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.425,
+              23.7
+            ],
+            [
+              90.455,
+              23.7
+            ],
+            [
+              90.455,
+              23.725
+            ],
+            [
+              90.425,
+              23.725
+            ],
+            [
+              90.425,
+              23.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Demra",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.445,
+              23.7
+            ],
+            [
+              90.485,
+              23.7
+            ],
+            [
+              90.485,
+              23.74
+            ],
+            [
+              90.445,
+              23.74
+            ],
+            [
+              90.445,
+              23.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kadamtali",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.42,
+              23.685
+            ],
+            [
+              90.448,
+              23.685
+            ],
+            [
+              90.448,
+              23.71
+            ],
+            [
+              90.42,
+              23.71
+            ],
+            [
+              90.42,
+              23.685
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Shyampur",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.415,
+              23.69
+            ],
+            [
+              90.435,
+              23.69
+            ],
+            [
+              90.435,
+              23.708
+            ],
+            [
+              90.415,
+              23.708
+            ],
+            [
+              90.415,
+              23.69
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kamrangirchar",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.36,
+              23.7
+            ],
+            [
+              90.385,
+              23.7
+            ],
+            [
+              90.385,
+              23.722
+            ],
+            [
+              90.36,
+              23.722
+            ],
+            [
+              90.36,
+              23.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Turag",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.35,
+              23.86
+            ],
+            [
+              90.385,
+              23.86
+            ],
+            [
+              90.385,
+              23.895
+            ],
+            [
+              90.35,
+              23.895
+            ],
+            [
+              90.35,
+              23.86
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Darus Salam",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.34,
+              23.78
+            ],
+            [
+              90.365,
+              23.78
+            ],
+            [
+              90.365,
+              23.805
+            ],
+            [
+              90.34,
+              23.805
+            ],
+            [
+              90.34,
+              23.78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Savar",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.22,
+              23.82
+            ],
+            [
+              90.3,
+              23.82
+            ],
+            [
+              90.3,
+              23.92
+            ],
+            [
+              90.22,
+              23.92
+            ],
+            [
+              90.22,
+              23.82
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Ashulia",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.28,
+              23.87
+            ],
+            [
+              90.35,
+              23.87
+            ],
+            [
+              90.35,
+              23.95
+            ],
+            [
+              90.28,
+              23.95
+            ],
+            [
+              90.28,
+              23.87
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Keraniganj",
+        "district_name": "Dhaka",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.31,
+              23.65
+            ],
+            [
+              90.41,
+              23.65
+            ],
+            [
+              90.41,
+              23.72
+            ],
+            [
+              90.31,
+              23.72
+            ],
+            [
+              90.31,
+              23.65
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Gazipur Sadar",
+        "district_name": "Gazipur",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.34,
+              23.92
+            ],
+            [
+              90.45,
+              23.92
+            ],
+            [
+              90.45,
+              24.05
+            ],
+            [
+              90.34,
+              24.05
+            ],
+            [
+              90.34,
+              23.92
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Tongi",
+        "district_name": "Gazipur",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.38,
+              23.88
+            ],
+            [
+              90.44,
+              23.88
+            ],
+            [
+              90.44,
+              23.93
+            ],
+            [
+              90.38,
+              23.93
+            ],
+            [
+              90.38,
+              23.88
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kaliakair",
+        "district_name": "Gazipur",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.18,
+              24
+            ],
+            [
+              90.3,
+              24
+            ],
+            [
+              90.3,
+              24.12
+            ],
+            [
+              90.18,
+              24.12
+            ],
+            [
+              90.18,
+              24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Narayanganj Sadar",
+        "district_name": "Narayanganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.46,
+              23.58
+            ],
+            [
+              90.54,
+              23.58
+            ],
+            [
+              90.54,
+              23.66
+            ],
+            [
+              90.46,
+              23.66
+            ],
+            [
+              90.46,
+              23.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bandar",
+        "district_name": "Narayanganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.51,
+              23.56
+            ],
+            [
+              90.58,
+              23.56
+            ],
+            [
+              90.58,
+              23.64
+            ],
+            [
+              90.51,
+              23.64
+            ],
+            [
+              90.51,
+              23.56
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sonargaon",
+        "district_name": "Narayanganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.55,
+              23.6
+            ],
+            [
+              90.66,
+              23.6
+            ],
+            [
+              90.66,
+              23.72
+            ],
+            [
+              90.55,
+              23.72
+            ],
+            [
+              90.55,
+              23.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Narsingdi Sadar",
+        "district_name": "Narsingdi",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.68,
+              23.88
+            ],
+            [
+              90.76,
+              23.88
+            ],
+            [
+              90.76,
+              23.96
+            ],
+            [
+              90.68,
+              23.96
+            ],
+            [
+              90.68,
+              23.88
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Manikganj Sadar",
+        "district_name": "Manikganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.95,
+              23.82
+            ],
+            [
+              90.05,
+              23.82
+            ],
+            [
+              90.05,
+              23.91
+            ],
+            [
+              89.95,
+              23.91
+            ],
+            [
+              89.95,
+              23.82
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Munshiganj Sadar",
+        "district_name": "Munshiganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.48,
+              23.5
+            ],
+            [
+              90.58,
+              23.5
+            ],
+            [
+              90.58,
+              23.58
+            ],
+            [
+              90.48,
+              23.58
+            ],
+            [
+              90.48,
+              23.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Tangail Sadar",
+        "district_name": "Tangail",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.88,
+              24.2
+            ],
+            [
+              89.98,
+              24.2
+            ],
+            [
+              89.98,
+              24.3
+            ],
+            [
+              89.88,
+              24.3
+            ],
+            [
+              89.88,
+              24.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kishoreganj Sadar",
+        "district_name": "Kishoreganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.74,
+              24.39
+            ],
+            [
+              90.84,
+              24.39
+            ],
+            [
+              90.84,
+              24.48
+            ],
+            [
+              90.74,
+              24.48
+            ],
+            [
+              90.74,
+              24.39
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Faridpur Sadar",
+        "district_name": "Faridpur",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.78,
+              23.55
+            ],
+            [
+              89.88,
+              23.55
+            ],
+            [
+              89.88,
+              23.65
+            ],
+            [
+              89.78,
+              23.65
+            ],
+            [
+              89.78,
+              23.55
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Gopalganj Sadar",
+        "district_name": "Gopalganj",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.78,
+              22.98
+            ],
+            [
+              89.88,
+              22.98
+            ],
+            [
+              89.88,
+              23.08
+            ],
+            [
+              89.78,
+              23.08
+            ],
+            [
+              89.78,
+              22.98
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Madaripur Sadar",
+        "district_name": "Madaripur",
+        "division_name": "Dhaka Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.15,
+              23.12
+            ],
+            [
+              90.25,
+              23.12
+            ],
+            [
+              90.25,
+              23.22
+            ],
+            [
+              90.15,
+              23.22
+            ],
+            [
+              90.15,
+              23.12
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.82,
+              22.325
+            ],
+            [
+              91.848,
+              22.325
+            ],
+            [
+              91.848,
+              22.35
+            ],
+            [
+              91.82,
+              22.35
+            ],
+            [
+              91.82,
+              22.325
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Panchlaish",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.815,
+              22.355
+            ],
+            [
+              91.845,
+              22.355
+            ],
+            [
+              91.845,
+              22.385
+            ],
+            [
+              91.815,
+              22.385
+            ],
+            [
+              91.815,
+              22.355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Chandgaon",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.838,
+              22.365
+            ],
+            [
+              91.87,
+              22.365
+            ],
+            [
+              91.87,
+              22.4
+            ],
+            [
+              91.838,
+              22.4
+            ],
+            [
+              91.838,
+              22.365
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Double Mooring",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.795,
+              22.32
+            ],
+            [
+              91.825,
+              22.32
+            ],
+            [
+              91.825,
+              22.345
+            ],
+            [
+              91.795,
+              22.345
+            ],
+            [
+              91.795,
+              22.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Pahartali",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.765,
+              22.345
+            ],
+            [
+              91.8,
+              22.345
+            ],
+            [
+              91.8,
+              22.38
+            ],
+            [
+              91.765,
+              22.38
+            ],
+            [
+              91.765,
+              22.345
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Halishahar",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.77,
+              22.3
+            ],
+            [
+              91.805,
+              22.3
+            ],
+            [
+              91.805,
+              22.335
+            ],
+            [
+              91.77,
+              22.335
+            ],
+            [
+              91.77,
+              22.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bakalia",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.835,
+              22.33
+            ],
+            [
+              91.86,
+              22.33
+            ],
+            [
+              91.86,
+              22.36
+            ],
+            [
+              91.835,
+              22.36
+            ],
+            [
+              91.835,
+              22.33
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Patenga",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.78,
+              22.23
+            ],
+            [
+              91.82,
+              22.23
+            ],
+            [
+              91.82,
+              22.285
+            ],
+            [
+              91.78,
+              22.285
+            ],
+            [
+              91.78,
+              22.23
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Khulshi",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.79,
+              22.355
+            ],
+            [
+              91.82,
+              22.355
+            ],
+            [
+              91.82,
+              22.38
+            ],
+            [
+              91.79,
+              22.38
+            ],
+            [
+              91.79,
+              22.355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bayazid",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.8,
+              22.38
+            ],
+            [
+              91.835,
+              22.38
+            ],
+            [
+              91.835,
+              22.415
+            ],
+            [
+              91.8,
+              22.415
+            ],
+            [
+              91.8,
+              22.38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Hathazari",
+        "district_name": "Chittagong",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.78,
+              22.45
+            ],
+            [
+              91.86,
+              22.45
+            ],
+            [
+              91.86,
+              22.55
+            ],
+            [
+              91.78,
+              22.55
+            ],
+            [
+              91.78,
+              22.45
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Comilla Sadar",
+        "district_name": "Comilla",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.15,
+              23.43
+            ],
+            [
+              91.22,
+              23.43
+            ],
+            [
+              91.22,
+              23.5
+            ],
+            [
+              91.15,
+              23.5
+            ],
+            [
+              91.15,
+              23.43
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Comilla Sadar Dakshin",
+        "district_name": "Comilla",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.14,
+              23.36
+            ],
+            [
+              91.22,
+              23.36
+            ],
+            [
+              91.22,
+              23.44
+            ],
+            [
+              91.14,
+              23.44
+            ],
+            [
+              91.14,
+              23.36
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Cox's Bazar Sadar",
+        "district_name": "Cox's Bazar",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.95,
+              21.4
+            ],
+            [
+              92.05,
+              21.4
+            ],
+            [
+              92.05,
+              21.5
+            ],
+            [
+              91.95,
+              21.5
+            ],
+            [
+              91.95,
+              21.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Feni Sadar",
+        "district_name": "Feni",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.36,
+              22.98
+            ],
+            [
+              91.44,
+              22.98
+            ],
+            [
+              91.44,
+              23.06
+            ],
+            [
+              91.36,
+              23.06
+            ],
+            [
+              91.36,
+              22.98
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Brahmanbaria Sadar",
+        "district_name": "Brahmanbaria",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.07,
+              23.92
+            ],
+            [
+              91.17,
+              23.92
+            ],
+            [
+              91.17,
+              24.02
+            ],
+            [
+              91.07,
+              24.02
+            ],
+            [
+              91.07,
+              23.92
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Noakhali Sadar",
+        "district_name": "Noakhali",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.05,
+              22.8
+            ],
+            [
+              91.15,
+              22.8
+            ],
+            [
+              91.15,
+              22.9
+            ],
+            [
+              91.05,
+              22.9
+            ],
+            [
+              91.05,
+              22.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Chandpur Sadar",
+        "district_name": "Chandpur",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.62,
+              23.18
+            ],
+            [
+              90.72,
+              23.18
+            ],
+            [
+              90.72,
+              23.28
+            ],
+            [
+              90.62,
+              23.28
+            ],
+            [
+              90.62,
+              23.18
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Rangamati Sadar",
+        "district_name": "Rangamati",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              92.15,
+              22.6
+            ],
+            [
+              92.25,
+              22.6
+            ],
+            [
+              92.25,
+              22.7
+            ],
+            [
+              92.15,
+              22.7
+            ],
+            [
+              92.15,
+              22.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bandarban Sadar",
+        "district_name": "Bandarban",
+        "division_name": "Chittagong Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              92.18,
+              22.15
+            ],
+            [
+              92.28,
+              22.15
+            ],
+            [
+              92.28,
+              22.25
+            ],
+            [
+              92.18,
+              22.25
+            ],
+            [
+              92.18,
+              22.15
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Boalia",
+        "district_name": "Rajshahi",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.58,
+              24.355
+            ],
+            [
+              88.615,
+              24.355
+            ],
+            [
+              88.615,
+              24.385
+            ],
+            [
+              88.58,
+              24.385
+            ],
+            [
+              88.58,
+              24.355
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Motihar",
+        "district_name": "Rajshahi",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.615,
+              24.35
+            ],
+            [
+              88.65,
+              24.35
+            ],
+            [
+              88.65,
+              24.38
+            ],
+            [
+              88.615,
+              24.38
+            ],
+            [
+              88.615,
+              24.35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Rajpara",
+        "district_name": "Rajshahi",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.56,
+              24.365
+            ],
+            [
+              88.59,
+              24.365
+            ],
+            [
+              88.59,
+              24.395
+            ],
+            [
+              88.56,
+              24.395
+            ],
+            [
+              88.56,
+              24.365
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Shah Makhdum",
+        "district_name": "Rajshahi",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.59,
+              24.385
+            ],
+            [
+              88.63,
+              24.385
+            ],
+            [
+              88.63,
+              24.425
+            ],
+            [
+              88.59,
+              24.425
+            ],
+            [
+              88.59,
+              24.385
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bogura Sadar",
+        "district_name": "Bogura",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.33,
+              24.81
+            ],
+            [
+              89.42,
+              24.81
+            ],
+            [
+              89.42,
+              24.9
+            ],
+            [
+              89.33,
+              24.9
+            ],
+            [
+              89.33,
+              24.81
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Shajahanpur",
+        "district_name": "Bogura",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.32,
+              24.72
+            ],
+            [
+              89.41,
+              24.72
+            ],
+            [
+              89.41,
+              24.81
+            ],
+            [
+              89.32,
+              24.81
+            ],
+            [
+              89.32,
+              24.72
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Pabna Sadar",
+        "district_name": "Pabna",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.2,
+              23.96
+            ],
+            [
+              89.28,
+              23.96
+            ],
+            [
+              89.28,
+              24.06
+            ],
+            [
+              89.2,
+              24.06
+            ],
+            [
+              89.2,
+              23.96
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Ishwardi",
+        "district_name": "Pabna",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.02,
+              24.08
+            ],
+            [
+              89.12,
+              24.08
+            ],
+            [
+              89.12,
+              24.18
+            ],
+            [
+              89.02,
+              24.18
+            ],
+            [
+              89.02,
+              24.08
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sirajganj Sadar",
+        "district_name": "Sirajganj",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.66,
+              24.41
+            ],
+            [
+              89.75,
+              24.41
+            ],
+            [
+              89.75,
+              24.5
+            ],
+            [
+              89.66,
+              24.5
+            ],
+            [
+              89.66,
+              24.41
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Natore Sadar",
+        "district_name": "Natore",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.94,
+              24.37
+            ],
+            [
+              89.03,
+              24.37
+            ],
+            [
+              89.03,
+              24.46
+            ],
+            [
+              88.94,
+              24.46
+            ],
+            [
+              88.94,
+              24.37
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Naogaon Sadar",
+        "district_name": "Naogaon",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.9,
+              24.76
+            ],
+            [
+              88.99,
+              24.76
+            ],
+            [
+              88.99,
+              24.85
+            ],
+            [
+              88.9,
+              24.85
+            ],
+            [
+              88.9,
+              24.76
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Chapainawabganj Sadar",
+        "district_name": "Chapainawabganj",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.22,
+              24.55
+            ],
+            [
+              88.32,
+              24.55
+            ],
+            [
+              88.32,
+              24.65
+            ],
+            [
+              88.22,
+              24.65
+            ],
+            [
+              88.22,
+              24.55
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Joypurhat Sadar",
+        "district_name": "Joypurhat",
+        "division_name": "Rajshahi Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89,
+              25.05
+            ],
+            [
+              89.1,
+              25.05
+            ],
+            [
+              89.1,
+              25.15
+            ],
+            [
+              89,
+              25.15
+            ],
+            [
+              89,
+              25.05
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Sylhet",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.84,
+              24.87
+            ],
+            [
+              91.89,
+              24.87
+            ],
+            [
+              91.89,
+              24.915
+            ],
+            [
+              91.84,
+              24.915
+            ],
+            [
+              91.84,
+              24.87
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Jalalabad",
+        "district_name": "Sylhet",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.81,
+              24.89
+            ],
+            [
+              91.86,
+              24.89
+            ],
+            [
+              91.86,
+              24.945
+            ],
+            [
+              91.81,
+              24.945
+            ],
+            [
+              91.81,
+              24.89
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Shah Paran",
+        "district_name": "Sylhet",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.88,
+              24.895
+            ],
+            [
+              91.93,
+              24.895
+            ],
+            [
+              91.93,
+              24.945
+            ],
+            [
+              91.88,
+              24.945
+            ],
+            [
+              91.88,
+              24.895
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "South Surma",
+        "district_name": "Sylhet",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.85,
+              24.84
+            ],
+            [
+              91.9,
+              24.84
+            ],
+            [
+              91.9,
+              24.885
+            ],
+            [
+              91.85,
+              24.885
+            ],
+            [
+              91.85,
+              24.84
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Airport",
+        "district_name": "Sylhet",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.84,
+              24.92
+            ],
+            [
+              91.89,
+              24.92
+            ],
+            [
+              91.89,
+              24.98
+            ],
+            [
+              91.84,
+              24.98
+            ],
+            [
+              91.84,
+              24.92
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Moulvibazar Sadar",
+        "district_name": "Moulvibazar",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.74,
+              24.44
+            ],
+            [
+              91.82,
+              24.44
+            ],
+            [
+              91.82,
+              24.52
+            ],
+            [
+              91.74,
+              24.52
+            ],
+            [
+              91.74,
+              24.44
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sreemangal",
+        "district_name": "Moulvibazar",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.7,
+              24.27
+            ],
+            [
+              91.78,
+              24.27
+            ],
+            [
+              91.78,
+              24.35
+            ],
+            [
+              91.7,
+              24.35
+            ],
+            [
+              91.7,
+              24.27
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Habiganj Sadar",
+        "district_name": "Habiganj",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.38,
+              24.34
+            ],
+            [
+              91.46,
+              24.34
+            ],
+            [
+              91.46,
+              24.42
+            ],
+            [
+              91.38,
+              24.42
+            ],
+            [
+              91.38,
+              24.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sunamganj Sadar",
+        "district_name": "Sunamganj",
+        "division_name": "Sylhet Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              91.36,
+              25.03
+            ],
+            [
+              91.44,
+              25.03
+            ],
+            [
+              91.44,
+              25.11
+            ],
+            [
+              91.36,
+              25.11
+            ],
+            [
+              91.36,
+              25.03
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Khulna Sadar",
+        "district_name": "Khulna",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.54,
+              22.8
+            ],
+            [
+              89.58,
+              22.8
+            ],
+            [
+              89.58,
+              22.84
+            ],
+            [
+              89.54,
+              22.84
+            ],
+            [
+              89.54,
+              22.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sonadanga",
+        "district_name": "Khulna",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.52,
+              22.81
+            ],
+            [
+              89.555,
+              22.81
+            ],
+            [
+              89.555,
+              22.845
+            ],
+            [
+              89.52,
+              22.845
+            ],
+            [
+              89.52,
+              22.81
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Khalishpur",
+        "district_name": "Khulna",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.51,
+              22.845
+            ],
+            [
+              89.555,
+              22.845
+            ],
+            [
+              89.555,
+              22.88
+            ],
+            [
+              89.51,
+              22.88
+            ],
+            [
+              89.51,
+              22.845
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Daulatpur",
+        "district_name": "Khulna",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.495,
+              22.875
+            ],
+            [
+              89.54,
+              22.875
+            ],
+            [
+              89.54,
+              22.915
+            ],
+            [
+              89.495,
+              22.915
+            ],
+            [
+              89.495,
+              22.875
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Jessore Sadar",
+        "district_name": "Jessore",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.17,
+              23.13
+            ],
+            [
+              89.26,
+              23.13
+            ],
+            [
+              89.26,
+              23.21
+            ],
+            [
+              89.17,
+              23.21
+            ],
+            [
+              89.17,
+              23.13
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kushtia Sadar",
+        "district_name": "Kushtia",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.08,
+              23.86
+            ],
+            [
+              89.17,
+              23.86
+            ],
+            [
+              89.17,
+              23.94
+            ],
+            [
+              89.08,
+              23.94
+            ],
+            [
+              89.08,
+              23.86
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Jhenaidah Sadar",
+        "district_name": "Jhenaidah",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.13,
+              23.5
+            ],
+            [
+              89.22,
+              23.5
+            ],
+            [
+              89.22,
+              23.58
+            ],
+            [
+              89.13,
+              23.58
+            ],
+            [
+              89.13,
+              23.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Magura Sadar",
+        "district_name": "Magura",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.38,
+              23.45
+            ],
+            [
+              89.46,
+              23.45
+            ],
+            [
+              89.46,
+              23.53
+            ],
+            [
+              89.38,
+              23.53
+            ],
+            [
+              89.38,
+              23.45
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Satkhira Sadar",
+        "district_name": "Satkhira",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.04,
+              22.68
+            ],
+            [
+              89.12,
+              22.68
+            ],
+            [
+              89.12,
+              22.76
+            ],
+            [
+              89.04,
+              22.76
+            ],
+            [
+              89.04,
+              22.68
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bagerhat Sadar",
+        "district_name": "Bagerhat",
+        "division_name": "Khulna Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.76,
+              22.62
+            ],
+            [
+              89.84,
+              22.62
+            ],
+            [
+              89.84,
+              22.7
+            ],
+            [
+              89.76,
+              22.7
+            ],
+            [
+              89.76,
+              22.62
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Barisal",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.345,
+              22.68
+            ],
+            [
+              90.39,
+              22.68
+            ],
+            [
+              90.39,
+              22.725
+            ],
+            [
+              90.345,
+              22.725
+            ],
+            [
+              90.345,
+              22.68
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Airport",
+        "district_name": "Barisal",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.32,
+              22.73
+            ],
+            [
+              90.37,
+              22.73
+            ],
+            [
+              90.37,
+              22.79
+            ],
+            [
+              90.32,
+              22.79
+            ],
+            [
+              90.32,
+              22.73
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kawnia",
+        "district_name": "Barisal",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.36,
+              22.705
+            ],
+            [
+              90.4,
+              22.705
+            ],
+            [
+              90.4,
+              22.745
+            ],
+            [
+              90.36,
+              22.745
+            ],
+            [
+              90.36,
+              22.705
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Patuakhali Sadar",
+        "district_name": "Patuakhali",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.29,
+              22.31
+            ],
+            [
+              90.37,
+              22.31
+            ],
+            [
+              90.37,
+              22.39
+            ],
+            [
+              90.29,
+              22.39
+            ],
+            [
+              90.29,
+              22.31
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Bhola Sadar",
+        "district_name": "Bhola",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.6,
+              22.65
+            ],
+            [
+              90.68,
+              22.65
+            ],
+            [
+              90.68,
+              22.73
+            ],
+            [
+              90.6,
+              22.73
+            ],
+            [
+              90.6,
+              22.65
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Pirojpur Sadar",
+        "district_name": "Pirojpur",
+        "division_name": "Barisal Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.95,
+              22.54
+            ],
+            [
+              90.03,
+              22.54
+            ],
+            [
+              90.03,
+              22.62
+            ],
+            [
+              89.95,
+              22.62
+            ],
+            [
+              89.95,
+              22.54
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Rangpur",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.22,
+              25.72
+            ],
+            [
+              89.28,
+              25.72
+            ],
+            [
+              89.28,
+              25.78
+            ],
+            [
+              89.22,
+              25.78
+            ],
+            [
+              89.22,
+              25.72
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Tazhat",
+        "district_name": "Rangpur",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.245,
+              25.695
+            ],
+            [
+              89.29,
+              25.695
+            ],
+            [
+              89.29,
+              25.735
+            ],
+            [
+              89.245,
+              25.735
+            ],
+            [
+              89.245,
+              25.695
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Dinajpur Sadar",
+        "district_name": "Dinajpur",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.6,
+              25.58
+            ],
+            [
+              88.68,
+              25.58
+            ],
+            [
+              88.68,
+              25.66
+            ],
+            [
+              88.6,
+              25.66
+            ],
+            [
+              88.6,
+              25.58
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Saidpur",
+        "district_name": "Nilphamari",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.85,
+              25.74
+            ],
+            [
+              88.93,
+              25.74
+            ],
+            [
+              88.93,
+              25.82
+            ],
+            [
+              88.85,
+              25.82
+            ],
+            [
+              88.85,
+              25.74
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Nilphamari Sadar",
+        "district_name": "Nilphamari",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.9,
+              25.9
+            ],
+            [
+              88.98,
+              25.9
+            ],
+            [
+              88.98,
+              25.98
+            ],
+            [
+              88.9,
+              25.98
+            ],
+            [
+              88.9,
+              25.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kurigram Sadar",
+        "district_name": "Kurigram",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.6,
+              25.78
+            ],
+            [
+              89.68,
+              25.78
+            ],
+            [
+              89.68,
+              25.86
+            ],
+            [
+              89.6,
+              25.86
+            ],
+            [
+              89.6,
+              25.78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Gaibandha Sadar",
+        "district_name": "Gaibandha",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.5,
+              25.29
+            ],
+            [
+              89.58,
+              25.29
+            ],
+            [
+              89.58,
+              25.37
+            ],
+            [
+              89.5,
+              25.37
+            ],
+            [
+              89.5,
+              25.29
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Thakurgaon Sadar",
+        "district_name": "Thakurgaon",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.43,
+              26
+            ],
+            [
+              88.51,
+              26
+            ],
+            [
+              88.51,
+              26.08
+            ],
+            [
+              88.43,
+              26.08
+            ],
+            [
+              88.43,
+              26
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Panchagarh Sadar",
+        "district_name": "Panchagarh",
+        "division_name": "Rangpur Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.52,
+              26.3
+            ],
+            [
+              88.6,
+              26.3
+            ],
+            [
+              88.6,
+              26.38
+            ],
+            [
+              88.52,
+              26.38
+            ],
+            [
+              88.52,
+              26.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Kotwali",
+        "district_name": "Mymensingh",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.38,
+              24.72
+            ],
+            [
+              90.44,
+              24.72
+            ],
+            [
+              90.44,
+              24.78
+            ],
+            [
+              90.38,
+              24.78
+            ],
+            [
+              90.38,
+              24.72
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Trishal",
+        "district_name": "Mymensingh",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.35,
+              24.55
+            ],
+            [
+              90.43,
+              24.55
+            ],
+            [
+              90.43,
+              24.63
+            ],
+            [
+              90.35,
+              24.63
+            ],
+            [
+              90.35,
+              24.55
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Muktagachha",
+        "district_name": "Mymensingh",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.22,
+              24.72
+            ],
+            [
+              90.3,
+              24.72
+            ],
+            [
+              90.3,
+              24.8
+            ],
+            [
+              90.22,
+              24.8
+            ],
+            [
+              90.22,
+              24.72
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Jamalpur Sadar",
+        "district_name": "Jamalpur",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              89.9,
+              24.88
+            ],
+            [
+              89.98,
+              24.88
+            ],
+            [
+              89.98,
+              24.96
+            ],
+            [
+              89.9,
+              24.96
+            ],
+            [
+              89.9,
+              24.88
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Netrokona Sadar",
+        "district_name": "Netrokona",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90.69,
+              24.84
+            ],
+            [
+              90.77,
+              24.84
+            ],
+            [
+              90.77,
+              24.92
+            ],
+            [
+              90.69,
+              24.92
+            ],
+            [
+              90.69,
+              24.84
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "thana_name": "Sherpur Sadar",
+        "district_name": "Sherpur",
+        "division_name": "Mymensingh Division"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              90,
+              25
+            ],
+            [
+              90.08,
+              25
+            ],
+            [
+              90.08,
+              25.08
+            ],
+            [
+              90,
+              25.08
+            ],
+            [
+              90,
+              25
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

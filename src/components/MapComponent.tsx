@@ -57,13 +57,64 @@ interface InvalidationTile {
   y: number;
 }
 
-type MapTheme = 'dark' | 'light' | 'streets';
+type MapTheme = 'dark' | 'light' | 'streets' | 'satellite';
 
-const MAP_STYLES: Record<MapTheme, string | maplibregl.StyleSpecification> = {
-  dark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
-  light: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
+  dark: {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+      'carto-dark': {
+        type: 'raster',
+        tiles: [
+          'https://a.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
+          'https://b.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
+          'https://c.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png',
+          'https://d.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'
+        ],
+        tileSize: 256,
+        attribution: '© CARTO, © OpenStreetMap contributors'
+      }
+    },
+    layers: [
+      {
+        id: 'carto-dark-layer',
+        type: 'raster',
+        source: 'carto-dark',
+        minzoom: 0,
+        maxzoom: 20
+      }
+    ]
+  },
+  light: {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+      'carto-voyager': {
+        type: 'raster',
+        tiles: [
+          'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+          'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+          'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+          'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
+        ],
+        tileSize: 256,
+        attribution: '© CARTO, © OpenStreetMap contributors'
+      }
+    },
+    layers: [
+      {
+        id: 'carto-voyager-layer',
+        type: 'raster',
+        source: 'carto-voyager',
+        minzoom: 0,
+        maxzoom: 20
+      }
+    ]
+  },
   streets: {
     version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
       'osm-raster': {
         type: 'raster',
@@ -77,6 +128,45 @@ const MAP_STYLES: Record<MapTheme, string | maplibregl.StyleSpecification> = {
         id: 'osm-layer',
         type: 'raster',
         source: 'osm-raster',
+        minzoom: 0,
+        maxzoom: 19
+      }
+    ]
+  },
+  satellite: {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+      'esri-satellite': {
+        type: 'raster',
+        tiles: [
+          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+        ],
+        tileSize: 256,
+        attribution: '© Esri, Maxar, Earthstar Geographics'
+      },
+      'carto-labels': {
+        type: 'raster',
+        tiles: [
+          'https://a.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
+          'https://b.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
+          'https://c.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png'
+        ],
+        tileSize: 256
+      }
+    },
+    layers: [
+      {
+        id: 'esri-satellite-layer',
+        type: 'raster',
+        source: 'esri-satellite',
+        minzoom: 0,
+        maxzoom: 19
+      },
+      {
+        id: 'carto-labels-layer',
+        type: 'raster',
+        source: 'carto-labels',
         minzoom: 0,
         maxzoom: 19
       }
@@ -651,7 +741,7 @@ export default function MapComponent() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+    <div data-theme={currentTheme === 'light' ? 'light' : 'dark'} style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* Map Canvas */}
       <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
 
@@ -939,12 +1029,12 @@ export default function MapComponent() {
               cursor: 'pointer'
             }}
           >
-            <option value={1000} style={{ background: '#0b111e' }}>Radius: 1 km</option>
-            <option value={2000} style={{ background: '#0b111e' }}>Radius: 2 km</option>
-            <option value={3000} style={{ background: '#0b111e' }}>Radius: 3 km</option>
-            <option value={5000} style={{ background: '#0b111e' }}>Radius: 5 km</option>
-            <option value={10000} style={{ background: '#0b111e' }}>Radius: 10 km</option>
-            <option value={15000} style={{ background: '#0b111e' }}>Radius: 15 km</option>
+            <option value={1000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 1 km</option>
+            <option value={2000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 2 km</option>
+            <option value={3000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 3 km</option>
+            <option value={5000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 5 km</option>
+            <option value={10000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 10 km</option>
+            <option value={15000} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Radius: 15 km</option>
           </select>
         </div>
 
@@ -974,10 +1064,10 @@ export default function MapComponent() {
               cursor: 'pointer'
             }}
           >
-            <option value="ALL" style={{ background: '#0b111e' }}>All Curriculums</option>
-            <option value="Admission" style={{ background: '#0b111e' }}>Admission Prep</option>
-            <option value="HSC" style={{ background: '#0b111e' }}>HSC Level</option>
-            <option value="SSC" style={{ background: '#0b111e' }}>SSC Level</option>
+            <option value="ALL" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>All Curriculums</option>
+            <option value="Admission" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>Admission Prep</option>
+            <option value="HSC" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>HSC Level</option>
+            <option value="SSC" style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>SSC Level</option>
           </select>
         </div>
 
@@ -1011,30 +1101,38 @@ export default function MapComponent() {
                 right: 0,
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
-                minWidth: '130px',
+                minWidth: '170px',
                 display: 'flex',
                 flexDirection: 'column',
                 zIndex: 100
               }}
             >
-              {(['dark', 'light', 'streets'] as MapTheme[]).map((t) => (
+              {[
+                { id: 'dark' as MapTheme, name: 'Midnight High-Contrast', desc: 'Clear Night' },
+                { id: 'light' as MapTheme, name: 'Daylight Voyager', desc: 'Vibrant Day' },
+                { id: 'streets' as MapTheme, name: 'OpenStreetMap', desc: 'Standard' },
+                { id: 'satellite' as MapTheme, name: 'Satellite Aerial', desc: 'Imagery' }
+              ].map((item) => (
                 <button
-                  key={t}
-                  onClick={() => handleThemeChange(t)}
+                  key={item.id}
+                  onClick={() => handleThemeChange(item.id)}
                   style={{
-                    background: currentTheme === t ? 'rgba(37,99,235,0.3)' : 'transparent',
-                    color: currentTheme === t ? '#60a5fa' : 'var(--text-primary)',
+                    background: currentTheme === item.id ? 'rgba(37,99,235,0.25)' : 'transparent',
+                    color: currentTheme === item.id ? '#38bdf8' : 'var(--text-primary)',
                     border: 'none',
-                    padding: '8px 14px',
+                    padding: '9px 14px',
                     fontSize: '12px',
                     fontWeight: 600,
                     textAlign: 'left',
                     cursor: 'pointer',
-                    textTransform: 'capitalize',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
                     borderBottom: '1px solid rgba(255,255,255,0.06)'
                   }}
                 >
-                  {t} Mode
+                  <span>{item.name}</span>
+                  <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{item.desc}</span>
                 </button>
               ))}
             </div>
@@ -1404,16 +1502,16 @@ export default function MapComponent() {
                   onChange={(e) => setClassLevel(e.target.value)}
                   style={{
                     width: '100%',
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    background: 'var(--bg-tertiary)',
+                    border: '1px solid var(--bg-glass-border)',
                     borderRadius: '8px',
                     padding: '10px',
-                    color: '#fff',
+                    color: 'var(--text-primary)',
                     fontFamily: 'var(--font-main)'
                   }}
                 >
                   {classLevels.map((lvl) => (
-                    <option key={lvl} value={lvl} style={{ background: '#0b111e' }}>
+                    <option key={lvl} value={lvl} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>
                       {lvl}
                     </option>
                   ))}
@@ -1434,9 +1532,9 @@ export default function MapComponent() {
                         key={sub}
                         onClick={() => toggleSubject(sub)}
                         style={{
-                          background: isSelected ? '#2563eb' : 'rgba(255,255,255,0.06)',
+                          background: isSelected ? '#2563eb' : 'var(--bg-tertiary)',
                           color: isSelected ? '#ffffff' : 'var(--text-secondary)',
-                          border: isSelected ? '1px solid #60a5fa' : '1px solid rgba(255,255,255,0.12)',
+                          border: isSelected ? '1px solid #60a5fa' : '1px solid var(--bg-glass-border)',
                           padding: '6px 12px',
                           borderRadius: '8px',
                           fontSize: '12px',
@@ -1467,11 +1565,11 @@ export default function MapComponent() {
                     required
                     style={{
                       width: '100%',
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.15)',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px solid var(--bg-glass-border)',
                       borderRadius: '8px',
                       padding: '10px 10px 10px 28px',
-                      color: '#fff',
+                      color: 'var(--text-primary)',
                       fontFamily: 'var(--font-main)',
                       fontSize: '15px'
                     }}
@@ -1492,11 +1590,11 @@ export default function MapComponent() {
                     onChange={(e) => setGuardianName(e.target.value)}
                     style={{
                       width: '100%',
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.15)',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px solid var(--bg-glass-border)',
                       borderRadius: '8px',
                       padding: '9px 12px',
-                      color: '#fff',
+                      color: 'var(--text-primary)',
                       fontSize: '13px'
                     }}
                   />
@@ -1512,11 +1610,11 @@ export default function MapComponent() {
                     onChange={(e) => setContactNumber(e.target.value)}
                     style={{
                       width: '100%',
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.15)',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px solid var(--bg-glass-border)',
                       borderRadius: '8px',
                       padding: '9px 12px',
-                      color: '#fff',
+                      color: 'var(--text-primary)',
                       fontSize: '13px'
                     }}
                   />
@@ -1535,11 +1633,11 @@ export default function MapComponent() {
                   onChange={(e) => setNotes(e.target.value)}
                   style={{
                     width: '100%',
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    background: 'var(--bg-tertiary)',
+                    border: '1px solid var(--bg-glass-border)',
                     borderRadius: '8px',
                     padding: '9px 12px',
-                    color: '#fff',
+                    color: 'var(--text-primary)',
                     fontSize: '13px',
                     resize: 'none'
                   }}

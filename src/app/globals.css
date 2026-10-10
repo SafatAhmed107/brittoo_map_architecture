@@ -57,6 +57,72 @@
   --shadow-glow: 0 0 24px var(--accent-glow);
 }
 
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --bg-glass: rgba(255, 255, 255, 0.88);
+  --bg-glass-elevated: rgba(255, 255, 255, 0.96);
+  --bg-glass-border: rgba(0, 0, 0, 0.12);
+  --bg-card: rgba(255, 255, 255, 0.96);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-accent: #0284c7;
+
+  --accent-glow: rgba(37, 99, 235, 0.2);
+  --emerald-glow: rgba(16, 185, 129, 0.2);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #94a3b8;
+}
+
+[data-theme="light"] .quick-chip {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #334155;
+}
+[data-theme="light"] .quick-chip:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: #0f172a;
+}
+[data-theme="light"] .quick-chip.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+[data-theme="light"] .tuition-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .tuition-card:hover {
+  border-color: #10b981;
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.22);
+}
+[data-theme="light"] .tuition-card.active {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+[data-theme="light"] .maplibregl-ctrl-group {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+[data-theme="light"] .maplibregl-ctrl-icon {
+  filter: none;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;

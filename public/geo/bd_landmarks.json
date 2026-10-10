@@ -2,35 +2,53 @@
   {
     "id": "lm-1",
     "name": "BUET - Main Campus & Palashi",
-    "name_bn": "",
+    "name_bn": "বুয়েট",
     "category": "landmark",
     "lat": 23.7266,
     "lng": 90.3924,
     "thana": "Lalbagh",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয়",
+      "BUET",
+      "Palashi",
+      "বুয়েট"
+    ]
   },
   {
     "id": "lm-2",
     "name": "Dhaka University (DU) - Curzon Hall",
-    "name_bn": "",
+    "name_bn": "ঢাকা বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.7275,
     "lng": 90.4019,
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ঢাবি",
+      "DU",
+      "Curzon Hall",
+      "কার্জন হল"
+    ]
   },
   {
     "id": "lm-3",
     "name": "Dhaka University (DU) - TSC & Arts Faculty",
-    "name_bn": "",
+    "name_bn": "ঢাকা বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.7334,
     "lng": 90.3938,
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ঢাবি",
+      "DU",
+      "Curzon Hall",
+      "কার্জন হল"
+    ]
   },
   {
     "id": "lm-4",
@@ -46,13 +64,18 @@
   {
     "id": "lm-5",
     "name": "Dhaka Medical College & Hospital (DMCH)",
-    "name_bn": "",
+    "name_bn": "ঢাকা মেডিকেল কলেজ",
     "category": "landmark",
     "lat": 23.7258,
     "lng": 90.3976,
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ডিএমসি",
+      "DMC",
+      "হাসপাতাল"
+    ]
   },
   {
     "id": "lm-6",
@@ -79,13 +102,18 @@
   {
     "id": "lm-8",
     "name": "Jahangirnagar University (JU)",
-    "name_bn": "",
+    "name_bn": "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.8824,
     "lng": 90.2671,
     "thana": "Savar",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "জাবি",
+      "JU",
+      "Savar"
+    ]
   },
   {
     "id": "lm-9",
@@ -101,68 +129,94 @@
   {
     "id": "lm-10",
     "name": "BUTEX - Bangladesh University of Textiles",
-    "name_bn": "",
+    "name_bn": "বাংলাদেশ টেক্সটাইল বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.7645,
     "lng": 90.3995,
     "thana": "Tejgaon",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "বুটেক্স",
+      "BUTEX"
+    ]
   },
   {
     "id": "lm-11",
     "name": "MIST - Military Institute of Science and Technology",
-    "name_bn": "",
+    "name_bn": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "category": "landmark",
     "lat": 23.8378,
     "lng": 90.3582,
     "thana": "Pallabi",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এমআইএসটি",
+      "MIST"
+    ]
   },
   {
     "id": "lm-12",
     "name": "BUP - Bangladesh University of Professionals",
-    "name_bn": "",
+    "name_bn": "বাংলাদেশ ইউনিভার্সিটি অব প্রফেশনালস",
     "category": "landmark",
     "lat": 23.8406,
     "lng": 90.3585,
     "thana": "Pallabi",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "বিইউপি",
+      "BUP"
+    ]
   },
   {
     "id": "lm-13",
     "name": "DUET - Dhaka University of Engineering & Technology",
-    "name_bn": "",
+    "name_bn": "ঢাকা বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.0044,
     "lng": 90.4253,
     "thana": "Gazipur Sadar",
     "district": "Gazipur",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ঢাবি",
+      "DU",
+      "Curzon Hall",
+      "কার্জন হল"
+    ]
   },
   {
     "id": "lm-14",
     "name": "RUET - Rajshahi University of Engineering & Technology",
-    "name_bn": "",
+    "name_bn": "রাজশাহী বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.3636,
     "lng": 88.6285,
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi Division"
+    "division": "Rajshahi Division",
+    "alt_names": [
+      "রাবি",
+      "RU"
+    ]
   },
   {
     "id": "lm-15",
     "name": "Rajshahi University (RU)",
-    "name_bn": "",
+    "name_bn": "রাজশাহী বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.3705,
     "lng": 88.6375,
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi Division"
+    "division": "Rajshahi Division",
+    "alt_names": [
+      "রাবি",
+      "RU"
+    ]
   },
   {
     "id": "lm-16",
@@ -178,24 +232,32 @@
   {
     "id": "lm-17",
     "name": "CUET - Chittagong University of Engineering & Technology",
-    "name_bn": "",
+    "name_bn": "চট্টগ্রাম বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 22.4604,
     "lng": 91.9711,
     "thana": "Raozan",
     "district": "Chittagong",
-    "division": "Chittagong Division"
+    "division": "Chittagong Division",
+    "alt_names": [
+      "চবি",
+      "CU"
+    ]
   },
   {
     "id": "lm-18",
     "name": "Chittagong University (CU)",
-    "name_bn": "",
+    "name_bn": "চট্টগ্রাম বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 22.4716,
     "lng": 91.7877,
     "thana": "Hathazari",
     "district": "Chittagong",
-    "division": "Chittagong Division"
+    "division": "Chittagong Division",
+    "alt_names": [
+      "চবি",
+      "CU"
+    ]
   },
   {
     "id": "lm-19",
@@ -211,13 +273,17 @@
   {
     "id": "lm-20",
     "name": "KUET - Khulna University of Engineering & Technology",
-    "name_bn": "",
+    "name_bn": "খুলনা প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 22.8996,
     "lng": 89.5024,
     "thana": "Khan Jahan Ali",
     "district": "Khulna",
-    "division": "Khulna Division"
+    "division": "Khulna Division",
+    "alt_names": [
+      "কুয়েট",
+      "KUET"
+    ]
   },
   {
     "id": "lm-21",
@@ -233,13 +299,17 @@
   {
     "id": "lm-22",
     "name": "SUST - Shahjalal University of Science and Technology",
-    "name_bn": "",
+    "name_bn": "শাহজালাল বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.9175,
     "lng": 91.8315,
     "thana": "Kotwali",
     "district": "Sylhet",
-    "division": "Sylhet Division"
+    "division": "Sylhet Division",
+    "alt_names": [
+      "সাস্ট",
+      "SUST"
+    ]
   },
   {
     "id": "lm-23",
@@ -321,35 +391,48 @@
   {
     "id": "lm-30",
     "name": "North South University (NSU)",
-    "name_bn": "",
+    "name_bn": "নর্থ সাউথ বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.8151,
     "lng": 90.4255,
     "thana": "Bhatara",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এনএসইউ",
+      "NSU",
+      "Bashundhara"
+    ]
   },
   {
     "id": "lm-31",
     "name": "Independent University, Bangladesh (IUB)",
-    "name_bn": "",
+    "name_bn": "ইন্ডিপেন্ডেন্ট বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.8164,
     "lng": 90.4284,
     "thana": "Bhatara",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "আইইউবি",
+      "IUB"
+    ]
   },
   {
     "id": "lm-32",
     "name": "BRAC University - New Merul Badda Campus",
-    "name_bn": "",
+    "name_bn": "ব্র্যাক বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.7725,
     "lng": 90.4258,
     "thana": "Badda",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "BRACU",
+      "Merul Badda"
+    ]
   },
   {
     "id": "lm-33",
@@ -398,101 +481,140 @@
   {
     "id": "lm-37",
     "name": "AIUB - American International University-Bangladesh",
-    "name_bn": "",
+    "name_bn": "আমেরিকান ইন্টারন্যাশনাল ইউনিভার্সিটি",
     "category": "landmark",
     "lat": 23.8223,
     "lng": 90.4277,
     "thana": "Bhatara",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এআইইউবি",
+      "Kuratoli"
+    ]
   },
   {
     "id": "lm-38",
     "name": "Notre Dame College (NDC)",
-    "name_bn": "",
+    "name_bn": "নটর ডেম কলেজ",
     "category": "landmark",
     "lat": 23.7314,
     "lng": 90.4218,
     "thana": "Motijheel",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এনডিসি",
+      "NDC",
+      "Motijheel"
+    ]
   },
   {
     "id": "lm-39",
     "name": "Dhaka College",
-    "name_bn": "",
+    "name_bn": "ঢাকা কলেজ",
     "category": "landmark",
     "lat": 23.7374,
     "lng": 90.3837,
     "thana": "Dhanmondi",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ডিসি",
+      "New Market"
+    ]
   },
   {
     "id": "lm-40",
     "name": "Viqarunnisa Noon School and College (VNSC)",
-    "name_bn": "",
+    "name_bn": "ভিকারুননিসা নূন স্কুল অ্যান্ড কলেজ",
     "category": "landmark",
     "lat": 23.7425,
     "lng": 90.4095,
     "thana": "Ramna",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ভিএনএসসি",
+      "Bailey Road"
+    ]
   },
   {
     "id": "lm-41",
     "name": "Holy Cross College & School",
-    "name_bn": "",
+    "name_bn": "হলি ক্রস কলেজ",
     "category": "landmark",
     "lat": 23.7578,
     "lng": 90.3908,
     "thana": "Tejgaon",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "Tejgaon",
+      "হলিক্রস"
+    ]
   },
   {
     "id": "lm-42",
     "name": "St. Joseph Higher Secondary School",
-    "name_bn": "",
+    "name_bn": "সেন্ট জোসেফ উচ্চ মাধ্যমিক বিদ্যালয়",
     "category": "landmark",
     "lat": 23.7582,
     "lng": 90.3665,
     "thana": "Mohammadpur",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "Josephite",
+      "Asad Gate"
+    ]
   },
   {
     "id": "lm-43",
     "name": "Dhaka Residential Model College (DRMC)",
-    "name_bn": "",
+    "name_bn": "ঢাকা রেসিডেনসিয়াল মডেল কলেজ",
     "category": "landmark",
     "lat": 23.7628,
     "lng": 90.3648,
     "thana": "Mohammadpur",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "রেসিডেনসিয়াল",
+      "DRMC",
+      "Mohammadpur"
+    ]
   },
   {
     "id": "lm-44",
     "name": "Adamjee Cantonment College",
-    "name_bn": "",
+    "name_bn": "আদমজী ক্যান্টনমেন্ট কলেজ",
     "category": "landmark",
     "lat": 23.8052,
     "lng": 90.3942,
     "thana": "Cantonment",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ACC",
+      "Cantonment"
+    ]
   },
   {
     "id": "lm-45",
     "name": "Rajuk Uttara Model College (RUMC)",
-    "name_bn": "",
+    "name_bn": "রাজউক উত্তরা মডেল কলেজ",
     "category": "landmark",
     "lat": 23.8645,
     "lng": 90.3985,
     "thana": "Uttara",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "রুমক",
+      "RUMC",
+      "Uttara"
+    ]
   },
   {
     "id": "lm-46",
@@ -508,13 +630,17 @@
   {
     "id": "lm-47",
     "name": "Chittagong College",
-    "name_bn": "",
+    "name_bn": "চট্টগ্রাম কলেজ",
     "category": "landmark",
     "lat": 22.3552,
     "lng": 91.8385,
     "thana": "Kotwali",
     "district": "Chittagong",
-    "division": "Chittagong Division"
+    "division": "Chittagong Division",
+    "alt_names": [
+      "Chittagong College",
+      "Chawkbazar"
+    ]
   },
   {
     "id": "lm-48",
@@ -530,24 +656,31 @@
   {
     "id": "lm-49",
     "name": "Rajshahi College",
-    "name_bn": "",
+    "name_bn": "রাজশাহী কলেজ",
     "category": "landmark",
     "lat": 24.3648,
     "lng": 88.5985,
     "thana": "Boalia",
     "district": "Rajshahi",
-    "division": "Rajshahi Division"
+    "division": "Rajshahi Division",
+    "alt_names": [
+      "Rajshahi College"
+    ]
   },
   {
     "id": "lm-50",
     "name": "Sylhet MC College (Murari Chand College)",
-    "name_bn": "",
+    "name_bn": "মুরারিচাঁদ কলেজ (এমসি কলেজ)",
     "category": "landmark",
     "lat": 24.8965,
     "lng": 91.9025,
     "thana": "Shah Paran",
     "district": "Sylhet",
-    "division": "Sylhet Division"
+    "division": "Sylhet Division",
+    "alt_names": [
+      "MC College",
+      "Tilagarh"
+    ]
   },
   {
     "id": "lm-51",
@@ -574,24 +707,32 @@
   {
     "id": "lm-53",
     "name": "Carmichael College, Rangpur",
-    "name_bn": "",
+    "name_bn": "কারমাইকেল কলেজ",
     "category": "landmark",
     "lat": 25.7285,
     "lng": 89.2625,
     "thana": "Tazhat",
     "district": "Rangpur",
-    "division": "Rangpur Division"
+    "division": "Rangpur Division",
+    "alt_names": [
+      "Carmichael College",
+      "Rangpur"
+    ]
   },
   {
     "id": "lm-54",
     "name": "Ananda Mohan College, Mymensingh",
-    "name_bn": "",
+    "name_bn": "আনন্দমোহন কলেজ",
     "category": "landmark",
     "lat": 24.7512,
     "lng": 90.4175,
     "thana": "Kotwali",
     "district": "Mymensingh",
-    "division": "Mymensingh Division"
+    "division": "Mymensingh Division",
+    "alt_names": [
+      "Anandamohan",
+      "Mymensingh"
+    ]
   },
   {
     "id": "lm-55",
@@ -772,13 +913,19 @@
   {
     "id": "lm-71",
     "name": "MRT Dhaka University Metro Station",
-    "name_bn": "",
+    "name_bn": "ঢাকা বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 23.7315,
     "lng": 90.3972,
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "ঢাবি",
+      "DU",
+      "Curzon Hall",
+      "কার্জন হল"
+    ]
   },
   {
     "id": "lm-72",
@@ -1135,13 +1282,17 @@
   {
     "id": "lm-104",
     "name": "Talaimari Mor (RUET Gate)",
-    "name_bn": "",
+    "name_bn": "রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.3622,
     "lng": 88.6225,
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi Division"
+    "division": "Rajshahi Division",
+    "alt_names": [
+      "রুয়েট",
+      "RUET"
+    ]
   },
   {
     "id": "lm-105",
@@ -1157,13 +1308,17 @@
   {
     "id": "lm-106",
     "name": "Kazla Gate (Rajshahi University)",
-    "name_bn": "",
+    "name_bn": "রাজশাহী বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 24.3662,
     "lng": 88.6315,
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi Division"
+    "division": "Rajshahi Division",
+    "alt_names": [
+      "রাবি",
+      "RU"
+    ]
   },
   {
     "id": "lm-107",
@@ -1245,13 +1400,17 @@
   {
     "id": "lm-114",
     "name": "Fulbarigate & KUET Gate (Khulna)",
-    "name_bn": "",
+    "name_bn": "খুলনা প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়",
     "category": "landmark",
     "lat": 22.8985,
     "lng": 89.5085,
     "thana": "Khan Jahan Ali",
     "district": "Khulna",
-    "division": "Khulna Division"
+    "division": "Khulna Division",
+    "alt_names": [
+      "কুয়েট",
+      "KUET"
+    ]
   },
   {
     "id": "lm-115",
@@ -20297,13 +20456,17 @@
   {
     "id": "osm-bazar-node/5875240803",
     "name": "Misty POtti",
-    "name_bn": "",
+    "name_bn": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "category": "commercial",
     "lat": 24.4168,
     "lng": 90.6521,
     "thana": "Hossainpur",
     "district": "Kishoreganj",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এমআইএসটি",
+      "MIST"
+    ]
   },
   {
     "id": "osm-bazar-node/5875247943",
@@ -31715,13 +31878,18 @@
   {
     "id": "osm-bazar-node/11824645386",
     "name": "North South Book Center, Islamia Market, Nilkhet Rd, Dhaka",
-    "name_bn": "",
+    "name_bn": "নর্থ সাউথ বিশ্ববিদ্যালয়",
     "category": "commercial",
     "lat": 23.7328,
     "lng": 90.3855,
     "thana": "New Market",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এনএসইউ",
+      "NSU",
+      "Bashundhara"
+    ]
   },
   {
     "id": "osm-bazar-node/11824663180",
@@ -36632,13 +36800,17 @@
   {
     "id": "osm-bazar-way/324283113",
     "name": "Mistripara Bazar",
-    "name_bn": "",
+    "name_bn": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "category": "commercial",
     "lat": 22.8024,
     "lng": 89.5615,
     "thana": "Khulna Sadar",
     "district": "Dhaka",
-    "division": "Dhaka Division"
+    "division": "Dhaka Division",
+    "alt_names": [
+      "এমআইএসটি",
+      "MIST"
+    ]
   },
   {
     "id": "osm-bazar-way/324553464",
@@ -38513,13 +38685,17 @@
   {
     "id": "osm-bazar-way/526945770",
     "name": "Aiub ali super market",
-    "name_bn": "",
+    "name_bn": "আমেরিকান ইন্টারন্যাশনাল ইউনিভার্সিটি",
     "category": "commercial",
     "lat": 23.4822,
     "lng": 91.0453,
     "thana": "Burichong",
     "district": "Cumilla",
-    "division": "Chattogram Division"
+    "division": "Chattogram Division",
+    "alt_names": [
+      "এআইইউবি",
+      "Kuratoli"
+    ]
   },
   {
     "id": "osm-bazar-way/526957083",
@@ -39030,24 +39206,32 @@
   {
     "id": "osm-bazar-way/527731907",
     "name": "Ismail Mistri Market",
-    "name_bn": "",
+    "name_bn": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "category": "commercial",
     "lat": 22.7605,
     "lng": 91.5829,
     "thana": "Mirsharai",
     "district": "Chattogram",
-    "division": "Chattogram Division"
+    "division": "Chattogram Division",
+    "alt_names": [
+      "এমআইএসটি",
+      "MIST"
+    ]
   },
   {
     "id": "osm-bazar-way/527739187",
     "name": "Ismail Mistri Market, Bazar Kali Bari Mondir, Chittagong",
-    "name_bn": "",
+    "name_bn": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি",
     "category": "commercial",
     "lat": 22.6242,
     "lng": 91.6551,
     "thana": "Sitakunda",
     "district": "Chattogram",
-    "division": "Chattogram Division"
+    "division": "Chattogram Division",
+    "alt_names": [
+      "এমআইএসটি",
+      "MIST"
+    ]
   },
   {
     "id": "osm-bazar-way/527751790",

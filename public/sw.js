@@ -1,5 +1,5 @@
 // Service Worker for Zero-Cost Map Architecture: Offline Precaching
-const CACHE_NAME = 'tuition-geo-v2';
+const CACHE_NAME = 'tuition-geo-v3';
 const PRECACHE_URLS = [
   '/geo/bd_thanas.min.geojson',
   '/geo/bd_landmarks.json'

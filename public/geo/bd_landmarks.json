@@ -1,302 +1,722 @@
 [
   {
-    "name": "BUET - Bangladesh University of Engineering and Technology",
-    "alt_names": ["BUET Main Campus", "Palashi", "BUET Cafe", "ECE Building BUET", "Ahsanullah Hall"],
+    "name": "BUET - Main Campus & Palashi",
+    "alt_names": ["BUET", "Palashi Gate", "ECE Building BUET", "Ahsanullah Hall", "Dr. M.A. Rashid Bhaban", "Polashi Chottor"],
     "thana": "Lalbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
+    "division": "Dhaka Division",
     "lat": 23.7266,
     "lng": 90.3924,
-    "type": "university"
+    "type": "Engineering University"
   },
   {
     "name": "Dhaka University (DU) - Curzon Hall",
-    "alt_names": ["Curzon Hall", "DU Science Annex", "High Court Area"],
+    "alt_names": ["Curzon Hall", "DU Science Annex", "High Court Mor", "Doel Chottor", "Shahidullah Hall"],
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
+    "division": "Dhaka Division",
     "lat": 23.7275,
     "lng": 90.4019,
-    "type": "university"
+    "type": "University"
   },
   {
-    "name": "Dhaka University (DU) - TSC & Arts Building",
-    "alt_names": ["TSC", "Teacher-Student Centre", "DU Mall Chottor", "Raju Memorial Sculpture"],
+    "name": "Dhaka University (DU) - TSC & Arts Faculty",
+    "alt_names": ["TSC", "Teacher-Student Centre", "DU Mall Chottor", "Raju Sculpture", "Central Library DU", "Rokeya Hall"],
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
+    "division": "Dhaka Division",
     "lat": 23.7334,
     "lng": 90.3938,
-    "type": "university"
+    "type": "University"
+  },
+  {
+    "name": "IBA - Institute of Business Administration DU",
+    "alt_names": ["IBA DU", "IBA Hostel", "Shahbagh IBA"],
+    "thana": "Shahbagh",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7345,
+    "lng": 90.3955,
+    "type": "Business School"
   },
   {
     "name": "Dhaka Medical College & Hospital (DMCH)",
-    "alt_names": ["DMC", "Dhaka Medical", "Central Shaheed Minar"],
+    "alt_names": ["DMC", "Central Shaheed Minar", "Bakshibazar", "Dr. Fazle Rabbi Hall"],
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
+    "division": "Dhaka Division",
     "lat": 23.7258,
     "lng": 90.3976,
-    "type": "medical_college"
+    "type": "Medical College"
   },
   {
-    "name": "Dhanmondi 27 (Old) / 16 (New)",
-    "alt_names": ["Dhanmondi 27", "Dhanmondi Lake", "Rapa Plaza", "Midas Center"],
-    "thana": "Dhanmondi",
+    "name": "Sir Salimullah Medical College (Mitford Hospital)",
+    "alt_names": ["SSMC", "Mitford", "Babubazar Bridge", "Old Dhaka Hospital"],
+    "thana": "Kotwali",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7533,
-    "lng": 90.3725,
-    "type": "intersection"
+    "division": "Dhaka Division",
+    "lat": 23.7118,
+    "lng": 90.4022,
+    "type": "Medical College"
   },
   {
-    "name": "Dhanmondi 32 - Bangabandhu Memorial Museum",
-    "alt_names": ["Dhanmondi 32", "Metro Shopping Mall", "Russel Square"],
-    "thana": "Dhanmondi",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7516,
-    "lng": 90.3779,
-    "type": "landmark"
-  },
-  {
-    "name": "Science Laboratory / New Market Overbridge",
-    "alt_names": ["Science Lab", "New Market", "Elephant Road", "Dhaka College", "City College"],
-    "thana": "Dhanmondi",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7388,
-    "lng": 90.3842,
-    "type": "intersection"
-  },
-  {
-    "name": "Shahbagh Intersection & Bangabandhu Sheikh Mujib Medical University (BSMMU)",
-    "alt_names": ["Shahbagh Circle", "PG Hospital", "National Museum"],
+    "name": "BSMMU (PG Hospital) & Shahbagh Mor",
+    "alt_names": ["PG Hospital", "Bangabandhu Sheikh Mujib Medical University", "Shahbagh Intersection", "BIRDEM Hospital"],
     "thana": "Shahbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7385,
-    "lng": 90.3957,
-    "type": "intersection"
+    "division": "Dhaka Division",
+    "lat": 23.7388,
+    "lng": 90.3958,
+    "type": "Medical University"
   },
   {
-    "name": "Farmgate Metro Station & Ananda Cinema",
-    "alt_names": ["Farmgate", "Tejgaon College", "Holy Cross College", "Indira Road"],
+    "name": "Jahangirnagar University (JU)",
+    "alt_names": ["JU", "Dairy Gate JU", "Pranto Chottor", "Amar Ekushey Sculpture", "Savar Campus"],
+    "thana": "Savar",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8824,
+    "lng": 90.2671,
+    "type": "University"
+  },
+  {
+    "name": "IUT - Islamic University of Technology",
+    "alt_names": ["IUT Campus", "Boardbazar", "OIC University Gazipur"],
+    "thana": "Gazipur Sadar",
+    "district": "Gazipur",
+    "division": "Dhaka Division",
+    "lat": 23.9482,
+    "lng": 90.3794,
+    "type": "Engineering University"
+  },
+  {
+    "name": "BUTEX - Bangladesh University of Textiles",
+    "alt_names": ["BUTEX Tejgaon", "Textile University", "Nabisco Mor"],
     "thana": "Tejgaon",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7571,
-    "lng": 90.3888,
-    "type": "metro_station"
-  },
-  {
-    "name": "Mirpur 10 Metro Station & Roundabout",
-    "alt_names": ["Mirpur 10", "Mirpur 10 Golchottor", "Benarasi Polli", "Mirpur Stadium"],
-    "thana": "Mirpur",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.8071,
-    "lng": 90.3697,
-    "type": "metro_station"
-  },
-  {
-    "name": "Mirpur 1 - Muktijoddha Market & Zoo Road",
-    "alt_names": ["Mirpur 1", "National Zoo", "Darussalam", "Sony Cinema"],
-    "thana": "Mirpur",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7956,
-    "lng": 90.3537,
-    "type": "intersection"
-  },
-  {
-    "name": "Uttara Sector 3 & Rajlakshmi Complex",
-    "alt_names": ["Uttara Sector 3", "Rajlakshmi", "Azampur Uttara", "Uttara Metro Station"],
-    "thana": "Uttara",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.8698,
-    "lng": 90.3980,
-    "type": "landmark"
-  },
-  {
-    "name": "Uttara Sector 7 & House Building",
-    "alt_names": ["Uttara House Building", "Sector 7", "Sector 9", "Rabindra Sarani"],
-    "thana": "Uttara",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.8753,
+    "division": "Dhaka Division",
+    "lat": 23.7645,
     "lng": 90.3995,
-    "type": "landmark"
+    "type": "Engineering University"
   },
   {
-    "name": "Mohammadpur Town Hall & Asad Gate",
-    "alt_names": ["Mohammadpur Town Hall", "Asad Gate", "St. Joseph School", "Noorjahan Road"],
-    "thana": "Mohammadpur",
+    "name": "BUP & MIST - Mirpur Cantonment",
+    "alt_names": ["Bangladesh University of Professionals", "Military Institute of Science and Technology", "Mirpur 12 Cantonment"],
+    "thana": "Pallabi",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7602,
-    "lng": 90.3621,
-    "type": "landmark"
+    "division": "Dhaka Division",
+    "lat": 23.8378,
+    "lng": 90.3582,
+    "type": "University"
   },
   {
-    "name": "Gulshan 1 Circle & DSC Tower",
-    "alt_names": ["Gulshan 1", "Gulshan DCC Market", "South Avenue"],
-    "thana": "Gulshan",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7788,
-    "lng": 90.4172,
-    "type": "intersection"
-  },
-  {
-    "name": "Gulshan 2 Circle & Pink City",
-    "alt_names": ["Gulshan 2", "Gulshan Club", "Diplomatic Zone"],
-    "thana": "Gulshan",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7938,
-    "lng": 90.4144,
-    "type": "intersection"
-  },
-  {
-    "name": "Banani 11 & Kemal Ataturk Avenue",
-    "alt_names": ["Banani 11", "Kemal Ataturk", "Banani Club", "Banani Super Market"],
-    "thana": "Banani",
-    "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7937,
-    "lng": 90.4042,
-    "type": "landmark"
-  },
-  {
-    "name": "North South University (NSU) & IUB Bashundhara",
-    "alt_names": ["NSU", "IUB", "Bashundhara R/A Gate", "Apollo/Evercare Hospital"],
+    "name": "North South University (NSU)",
+    "alt_names": ["NSU", "Bashundhara R/A Gate 1", "Plot 15 Block B", "Kuril NSU"],
     "thana": "Bhatara",
     "district": "Dhaka",
-    "division": "Dhaka",
+    "division": "Dhaka Division",
     "lat": 23.8151,
-    "lng": 90.4256,
-    "type": "university"
+    "lng": 90.4255,
+    "type": "Private University"
   },
   {
-    "name": "BRAC University Merul Badda New Campus",
-    "alt_names": ["BRACU", "BRAC University", "Merul Badda", "Hatirjheel Ramp"],
+    "name": "Independent University, Bangladesh (IUB)",
+    "alt_names": ["IUB", "Bashundhara R/A Gate 2", "Bashundhara IUB Campus"],
+    "thana": "Bhatara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8164,
+    "lng": 90.4282,
+    "type": "Private University"
+  },
+  {
+    "name": "BRAC University - New Merul Badda Campus",
+    "alt_names": ["BRACU", "Merul Badda", "Hatirjheel East", "Rampura Bridge BRACU"],
     "thana": "Badda",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7699,
-    "lng": 90.4253,
-    "type": "university"
+    "division": "Dhaka Division",
+    "lat": 23.7735,
+    "lng": 90.4252,
+    "type": "Private University"
   },
   {
-    "name": "Motijheel Commercial Area & Shapla Chottor",
-    "alt_names": ["Motijheel", "Shapla Chottor", "Bangladesh Bank", "Dilkusha"],
+    "name": "AIUB - American International University-Bangladesh",
+    "alt_names": ["AIUB", "Kuratoli", "Khilkhet AIUB", "408/1 Kuratoli Road"],
+    "thana": "Khilkhet",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8225,
+    "lng": 90.4278,
+    "type": "Private University"
+  },
+  {
+    "name": "UIU - United International University",
+    "alt_names": ["UIU", "United City", "Madani Avenue", "100 Feet Road UIU"],
+    "thana": "Bhatara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7978,
+    "lng": 90.4498,
+    "type": "Private University"
+  },
+  {
+    "name": "AUST - Ahsanullah University of Science and Technology",
+    "alt_names": ["AUST", "Tejgaon Industrial Area", "Love Road Tejgaon", "Nabisco AUST"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7688,
+    "lng": 90.4072,
+    "type": "Private University"
+  },
+  {
+    "name": "East West University (EWU)",
+    "alt_names": ["EWU", "Aftabnagar", "Rampura Bridge EWU", "Jahurul Islam City"],
+    "thana": "Badda",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7686,
+    "lng": 90.4255,
+    "type": "Private University"
+  },
+  {
+    "name": "Notre Dame College (NDC)",
+    "alt_names": ["NDC", "Arambagh", "Motijheel NDC", "Toyenbee Circular Road"],
     "thana": "Motijheel",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7328,
-    "lng": 90.4178,
-    "type": "commercial"
+    "division": "Dhaka Division",
+    "lat": 23.7312,
+    "lng": 90.4215,
+    "type": "Premier College"
   },
   {
-    "name": "Lalbagh Fort & Chawkbazar",
-    "alt_names": ["Lalbagh Fort", "Lalbagh Kella", "Chawkbazar Shahi Mosque", "Old Dhaka"],
+    "name": "Dhaka College",
+    "alt_names": ["Mirpur Road", "New Market Mor", "Teachers Training College", "Science Lab"],
+    "thana": "Dhanmondi",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7365,
+    "lng": 90.3842,
+    "type": "Premier College"
+  },
+  {
+    "name": "Viqarunnisa Noon School & College",
+    "alt_names": ["VNSC", "Bailey Road", "Officers Club Area", "Siddheswari VNSC"],
+    "thana": "Ramna",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7432,
+    "lng": 90.4085,
+    "type": "Premier College"
+  },
+  {
+    "name": "Holy Cross College & School",
+    "alt_names": ["Holy Cross", "Farmgate Tejgaon", "Tejkunipara", "Ananda Cinema Mor"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7592,
+    "lng": 90.3895,
+    "type": "Premier College"
+  },
+  {
+    "name": "St. Joseph Higher Secondary School",
+    "alt_names": ["St Joseph", "Asad Avenue", "Mohammadpur Boys School", "Asad Gate"],
+    "thana": "Mohammadpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7585,
+    "lng": 90.3645,
+    "type": "Premier College"
+  },
+  {
+    "name": "Dhaka Residential Model College (DRMC)",
+    "alt_names": ["Residential Model", "Mirpur Road Mohammadpur", "College Gate", "Suhrawardy Hospital Gate"],
+    "thana": "Mohammadpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7665,
+    "lng": 90.3672,
+    "type": "Premier College"
+  },
+  {
+    "name": "Rajuk Uttara Model College (RUMC)",
+    "alt_names": ["Rajuk College", "Sector 6 Uttara", "Azampur Bus Stand", "House Building"],
+    "thana": "Uttara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8645,
+    "lng": 90.4005,
+    "type": "Premier College"
+  },
+  {
+    "name": "Adamjee Cantonment College",
+    "alt_names": ["Adamjee College", "Dhaka Cantonment", "Cantonment Station", "Shewra"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8055,
+    "lng": 90.3965,
+    "type": "Premier College"
+  },
+  {
+    "name": "Ideal School and College, Motijheel",
+    "alt_names": ["Ideal School Motijheel", "Arambagh Ideal", "Central Bank Mor"],
+    "thana": "Motijheel",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7318,
+    "lng": 90.4195,
+    "type": "School & College"
+  },
+  {
+    "name": "BAF Shaheen College Dhaka",
+    "alt_names": ["Shaheen College", "Jahangir Gate", "Air Force Base Bashar", "Mohakhali Flyover"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7745,
+    "lng": 90.3925,
+    "type": "College"
+  },
+  {
+    "name": "Birshreshtha Noor Mohammad Public College",
+    "alt_names": ["BNMPC", "Pilkhana Gate 1", "BGB Headquarters", "Lalbagh Road"],
     "thana": "Lalbagh",
     "district": "Dhaka",
-    "division": "Dhaka",
-    "lat": 23.7188,
+    "division": "Dhaka Division",
+    "lat": 23.7328,
+    "lng": 90.3805,
+    "type": "College"
+  },
+  {
+    "name": "Dhanmondi 27 (Rapa Plaza)",
+    "alt_names": ["Dhanmondi 27", "Road 27", "Rapa Plaza", "Midas Center", "Asad Gate End"],
+    "thana": "Dhanmondi",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7533,
+    "lng": 90.3725,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Dhanmondi 32 - Russel Square",
+    "alt_names": ["Dhanmondi 32", "Metro Shopping Mall", "Bangabandhu Museum", "Russel Square Mor"],
+    "thana": "Dhanmondi",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7516,
+    "lng": 90.3779,
+    "type": "Intersection"
+  },
+  {
+    "name": "Dhanmondi 8 / Shimanto Square",
+    "alt_names": ["Dhanmondi 8", "Shimanto Square Mall", "Peelkhana Gate 4", "Dhanmondi Lake Amphitheater"],
+    "thana": "Dhanmondi",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7412,
+    "lng": 90.3785,
+    "type": "Shopping Hub"
+  },
+  {
+    "name": "Science Laboratory Mor (Science Lab)",
+    "alt_names": ["Science Lab", "BCSIR", "Priyongon Shopping Mall", "Elephant Road Mor"],
+    "thana": "Dhanmondi",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7395,
+    "lng": 90.3835,
+    "type": "Major Intersection"
+  },
+  {
+    "name": "Nilkhet Mor & Book Market",
+    "alt_names": ["Nilkhet", "Babupura", "Book Market Nilkhet", "New Market Gate 1"],
+    "thana": "Lalbagh",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7335,
+    "lng": 90.3878,
+    "type": "Major Intersection"
+  },
+  {
+    "name": "Farmgate Intersection & Indira Road",
+    "alt_names": ["Farmgate", "Indira Road", "Ananda Cinema", "Khamarbari Mor", "Tejgaon College Gate"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7571,
+    "lng": 90.3888,
+    "type": "Major Intersection"
+  },
+  {
+    "name": "Karwan Bazar & SAARC Fountain",
+    "alt_names": ["Karwan Bazar", "Pan Pacific Sonargaon", "WASA Bhaban", "Toren Mor"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7512,
+    "lng": 90.3935,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Mirpur 10 Roundabout (Golchottor)",
+    "alt_names": ["Mirpur 10", "Mirpur 10 Golchottor", "Benarasi Polli Gate", "Fire Service Mor"],
+    "thana": "Mirpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8071,
+    "lng": 90.3697,
+    "type": "Major Intersection"
+  },
+  {
+    "name": "Mirpur 1 - Muktijoddha Market",
+    "alt_names": ["Mirpur 1", "Mazar Mor", "Shah Ali Mazar", "Sony Cinema Hall Mor"],
+    "thana": "Mirpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7955,
+    "lng": 90.3535,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Mirpur 2 - National Cricket Stadium",
+    "alt_names": ["Mirpur Stadium", "Sher-e-Bangla Stadium", "Commerce College Road", "Mirpur 2 Bus Stand"],
+    "thana": "Mirpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8062,
+    "lng": 90.3638,
+    "type": "Sports & College Hub"
+  },
+  {
+    "name": "Mohakhali Wireless Mor & Inter-District Terminal",
+    "alt_names": ["Mohakhali", "Wireless Mor", "Mohakhali Bus Terminal", "Titumir College Gate"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7785,
+    "lng": 90.4045,
+    "type": "Transit Hub"
+  },
+  {
+    "name": "Gulshan 1 Circle",
+    "alt_names": ["Gulshan 1", "Navana Tower", "Shoppers World", "Police Plaza Concord Road"],
+    "thana": "Gulshan",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7788,
+    "lng": 90.4175,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Gulshan 2 Circle",
+    "alt_names": ["Gulshan 2", "Gulshan DCC Market", "Westin Hotel Dhaka", "Diplomatic Enclave"],
+    "thana": "Gulshan",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7942,
+    "lng": 90.4142,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Banani Kemal Ataturk Avenue & Road 11",
+    "alt_names": ["Banani 11", "Kemal Ataturk", "Banani Super Market", "Prasad Trade Center"],
+    "thana": "Banani",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7938,
+    "lng": 90.4048,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Kuril Flyover & Jamuna Future Park",
+    "alt_names": ["Jamuna Future Park", "Kuril Biswa Road", "Bashundhara Gate", "Progoti Sarani"],
+    "thana": "Bhatara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8135,
+    "lng": 90.4242,
+    "type": "Shopping & Transit Hub"
+  },
+  {
+    "name": "Uttara Sector 3 & House Building",
+    "alt_names": ["Uttara House Building", "Sector 3 Friends Club", "Rajlakshmi Complex", "Rabindra Sarani"],
+    "thana": "Uttara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8698,
+    "lng": 90.3980,
+    "type": "Residential Hub"
+  },
+  {
+    "name": "Uttara Jasimuddin Avenue (Sector 1 & 3)",
+    "alt_names": ["Jasimuddin Mor", "Aarong Uttara", "Airport End Uttara"],
+    "thana": "Uttara",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8565,
+    "lng": 90.4015,
+    "type": "Intersection"
+  },
+  {
+    "name": "Hazrat Shahjalal International Airport (DAC)",
+    "alt_names": ["Dhaka Airport", "Terminal 1", "Terminal 2", "Airport Railway Station"],
+    "thana": "Airport",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8435,
+    "lng": 90.4055,
+    "type": "Airport"
+  },
+  {
+    "name": "Mouchak Market & Malibagh Mor",
+    "alt_names": ["Mouchak Mor", "Malibagh Flyover", "Fortune Shopping Mall", "Siddheswari Mor"],
+    "thana": "Ramna",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7465,
+    "lng": 90.4125,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Shapla Chottor & Motijheel Commercial Area",
+    "alt_names": ["Shapla Chottor", "Bangladesh Bank", "Dilkusha C/A", "Sonali Bank HQ"],
+    "thana": "Motijheel",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7275,
+    "lng": 90.4195,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "Kamalapur Railway Station",
+    "alt_names": ["Kamalapur Station", "Dhaka Central Railway", "Station Road Motijheel"],
+    "thana": "Motijheel",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7315,
+    "lng": 90.4265,
+    "type": "Transit Hub"
+  },
+  {
+    "name": "Sadarghat Launch Terminal & Riverfront",
+    "alt_names": ["Sadarghat", "Buriganga River", "Ahsan Manzil Road", "Lalkuthi Sadarghat"],
+    "thana": "Kotwali",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7045,
+    "lng": 90.4125,
+    "type": "Port & Historic Hub"
+  },
+  {
+    "name": "Lalbagh Fort (Lalbagh Qila)",
+    "alt_names": ["Lalbagh Kella", "Fort Aurangabad", "Shaista Khan Tomb", "Lalbagh Shahi Masjid"],
+    "thana": "Lalbagh",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7198,
     "lng": 90.3882,
-    "type": "historical"
+    "type": "Historical Landmark"
   },
   {
-    "name": "RUET - Rajshahi University of Engineering and Technology",
-    "alt_names": ["RUET", "Kazla", "Talaimari", "Rajshahi University Station"],
+    "name": "MRT-6: Farmgate Metro Station",
+    "alt_names": ["Farmgate Metro", "Ananda Hall Metro", "MRT Line 6 Farmgate"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7578,
+    "lng": 90.3892,
+    "type": "Metro Station"
+  },
+  {
+    "name": "MRT-6: Shahbagh Metro Station",
+    "alt_names": ["Shahbagh Metro", "BSMMU Metro", "National Museum Metro"],
+    "thana": "Shahbagh",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7385,
+    "lng": 90.3955,
+    "type": "Metro Station"
+  },
+  {
+    "name": "MRT-6: Dhaka University Metro Station",
+    "alt_names": ["DU Metro", "TSC Metro", "Curzon Hall Metro Station"],
+    "thana": "Shahbagh",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7315,
+    "lng": 90.3965,
+    "type": "Metro Station"
+  },
+  {
+    "name": "MRT-6: Mirpur 10 Metro Station",
+    "alt_names": ["Mirpur 10 Metro", "Golchottor Metro Station"],
+    "thana": "Mirpur",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.8075,
+    "lng": 90.3692,
+    "type": "Metro Station"
+  },
+  {
+    "name": "MRT-6: Agargaon Metro Station",
+    "alt_names": ["Agargaon Metro", "Passport Office Metro", "BSEC Bhaban Metro"],
+    "thana": "Tejgaon",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7782,
+    "lng": 90.3788,
+    "type": "Metro Station"
+  },
+  {
+    "name": "MRT-6: Motijheel Metro Station",
+    "alt_names": ["Motijheel Metro", "Shapla Chottor Metro Terminal"],
+    "thana": "Motijheel",
+    "district": "Dhaka",
+    "division": "Dhaka Division",
+    "lat": 23.7272,
+    "lng": 90.4188,
+    "type": "Metro Station"
+  },
+  {
+    "name": "RUET - Rajshahi University of Engineering & Technology",
+    "alt_names": ["RUET", "Kazla Gate", "Talaimari", "Padma Residential Area"],
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi",
+    "division": "Rajshahi Division",
     "lat": 24.3636,
-    "lng": 88.6284,
-    "type": "university"
+    "lng": 88.6285,
+    "type": "Engineering University"
   },
   {
-    "name": "Rajshahi University (RU) Main Campus",
-    "alt_names": ["RU", "Paris Road RU", "Shabash Bangladesh", "Zoha Hall"],
+    "name": "Rajshahi University (RU)",
+    "alt_names": ["RU", "Paris Road RU", "Shabash Bangladesh", "Zuberi Bhaban", "Kazla Gate 1"],
     "thana": "Motihar",
     "district": "Rajshahi",
-    "division": "Rajshahi",
-    "lat": 24.3706,
-    "lng": 88.6369,
-    "type": "university"
+    "division": "Rajshahi Division",
+    "lat": 24.3705,
+    "lng": 88.6375,
+    "type": "University"
   },
   {
-    "name": "Shaheb Bazar Zero Point, Rajshahi",
-    "alt_names": ["Shaheb Bazar", "Zero Point Rajshahi", "Boalia"],
+    "name": "Shaheb Bazar & Zero Point, Rajshahi",
+    "alt_names": ["Shaheb Bazar", "Zero Point Rajshahi", "RDA Market", "Ghoramara"],
     "thana": "Boalia",
     "district": "Rajshahi",
-    "division": "Rajshahi",
+    "division": "Rajshahi Division",
     "lat": 24.3676,
     "lng": 88.6004,
-    "type": "landmark"
+    "type": "Commercial Hub"
   },
   {
-    "name": "CUET - Chittagong University of Engineering and Technology",
-    "alt_names": ["CUET", "Pahartali Raozan", "Kaptai Road"],
-    "thana": "Raozan",
-    "district": "Chittagong",
-    "division": "Chittagong",
-    "lat": 22.4633,
-    "lng": 91.9713,
-    "type": "university"
+    "name": "Rajshahi College & New Government Degree College",
+    "alt_names": ["Rajshahi College", "Historic College Rajshahi", "Padma Riverfront College"],
+    "thana": "Boalia",
+    "district": "Rajshahi",
+    "division": "Rajshahi Division",
+    "lat": 24.3648,
+    "lng": 88.5975,
+    "type": "Premier College"
   },
   {
-    "name": "Chittagong University (CU) Shuttle Station & Gate",
-    "alt_names": ["CU", "Hathazari", "1 No Gate CU", "Chittagong University Campus"],
+    "name": "Chittagong University (CU)",
+    "alt_names": ["CU", "Zero Point CU", "1 No Gate CU", "Shuttle Train Station CU", "Hathazari Campus"],
     "thana": "Hathazari",
     "district": "Chittagong",
-    "division": "Chittagong",
-    "lat": 22.4716,
-    "lng": 91.7877,
-    "type": "university"
+    "division": "Chittagong Division",
+    "lat": 22.4715,
+    "lng": 91.7875,
+    "type": "University"
   },
   {
-    "name": "GEC Circle, Chittagong",
-    "alt_names": ["GEC Mor", "Sanmar Ocean City", "GEC Convention Hall"],
+    "name": "CUET - Chittagong University of Engineering & Technology",
+    "alt_names": ["CUET", "Kaptai Road", "Pahartali Raozan", "CUET Auditorium"],
+    "thana": "Raozan",
+    "district": "Chittagong",
+    "division": "Chittagong Division",
+    "lat": 22.4635,
+    "lng": 91.9715,
+    "type": "Engineering University"
+  },
+  {
+    "name": "GEC Circle & Nasirabad, Chittagong",
+    "alt_names": ["GEC Mor", "Hotel Peninsula", "Sanmar Ocean City", "Central Chittagong"],
     "thana": "Panchlaish",
     "district": "Chittagong",
-    "division": "Chittagong",
-    "lat": 22.3592,
-    "lng": 91.8217,
-    "type": "intersection"
+    "division": "Chittagong Division",
+    "lat": 22.3585,
+    "lng": 91.8215,
+    "type": "Commercial Hub"
   },
   {
     "name": "Agrabad Commercial Area, Chittagong",
-    "alt_names": ["Agrabad", "World Trade Center Chittagong", "Badamtali Mor"],
+    "alt_names": ["Agrabad", "Badamtoli Mor", "World Trade Center Chittagong", "Akhtaruzzaman Center"],
     "thana": "Double Mooring",
     "district": "Chittagong",
-    "division": "Chittagong",
+    "division": "Chittagong Division",
     "lat": 22.3275,
     "lng": 91.8152,
-    "type": "commercial"
+    "type": "Financial Hub"
+  },
+  {
+    "name": "Chawkbazar Mor & Chittagong College",
+    "alt_names": ["Chawkbazar Chittagong", "Gulzar Tower", "Chittagong College Gate", "Mohsin College"],
+    "thana": "Panchlaish",
+    "district": "Chittagong",
+    "division": "Chittagong Division",
+    "lat": 22.3575,
+    "lng": 91.8385,
+    "type": "Tuition & College Hub"
   },
   {
     "name": "SUST - Shahjalal University of Science and Technology",
-    "alt_names": ["SUST", "Kumargaon", "Akhalia", "Kilo Road SUST"],
+    "alt_names": ["SUST", "Akhalia", "Kilo Road SUST", "Shahjalal University Sylhet", "One Kilometer Bridge"],
     "thana": "Kotwali",
     "district": "Sylhet",
-    "division": "Sylhet",
-    "lat": 24.9205,
-    "lng": 91.8322,
-    "type": "university"
+    "division": "Sylhet Division",
+    "lat": 24.9175,
+    "lng": 91.8315,
+    "type": "University"
   },
   {
-    "name": "Zindabazar Point, Sylhet",
-    "alt_names": ["Zindabazar", "Al Hamra Shopping City", "Bandar Bazar"],
+    "name": "Zindabazar & City Centre, Sylhet",
+    "alt_names": ["Zindabazar Mor", "Al-Hamra Shopping City", "Blue Water Shopping City", "Shurma Tower"],
     "thana": "Kotwali",
     "district": "Sylhet",
-    "division": "Sylhet",
-    "lat": 24.8949,
-    "lng": 91.8687,
-    "type": "intersection"
+    "division": "Sylhet Division",
+    "lat": 24.8975,
+    "lng": 91.8715,
+    "type": "Commercial Hub"
+  },
+  {
+    "name": "KUET - Khulna University of Engineering & Technology",
+    "alt_names": ["KUET", "Teligati", "Fulbarigate Khulna", "KUET Central Gate"],
+    "thana": "Khalishpur",
+    "district": "Khulna",
+    "division": "Khulna Division",
+    "lat": 22.8998,
+    "lng": 89.5025,
+    "type": "Engineering University"
+  },
+  {
+    "name": "Khulna University (KU)",
+    "alt_names": ["KU", "Gollamari Khulna", "Mayur River KU", "Katakhali Khulna"],
+    "thana": "Sonadanga",
+    "district": "Khulna",
+    "division": "Khulna Division",
+    "lat": 22.8025,
+    "lng": 89.5335,
+    "type": "University"
+  },
+  {
+    "name": "Shibbari Mor & New Market, Khulna",
+    "alt_names": ["Shibbari", "Khulna New Market", "Moylapota Mor", "Sonadanga Bus Stand Road"],
+    "thana": "Sonadanga",
+    "district": "Khulna",
+    "division": "Khulna Division",
+    "lat": 22.8195,
+    "lng": 89.5515,
+    "type": "Commercial Hub"
   }
 ]

@@ -1,6 +1,16 @@
 import RBush from 'rbush';
 import Fuse from 'fuse.js';
 
+export interface PolygonGeometry {
+  type: 'Polygon';
+  coordinates: number[][][];
+}
+
+export interface MultiPolygonGeometry {
+  type: 'MultiPolygon';
+  coordinates: number[][][][];
+}
+
 export interface ThanaFeature {
   type: 'Feature';
   properties: {
@@ -8,10 +18,7 @@ export interface ThanaFeature {
     district_name: string;
     division_name: string;
   };
-  geometry: {
-    type: 'Polygon';
-    coordinates: number[][][];
-  };
+  geometry: PolygonGeometry | MultiPolygonGeometry;
 }
 
 export interface LandmarkItem {
@@ -31,6 +38,8 @@ interface RBushItem {
   maxX: number;
   maxY: number;
   index: number;
+  centerX: number;
+  centerY: number;
 }
 
 // ---------- Bounds Check for Bangladesh ----------
@@ -41,15 +50,9 @@ export function isInBangladesh(lng: number, lat: number): boolean {
          lat >= BD_BOUNDS.minLat && lat <= BD_BOUNDS.maxLat;
 }
 
-export function pointInPolygon(
-  [x, y]: [number, number],
-  polygon: ThanaFeature | { type?: string; geometry?: { coordinates: number[][][] }; coordinates?: number[][][] }
-): boolean {
-  const geomCoords = (polygon as ThanaFeature).geometry?.coordinates?.[0];
-  const directCoords = (polygon as { coordinates?: number[][][] }).coordinates?.[0];
-  const ring = geomCoords || directCoords || (Array.isArray(polygon) ? polygon[0] : null);
-  if (!ring || !ring.length) return false;
-
+// ---------- Inline Ray-Cast Point-in-Polygon (0.5 KB, Zero Dependencies) ----------
+function raycastRing([x, y]: [number, number], ring: number[][]): boolean {
+  if (!ring || ring.length < 3) return false;
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
     const [xi, yi] = ring[i];
@@ -61,21 +64,43 @@ export function pointInPolygon(
   return inside;
 }
 
+export function pointInPolygon([x, y]: [number, number], feature: ThanaFeature): boolean {
+  if (!feature || !feature.geometry) return false;
+  const geom = feature.geometry;
+
+  if (geom.type === 'Polygon') {
+    const coords = geom.coordinates;
+    if (!coords || !coords[0]) return false;
+    return raycastRing([x, y], coords[0]);
+  } else if (geom.type === 'MultiPolygon') {
+    const polys = geom.coordinates;
+    if (!polys) return false;
+    for (const poly of polys) {
+      if (poly && poly[0] && raycastRing([x, y], poly[0])) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 // ---------- State & Indices ----------
 let thanaGeoJSON: { features: ThanaFeature[] } | null = null;
 const tree = new RBush<RBushItem>();
+let allTreeItems: RBushItem[] = [];
 let searchIndex: Fuse<LandmarkItem> | null = null;
 let landmarksData: LandmarkItem[] = [];
 
 // ---------- Initialize Spatial Geo Engine (Cache API + RBush) ----------
 export async function initGeoEngine(): Promise<void> {
-  if (thanaGeoJSON) return;
+  if (thanaGeoJSON && allTreeItems.length > 0) return;
 
   try {
     let json: { features: ThanaFeature[] } | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v1');
+      const cache = await caches.open('geo-engine-v3');
       const cacheKey = '/geo/bd_thanas.min.geojson';
       let response = await cache.match(cacheKey);
 
@@ -97,19 +122,44 @@ export async function initGeoEngine(): Promise<void> {
 
     if (json && json.features) {
       thanaGeoJSON = json;
-      const items: RBushItem[] = thanaGeoJSON.features.map((f, i) => {
-        const coords = f.geometry.coordinates[0];
+      allTreeItems = [];
+
+      json.features.forEach((f, i) => {
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-        for (const [x, y] of coords) {
-          if (x < minX) minX = x;
-          if (y < minY) minY = y;
-          if (x > maxX) maxX = x;
-          if (y > maxY) maxY = y;
+        const geom = f.geometry;
+
+        const updateBounds = (coords: number[][]) => {
+          for (const [x, y] of coords) {
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+          }
+        };
+
+        if (geom.type === 'Polygon' && geom.coordinates?.[0]) {
+          updateBounds(geom.coordinates[0]);
+        } else if (geom.type === 'MultiPolygon' && geom.coordinates) {
+          geom.coordinates.forEach((poly) => {
+            if (poly?.[0]) updateBounds(poly[0]);
+          });
         }
-        return { minX, minY, maxX, maxY, index: i };
+
+        if (minX !== Infinity) {
+          allTreeItems.push({
+            minX,
+            minY,
+            maxX,
+            maxY,
+            index: i,
+            centerX: (minX + maxX) / 2,
+            centerY: (minY + maxY) / 2
+          });
+        }
       });
+
       tree.clear();
-      tree.load(items);
+      tree.load(allTreeItems);
     }
   } catch (err) {
     console.warn('Could not initialize GeoEngine via cache:', err);
@@ -124,7 +174,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
     let landmarks: LandmarkItem[] | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v1');
+      const cache = await caches.open('geo-engine-v3');
       const cacheKey = '/geo/bd_landmarks.json';
       let response = await cache.match(cacheKey);
 
@@ -148,12 +198,15 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
       landmarksData = landmarks;
       searchIndex = new Fuse(landmarks, {
         keys: [
-          { name: 'name', weight: 0.6 },
+          { name: 'name', weight: 0.5 },
           { name: 'alt_names', weight: 0.3 },
-          { name: 'thana', weight: 0.1 }
+          { name: 'thana', weight: 0.15 },
+          { name: 'district', weight: 0.1 },
+          { name: 'type', weight: 0.1 }
         ],
-        threshold: 0.35,
-        includeScore: true
+        threshold: 0.38,
+        includeScore: true,
+        shouldSort: true
       });
     }
   } catch (err) {
@@ -199,7 +252,7 @@ export function resolveLocationLocally(lng: number, lat: number): LocationResolu
     };
   }
 
-  // O(log n) candidates
+  // 1. O(log n) candidates via R-Tree bounding box intersection
   const candidates = tree.search({ minX: lng, minY: lat, maxX: lng, maxY: lat });
 
   for (const c of candidates) {
@@ -217,6 +270,33 @@ export function resolveLocationLocally(lng: number, lat: number): LocationResolu
     }
   }
 
+  // 2. Nearest boundary fallback (handles simplified polygon borders smoothly)
+  let closestFeature: ThanaFeature | null = null;
+  let minDistanceSq = Infinity;
+
+  for (const item of allTreeItems) {
+    const dx = lng - item.centerX;
+    const dy = lat - item.centerY;
+    const distSq = dx * dx + dy * dy;
+    if (distSq < minDistanceSq) {
+      minDistanceSq = distSq;
+      closestFeature = thanaGeoJSON.features[item.index];
+    }
+  }
+
+  // If closest center is within ~0.35 degrees (~35 km)
+  if (closestFeature && minDistanceSq < 0.15) {
+    const endTime = typeof performance !== 'undefined' ? performance.now() : 0;
+    return {
+      thana: closestFeature.properties.thana_name,
+      district: closestFeature.properties.district_name,
+      division: closestFeature.properties.division_name,
+      displayName: `${closestFeature.properties.thana_name}, ${closestFeature.properties.district_name}`,
+      outOfBounds: false,
+      executionMs: parseFloat((endTime - startTime).toFixed(3))
+    };
+  }
+
   const endTime = typeof performance !== 'undefined' ? performance.now() : 0;
   return {
     thana: null,
@@ -229,7 +309,7 @@ export function resolveLocationLocally(lng: number, lat: number): LocationResolu
 }
 
 // ---------- Instant In-Memory Autocomplete ----------
-export function searchPlaces(query: string, limit = 6): LandmarkItem[] {
+export function searchPlaces(query: string, limit = 7): LandmarkItem[] {
   if (!searchIndex || !query.trim()) return [];
   const results = searchIndex.search(query.trim(), { limit });
   return results.map(r => r.item);

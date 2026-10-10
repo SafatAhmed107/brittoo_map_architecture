@@ -2,7 +2,9 @@
 const CACHE_NAME = 'tuition-geo-v5';
 const PRECACHE_URLS = [
   '/geo/bd_thanas.min.geojson',
-  '/geo/bd_landmarks.json'
+  '/geo/bd_landmarks.json',
+  '/geo/districts/manifest.json',
+  '/geo/districts/dhaka.json'
 ];
 
 // Install: Precache critical geo assets

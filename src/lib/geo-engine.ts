@@ -329,9 +329,101 @@ export function resolveLocationLocally(lng: number, lat: number): LocationResolu
   };
 }
 
-// ---------- Instant In-Memory Autocomplete ----------
-export function searchPlaces(query: string, limit = 7): LandmarkItem[] {
+// ---------- District Cluster Lazy Loading & LRU Cache ----------
+const loadedDistricts = new Set<string>();
+
+export function slugifyDistrict(name: string): string {
+  return name.toLowerCase()
+    .replace(/'/g, '')
+    .replace(/[^a-z0-9]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
+}
+
+export async function loadDistrictData(districtName: string): Promise<boolean> {
+  if (!districtName) return false;
+  const slug = slugifyDistrict(districtName);
+  if (loadedDistricts.has(slug)) return true;
+
+  try {
+    let payload: { landmarks: LandmarkItem[] } | null = null;
+    const url = `/geo/districts/${slug}.json`;
+
+    if (typeof window !== 'undefined' && 'caches' in window) {
+      const cache = await caches.open('geo-engine-v5');
+      let response = await cache.match(url);
+      if (!response) {
+        response = await fetch(url);
+        if (response.ok) {
+          await cache.put(url, response.clone());
+        }
+      }
+      if (response && response.ok) {
+        payload = await response.json();
+      }
+    } else {
+      const response = await fetch(url);
+      if (response.ok) payload = await response.json();
+    }
+
+    if (payload && Array.isArray(payload.landmarks) && payload.landmarks.length > 0) {
+      const existingIds = new Set(landmarksData.map(l => l.id || l.name));
+      let added = 0;
+      for (const item of payload.landmarks) {
+        const id = item.id || item.name;
+        if (!existingIds.has(id)) {
+          landmarksData.push(item);
+          existingIds.add(id);
+          added++;
+        }
+      }
+      loadedDistricts.add(slug);
+
+      if (added > 0 && searchIndex) {
+        searchIndex.setCollection(landmarksData);
+      }
+      return true;
+    }
+  } catch (err) {
+    console.warn(`Could not load cluster for district ${districtName}:`, err);
+  }
+  return false;
+}
+
+// ---------- Instant In-Memory Proximity-Biased Autocomplete ----------
+export function searchPlaces(
+  query: string,
+  limit = 7,
+  userCoords?: { lat: number; lng: number }
+): LandmarkItem[] {
   if (!searchIndex || !query.trim()) return [];
-  const results = searchIndex.search(query.trim(), { limit });
-  return results.map(r => r.item);
+
+  const searchLimit = userCoords ? Math.min(limit * 3, 25) : limit;
+  const results = searchIndex.search(query.trim(), { limit: searchLimit });
+
+  if (!userCoords || results.length <= 1) {
+    return results.slice(0, limit).map(r => r.item);
+  }
+
+  const { lat: uLat, lng: uLng } = userCoords;
+  const cosLat = Math.cos((uLat * Math.PI) / 180);
+
+  // Proximity-decay ranking: lower score is better in Fuse.js
+  const ranked = results.map(r => {
+    const dLat = (r.item.lat - uLat) * 111.0;
+    const dLng = (r.item.lng - uLng) * 111.0 * cosLat;
+    const distKm = Math.sqrt(dLat * dLat + dLng * dLng);
+
+    const baseScore = r.score ?? 0.4;
+    const adjustedScore = baseScore * (1 + distKm * 0.035);
+
+    return {
+      item: r.item,
+      adjustedScore,
+      distKm
+    };
+  });
+
+  ranked.sort((a, b) => a.adjustedScore - b.adjustedScore);
+  return ranked.slice(0, limit).map(r => r.item);
 }

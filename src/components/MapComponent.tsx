@@ -8,6 +8,7 @@ import {
   initSearchIndex,
   resolveLocationLocally,
   searchPlaces,
+  loadDistrictData,
   LocationResolution,
   LandmarkItem
 } from '@/lib/geo-engine';
@@ -307,6 +308,10 @@ export default function MapComponent() {
     const resolved = resolveLocationLocally(lng, lat);
     setLocationInfo(resolved);
 
+    if (resolved.district) {
+      loadDistrictData(resolved.district);
+    }
+
     if (resolved.outOfBounds) {
       showToast('📍 Selected location is outside Bangladesh. Snapped back to BUET.');
       const buet = [90.3924, 23.7266];
@@ -426,6 +431,7 @@ export default function MapComponent() {
     // Initialize local geo assets
     initGeoEngine();
     initSearchIndex();
+    loadDistrictData('Dhaka');
     fetchSystemStatus();
 
     const map = new maplibregl.Map({
@@ -595,7 +601,7 @@ export default function MapComponent() {
       setIsSearching(false);
       return;
     }
-    const results = searchPlaces(q, 8);
+    const results = searchPlaces(q, 8, selectedCoordsRef.current);
     setSuggestions(results);
     setIsSearching(true);
   };

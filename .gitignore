@@ -40,3 +40,6 @@ keys.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch crawler data
+scratch/

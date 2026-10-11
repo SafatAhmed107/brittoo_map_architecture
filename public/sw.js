@@ -1,5 +1,5 @@
 // Service Worker for Zero-Cost Map Architecture: Offline Precaching
-const CACHE_NAME = 'tuition-geo-v5';
+const CACHE_NAME = 'tuition-geo-v6';
 const PRECACHE_URLS = [
   '/geo/bd_thanas.min.geojson',
   '/geo/bd_landmarks.json',
@@ -25,14 +25,23 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Cache-first for geo assets, network-first for everything else
+// Fetch: Cache-first with background fill for all /geo/ assets
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Cache-first for our precached geo data
-  if (PRECACHE_URLS.some(p => url.pathname.endsWith(p))) {
+  // Cache-first for any geo asset (thanas, landmarks, districts, clusters)
+  if (url.pathname.startsWith('/geo/')) {
     event.respondWith(
-      caches.match(event.request).then(cached => cached || fetch(event.request))
+      caches.match(event.request).then(cached => {
+        if (cached) return cached;
+        return fetch(event.request).then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        });
+      })
     );
     return;
   }

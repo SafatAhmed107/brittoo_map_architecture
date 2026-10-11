@@ -474,4 +474,28 @@ input[type="range"].commute-slider::-webkit-slider-thumb:hover {
   filter: none;
 }
 
+/* Custom Cyber-Glass Popup for Landmarks */
+.glass-landmark-popup .maplibregl-popup-content {
+  background: rgba(15, 23, 42, 0.92) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 24px rgba(16, 185, 129, 0.2);
+  padding: 12px 14px;
+  color: #f8fafc;
+}
+.glass-landmark-popup .maplibregl-popup-tip {
+  border-top-color: rgba(15, 23, 42, 0.92) !important;
+}
+.glass-landmark-popup .maplibregl-popup-close-button {
+  color: #94a3b8;
+  font-size: 16px;
+  padding: 4px 8px;
+}
+.glass-landmark-popup .maplibregl-popup-close-button:hover {
+  color: #ffffff;
+  background: transparent;
+}
+
 

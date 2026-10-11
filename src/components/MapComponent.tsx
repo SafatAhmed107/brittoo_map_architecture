@@ -9,6 +9,7 @@ import {
   resolveLocationLocally,
   searchPlaces,
   loadDistrictData,
+  getNearbyLandmarks,
   LocationResolution,
   LandmarkItem
 } from '@/lib/geo-engine';
@@ -246,6 +247,14 @@ export default function MapComponent() {
   radiusFilterRef.current = radiusFilter;
   const [classFilter, setClassFilter] = useState<string>('ALL');
   const [showDeck, setShowDeck] = useState(true);
+  const [showLandmarksLayer, setShowLandmarksLayer] = useState(true);
+  const [showNearbyDrawer, setShowNearbyDrawer] = useState(false);
+  const [districtLandmarksLoaded, setDistrictLandmarksLoaded] = useState(0);
+
+  // Instant in-memory institutions within tutor's commute radius
+  const nearbyInstitutions = useMemo(() => {
+    return getNearbyLandmarks(selectedCoords, radiusFilter / 1000, 20);
+  }, [selectedCoords, radiusFilter, districtLandmarksLoaded]);
 
   // "Post a Tuition" Modal State
   const [postFormOpen, setPostFormOpen] = useState(false);
@@ -309,7 +318,9 @@ export default function MapComponent() {
     setLocationInfo(resolved);
 
     if (resolved.district) {
-      loadDistrictData(resolved.district);
+      loadDistrictData(resolved.district).then((loaded) => {
+        if (loaded) setDistrictLandmarksLoaded(prev => prev + 1);
+      });
     }
 
     if (resolved.outOfBounds) {
@@ -420,6 +431,171 @@ export default function MapComponent() {
     }
   }, []);
 
+  // Breakthrough 6: Native WebGL Clustered Landmarks Layer (24,000+ points at 60 FPS)
+  const setupLandmarksLayer = useCallback((map: maplibregl.Map) => {
+    if (!map.isStyleLoaded()) return;
+
+    if (!map.getSource('bd-landmarks-cluster')) {
+      map.addSource('bd-landmarks-cluster', {
+        type: 'geojson',
+        data: '/geo/landmarks_layer.geojson',
+        cluster: true,
+        clusterMaxZoom: 14,
+        clusterRadius: 45
+      });
+
+      // 1. Cluster background circles with 3-tier count colors
+      map.addLayer({
+        id: 'landmarks-clusters',
+        type: 'circle',
+        source: 'bd-landmarks-cluster',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': [
+            'step',
+            ['get', 'point_count'],
+            '#0284c7', // < 25: Sky Cyan
+            25,
+            '#059669', // 25 - 99: Emerald Green
+            100,
+            '#7c3aed'  // >= 100: Royal Purple
+          ],
+          'circle-radius': [
+            'step',
+            ['get', 'point_count'],
+            16,
+            25,
+            22,
+            100,
+            28
+          ],
+          'circle-stroke-width': 2.5,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.9
+        }
+      });
+
+      // 2. Cluster count text
+      map.addLayer({
+        id: 'landmarks-cluster-count',
+        type: 'symbol',
+        source: 'bd-landmarks-cluster',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['Open Sans Bold'],
+          'text-size': 12
+        },
+        paint: {
+          'text-color': '#ffffff'
+        }
+      });
+
+      // 3. Individual unclustered landmark points
+      map.addLayer({
+        id: 'landmarks-unclustered-point',
+        type: 'circle',
+        source: 'bd-landmarks-cluster',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-color': [
+            'match',
+            ['get', 'category'],
+            'education', '#10b981',   // Emerald
+            'healthcare', '#ef4444',  // Rose Red
+            'commercial', '#f59e0b',  // Amber Gold
+            'transit', '#3b82f6',     // Electric Blue
+            'hub', '#8b5cf6',         // Purple
+            '#06b6d4'                 // Default Cyan
+          ],
+          'circle-radius': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10, 4,
+            14, 6.5,
+            17, 9
+          ],
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.95
+        }
+      });
+
+      // Cluster click: smooth expansion flyTo
+      map.on('click', 'landmarks-clusters', (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ['landmarks-clusters'] });
+        if (!features.length) return;
+        const clusterId = features[0].properties?.cluster_id;
+        const source = map.getSource('bd-landmarks-cluster') as maplibregl.GeoJSONSource;
+        if (source && typeof (source as any).getClusterExpansionZoom === 'function') {
+          (source as any).getClusterExpansionZoom(clusterId, (err: any, zoom: number) => {
+            if (err) return;
+            const geom = features[0].geometry as any;
+            map.easeTo({
+              center: geom.coordinates,
+              zoom: Math.min(zoom + 0.5, 16),
+              duration: 600
+            });
+          });
+        }
+      });
+
+      // Unclustered point click: Open popup & allow instant pin move
+      map.on('click', 'landmarks-unclustered-point', (e) => {
+        if (!e.features || !e.features[0]) return;
+        const feat = e.features[0];
+        const geom = feat.geometry as any;
+        const p = feat.properties as any;
+        const coords: [number, number] = geom.coordinates;
+
+        const catEmoji = p.category === 'education' ? '🎓' : p.category === 'healthcare' ? '🏥' : p.category === 'commercial' ? '🛒' : p.category === 'transit' ? '🚆' : '📍';
+
+        const popup = new maplibregl.Popup({ offset: 12, closeButton: true, className: 'glass-landmark-popup' })
+          .setLngLat(coords)
+          .setHTML(`
+            <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px 2px; min-width: 190px;">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 4px;">
+                  ${catEmoji} ${p.category || 'Landmark'}
+                </span>
+              </div>
+              <div style="font-weight: 700; font-size: 14px; color: #f8fafc; margin-bottom: 2px; line-height: 1.3;">
+                ${p.name || 'Landmark'}
+              </div>
+              ${p.name_bn ? '<div style="font-size: 12px; color: #94a3b8; margin-bottom: 4px;">' + p.name_bn + '</div>' : ''}
+              <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px;">
+                📍 ${p.thana ? p.thana + ', ' : ''}${p.district || ''}
+              </div>
+              <button id="btn-pin-landmark-${p.id || 'target'}" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+                🎯 Set Commute Pin Here
+              </button>
+            </div>
+          `)
+          .addTo(map);
+
+        setTimeout(() => {
+          const btn = document.getElementById(`btn-pin-landmark-${p.id || 'target'}`);
+          if (btn) {
+            btn.onclick = () => {
+              if (markerRef.current) markerRef.current.setLngLat(coords);
+              handleLocationChange(coords[0], coords[1]);
+              updateRadiusCircle(map, coords, radiusFilterRef.current);
+              map.flyTo({ center: coords, zoom: 15.2, duration: 1200 });
+              popup.remove();
+            };
+          }
+        }, 60);
+      });
+
+      // Cursor pointers
+      map.on('mouseenter', 'landmarks-clusters', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'landmarks-clusters', () => { map.getCanvas().style.cursor = ''; });
+      map.on('mouseenter', 'landmarks-unclustered-point', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'landmarks-unclustered-point', () => { map.getCanvas().style.cursor = ''; });
+    }
+  }, [handleLocationChange, updateRadiusCircle]);
+
   // Initialize MapLibre
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return;
@@ -431,7 +607,9 @@ export default function MapComponent() {
     // Initialize local geo assets
     initGeoEngine();
     initSearchIndex();
-    loadDistrictData('Dhaka');
+    loadDistrictData('Dhaka').then(() => {
+      setDistrictLandmarksLoaded(prev => prev + 1);
+    });
     fetchSystemStatus();
 
     const map = new maplibregl.Map({
@@ -481,6 +659,7 @@ export default function MapComponent() {
     map.on('load', () => {
       updateRadiusCircle(map, [selectedCoordsRef.current.lng, selectedCoordsRef.current.lat], radiusFilterRef.current);
       setupMvtLayer(map);
+      setupLandmarksLayer(map);
     });
 
     map.on('move', () => {
@@ -587,10 +766,22 @@ export default function MapComponent() {
         if (mapRef.current) {
           updateRadiusCircle(mapRef.current, [selectedCoords.lng, selectedCoords.lat], radiusFilter);
           setupMvtLayer(mapRef.current);
+          setupLandmarksLayer(mapRef.current);
         }
       });
     }
   };
+
+  // Synchronize Landmarks Layer Visibility
+  useEffect(() => {
+    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
+    const visibility = showLandmarksLayer ? 'visible' : 'none';
+    ['landmarks-clusters', 'landmarks-cluster-count', 'landmarks-unclustered-point'].forEach(id => {
+      if (mapRef.current?.getLayer(id)) {
+        mapRef.current.setLayoutProperty(id, 'visibility', visibility);
+      }
+    });
+  }, [showLandmarksLayer]);
 
   // Search input handler
   const handleSearchInput = (q: string) => {
@@ -1085,6 +1276,60 @@ export default function MapComponent() {
           </select>
         </div>
 
+        {/* Landmark Cluster Layer Toggle */}
+        <button
+          onClick={() => setShowLandmarksLayer(!showLandmarksLayer)}
+          className="glass-panel"
+          title="Toggle 24,000+ Nationwide Schools, Colleges, Bazars & Hospitals"
+          style={{
+            padding: '6px 12px',
+            borderRadius: 'var(--radius-full)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            color: showLandmarksLayer ? '#34d399' : 'var(--text-muted)',
+            border: showLandmarksLayer ? '1px solid rgba(52, 211, 153, 0.4)' : '1px solid rgba(255,255,255,0.1)',
+            background: showLandmarksLayer ? 'rgba(16, 185, 129, 0.12)' : 'rgba(0,0,0,0.3)',
+            fontSize: '12px',
+            fontWeight: 700,
+            cursor: 'pointer'
+          }}
+        >
+          <GraduationCap size={14} color={showLandmarksLayer ? '#34d399' : '#94a3b8'} />
+          <span>Landmarks</span>
+          <span style={{ fontSize: '10px', background: 'rgba(52, 211, 153, 0.25)', color: '#10b981', padding: '1px 5px', borderRadius: '4px' }}>
+            24k
+          </span>
+        </button>
+
+        {/* Nearby Commute Hubs Explorer Button */}
+        <button
+          onClick={() => setShowNearbyDrawer(!showNearbyDrawer)}
+          className="glass-panel"
+          title="Explore Schools & Institutions within Commute Radius"
+          style={{
+            padding: '6px 12px',
+            borderRadius: 'var(--radius-full)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            color: showNearbyDrawer ? '#38bdf8' : 'var(--text-primary)',
+            border: showNearbyDrawer ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid rgba(255,255,255,0.1)',
+            background: showNearbyDrawer ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0,0,0,0.3)',
+            fontSize: '12px',
+            fontWeight: 700,
+            cursor: 'pointer'
+          }}
+        >
+          <Building2 size={14} color="#38bdf8" />
+          <span>Nearby Hubs</span>
+          {nearbyInstitutions.length > 0 && (
+            <span style={{ fontSize: '10px', background: 'rgba(56, 189, 248, 0.25)', color: '#38bdf8', padding: '1px 5px', borderRadius: '4px' }}>
+              {nearbyInstitutions.length}
+            </span>
+          )}
+        </button>
+
         {/* Basemap Style Switcher */}
         <div style={{ position: 'relative' }}>
           <button
@@ -1437,6 +1682,117 @@ export default function MapComponent() {
             >
               Close
             </button>
+          </div>
+        </aside>
+      )}
+
+      {/* Nearby Commute Institutions Slide Drawer */}
+      {showNearbyDrawer && (
+        <aside
+          className="glass-panel-elevated animate-slide-up"
+          style={{
+            position: 'absolute',
+            bottom: '24px',
+            left: '24px',
+            width: '390px',
+            maxHeight: '480px',
+            display: 'flex',
+            flexDirection: 'column',
+            zIndex: 90,
+            padding: '18px',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: '0 20px 45px rgba(0,0,0,0.65)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ background: 'rgba(56, 189, 248, 0.2)', padding: '6px', borderRadius: '8px' }}>
+                <Building2 size={18} color="#38bdf8" />
+              </div>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                  Institutions in Commute Radius
+                </h3>
+                <p style={{ margin: 0, fontSize: '11px', color: 'var(--text-muted)' }}>
+                  Within {(radiusFilter / 1000).toFixed(1)} km of your commute center
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowNearbyDrawer(false)}
+              className="btn btn-secondary btn-sm"
+              style={{ padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <X size={15} />
+            </button>
+          </div>
+
+          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 8, paddingRight: 4 }}>
+            {nearbyInstitutions.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '28px 12px', color: 'var(--text-muted)', fontSize: '13px' }}>
+                No institutions found within {(radiusFilter / 1000).toFixed(1)} km.<br />
+                Try increasing your commute radius slider.
+              </div>
+            ) : (
+              nearbyInstitutions.map((item, idx) => {
+                const catEmoji = item.category === 'education' ? '🎓' : item.category === 'healthcare' ? '🏥' : item.category === 'commercial' ? '🛒' : item.category === 'transit' ? '🚆' : '📍';
+                const catColor = item.category === 'education' ? '#34d399' : item.category === 'healthcare' ? '#f43f5e' : item.category === 'commercial' ? '#fbbf24' : '#38bdf8';
+
+                return (
+                  <div
+                    key={item.id || idx}
+                    onClick={() => {
+                      if (markerRef.current) markerRef.current.setLngLat([item.lng, item.lat]);
+                      handleLocationChange(item.lng, item.lat);
+                      if (mapRef.current) {
+                        updateRadiusCircle(mapRef.current, [item.lng, item.lat], radiusFilterRef.current);
+                        mapRef.current.flyTo({ center: [item.lng, item.lat], zoom: 15.2, duration: 1200 });
+                      }
+                      showToast(`📍 Centered on ${item.name}`);
+                    }}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '10px 12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(56, 189, 248, 0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                      <span style={{ fontSize: '18px', flexShrink: 0 }}>{catEmoji}</span>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {item.name}
+                        </div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                          {item.thana ? `${item.thana}, ` : ''}{item.district}
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2, flexShrink: 0, marginLeft: 8 }}>
+                      <span style={{ fontSize: '11px', fontWeight: 700, color: catColor }}>
+                        {item.distKm} km
+                      </span>
+                      <span style={{ fontSize: '10px', textTransform: 'capitalize', color: 'var(--text-muted)' }}>
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         </aside>
       )}

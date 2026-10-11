@@ -427,3 +427,40 @@ export function searchPlaces(
   ranked.sort((a, b) => a.adjustedScore - b.adjustedScore);
   return ranked.slice(0, limit).map(r => r.item);
 }
+
+// ---------- Instant In-Memory Radius Institution Filter ----------
+export function getNearbyLandmarks(
+  coords: { lat: number; lng: number },
+  radiusKm = 3.0,
+  limit = 20
+): (LandmarkItem & { distKm: number })[] {
+  if (!landmarksData || landmarksData.length === 0) return [];
+  const { lat: uLat, lng: uLng } = coords;
+  const cosLat = Math.cos((uLat * Math.PI) / 180);
+
+  const matched: (LandmarkItem & { distKm: number })[] = [];
+
+  for (const item of landmarksData) {
+    const dLat = (item.lat - uLat) * 111.0;
+    const dLng = (item.lng - uLng) * 111.0 * cosLat;
+    const distKm = Math.sqrt(dLat * dLat + dLng * dLng);
+
+    if (distKm <= radiusKm) {
+      matched.push({
+        ...item,
+        distKm: Number(distKm.toFixed(2))
+      });
+    }
+  }
+
+  // Prioritize education and healthcare first, then by distance
+  matched.sort((a, b) => {
+    const aPriority = a.category === 'education' ? 0 : a.category === 'healthcare' ? 1 : 2;
+    const bPriority = b.category === 'education' ? 0 : b.category === 'healthcare' ? 1 : 2;
+    if (aPriority !== bPriority) return aPriority - bPriority;
+    return a.distKm - b.distKm;
+  });
+
+  return matched.slice(0, limit);
+}
+

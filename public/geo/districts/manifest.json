@@ -2,385 +2,385 @@
   "jashore": {
     "district": "Jashore",
     "division": "Khulna Division",
-    "landmarks": 25,
+    "landmarks": 1262,
     "file": "/geo/districts/jashore.json"
   },
   "dhaka": {
     "district": "Dhaka",
     "division": "Dhaka Division",
-    "landmarks": 1130,
+    "landmarks": 13976,
     "file": "/geo/districts/dhaka.json"
   },
   "bogura": {
     "district": "Bogura",
     "division": "Rajshahi Division",
-    "landmarks": 97,
+    "landmarks": 1379,
     "file": "/geo/districts/bogura.json"
   },
   "lalmonirhat": {
     "district": "Lalmonirhat",
     "division": "Rangpur Division",
-    "landmarks": 30,
+    "landmarks": 469,
     "file": "/geo/districts/lalmonirhat.json"
   },
   "barishal": {
     "district": "Barishal",
     "division": "Barishal Division",
-    "landmarks": 70,
+    "landmarks": 1269,
     "file": "/geo/districts/barishal.json"
   },
   "habiganj": {
     "district": "Habiganj",
     "division": "Sylhet Division",
-    "landmarks": 41,
+    "landmarks": 235,
     "file": "/geo/districts/habiganj.json"
   },
   "brahmanbaria": {
     "district": "Brahmanbaria",
     "division": "Chattogram Division",
-    "landmarks": 32,
+    "landmarks": 427,
     "file": "/geo/districts/brahmanbaria.json"
   },
   "joypurhat": {
     "district": "Joypurhat",
     "division": "Rajshahi Division",
-    "landmarks": 11,
+    "landmarks": 655,
     "file": "/geo/districts/joypurhat.json"
   },
   "chuadanga": {
     "district": "Chuadanga",
     "division": "Khulna Division",
-    "landmarks": 9,
+    "landmarks": 490,
     "file": "/geo/districts/chuadanga.json"
   },
   "faridpur": {
     "district": "Faridpur",
     "division": "Dhaka Division",
-    "landmarks": 47,
+    "landmarks": 827,
     "file": "/geo/districts/faridpur.json"
   },
   "bandarban": {
     "district": "Bandarban",
     "division": "Chattogram Division",
-    "landmarks": 13,
+    "landmarks": 391,
     "file": "/geo/districts/bandarban.json"
   },
   "barguna": {
     "district": "Barguna",
     "division": "Barishal Division",
-    "landmarks": 51,
+    "landmarks": 851,
     "file": "/geo/districts/barguna.json"
   },
   "narayanganj": {
     "district": "Narayanganj",
     "division": "Dhaka Division",
-    "landmarks": 29,
+    "landmarks": 1034,
     "file": "/geo/districts/narayanganj.json"
   },
   "satkhira": {
     "district": "Satkhira",
     "division": "Khulna Division",
-    "landmarks": 34,
+    "landmarks": 1333,
     "file": "/geo/districts/satkhira.json"
   },
   "pabna": {
     "district": "Pabna",
     "division": "Rajshahi Division",
-    "landmarks": 51,
+    "landmarks": 837,
     "file": "/geo/districts/pabna.json"
   },
   "netrokona": {
     "district": "Netrokona",
     "division": "Mymensingh Division",
-    "landmarks": 55,
+    "landmarks": 1062,
     "file": "/geo/districts/netrokona.json"
   },
   "naogaon": {
     "district": "Naogaon",
     "division": "Rajshahi Division",
-    "landmarks": 65,
+    "landmarks": 2785,
     "file": "/geo/districts/naogaon.json"
   },
   "panchagarh": {
     "district": "Panchagarh",
     "division": "Rangpur Division",
-    "landmarks": 43,
+    "landmarks": 1089,
     "file": "/geo/districts/panchagarh.json"
   },
   "rangpur": {
     "district": "Rangpur",
     "division": "Rangpur Division",
-    "landmarks": 62,
+    "landmarks": 1778,
     "file": "/geo/districts/rangpur.json"
   },
   "natore": {
     "district": "Natore",
     "division": "Rajshahi Division",
-    "landmarks": 60,
+    "landmarks": 901,
     "file": "/geo/districts/natore.json"
   },
   "bagerhat": {
     "district": "Bagerhat",
     "division": "Khulna Division",
-    "landmarks": 58,
+    "landmarks": 842,
     "file": "/geo/districts/bagerhat.json"
   },
   "rajshahi": {
     "district": "Rajshahi",
     "division": "Rajshahi Division",
-    "landmarks": 54,
+    "landmarks": 2128,
     "file": "/geo/districts/rajshahi.json"
   },
   "kishoreganj": {
     "district": "Kishoreganj",
     "division": "Dhaka Division",
-    "landmarks": 54,
+    "landmarks": 983,
     "file": "/geo/districts/kishoreganj.json"
   },
   "sylhet": {
     "district": "Sylhet",
     "division": "Sylhet Division",
-    "landmarks": 65,
+    "landmarks": 715,
     "file": "/geo/districts/sylhet.json"
   },
   "rajbari": {
     "district": "Rajbari",
     "division": "Dhaka Division",
-    "landmarks": 11,
+    "landmarks": 957,
     "file": "/geo/districts/rajbari.json"
   },
   "thakurgaon": {
     "district": "Thakurgaon",
     "division": "Rangpur Division",
-    "landmarks": 43,
+    "landmarks": 1392,
     "file": "/geo/districts/thakurgaon.json"
   },
   "chattogram": {
     "district": "Chattogram",
     "division": "Chattogram Division",
-    "landmarks": 263,
+    "landmarks": 2401,
     "file": "/geo/districts/chattogram.json"
   },
   "rangamati": {
     "district": "Rangamati",
     "division": "Chattogram Division",
-    "landmarks": 16,
+    "landmarks": 408,
     "file": "/geo/districts/rangamati.json"
   },
   "maulvibazar": {
     "district": "Maulvibazar",
     "division": "Sylhet Division",
-    "landmarks": 22,
+    "landmarks": 290,
     "file": "/geo/districts/maulvibazar.json"
   },
   "cumilla": {
     "district": "Cumilla",
     "division": "Chattogram Division",
-    "landmarks": 88,
+    "landmarks": 1583,
     "file": "/geo/districts/cumilla.json"
   },
   "tangail": {
     "district": "Tangail",
     "division": "Dhaka Division",
-    "landmarks": 105,
+    "landmarks": 1382,
     "file": "/geo/districts/tangail.json"
   },
   "khulna": {
     "district": "Khulna",
     "division": "Khulna Division",
-    "landmarks": 66,
+    "landmarks": 1340,
     "file": "/geo/districts/khulna.json"
   },
   "patuakhali": {
     "district": "Patuakhali",
     "division": "Barishal Division",
-    "landmarks": 46,
+    "landmarks": 1311,
     "file": "/geo/districts/patuakhali.json"
   },
   "noakhali": {
     "district": "Noakhali",
     "division": "Chattogram Division",
-    "landmarks": 21,
+    "landmarks": 548,
     "file": "/geo/districts/noakhali.json"
   },
   "narsingdi": {
     "district": "Narsingdi",
     "division": "Dhaka Division",
-    "landmarks": 22,
+    "landmarks": 621,
     "file": "/geo/districts/narsingdi.json"
   },
   "sirajgonj": {
     "district": "Sirajgonj",
     "division": "Rajshahi Division",
-    "landmarks": 43,
+    "landmarks": 365,
     "file": "/geo/districts/sirajgonj.json"
   },
   "mymensingh": {
     "district": "Mymensingh",
     "division": "Mymensingh Division",
-    "landmarks": 156,
+    "landmarks": 2732,
     "file": "/geo/districts/mymensingh.json"
   },
   "pirojpur": {
     "district": "Pirojpur",
     "division": "Barishal Division",
-    "landmarks": 19,
+    "landmarks": 392,
     "file": "/geo/districts/pirojpur.json"
   },
   "shariatpur": {
     "district": "Shariatpur",
     "division": "Dhaka Division",
-    "landmarks": 14,
+    "landmarks": 523,
     "file": "/geo/districts/shariatpur.json"
   },
   "kushtia": {
     "district": "Kushtia",
     "division": "Khulna Division",
-    "landmarks": 37,
+    "landmarks": 772,
     "file": "/geo/districts/kushtia.json"
   },
   "bhola": {
     "district": "Bhola",
     "division": "Barishal Division",
-    "landmarks": 212,
+    "landmarks": 1209,
     "file": "/geo/districts/bhola.json"
   },
   "nawabganj": {
     "district": "Nawabganj",
     "division": "Rajshahi Division",
-    "landmarks": 43,
+    "landmarks": 1255,
     "file": "/geo/districts/nawabganj.json"
   },
   "kurigram": {
     "district": "Kurigram",
     "division": "Rangpur Division",
-    "landmarks": 47,
+    "landmarks": 1033,
     "file": "/geo/districts/kurigram.json"
   },
   "dinajpur": {
     "district": "Dinajpur",
     "division": "Rangpur Division",
-    "landmarks": 55,
+    "landmarks": 2722,
     "file": "/geo/districts/dinajpur.json"
   },
   "sunamganj": {
     "district": "Sunamganj",
     "division": "Sylhet Division",
-    "landmarks": 48,
+    "landmarks": 397,
     "file": "/geo/districts/sunamganj.json"
   },
   "coxs_bazar": {
     "district": "Cox's Bazar",
     "division": "Chattogram Division",
-    "landmarks": 32,
+    "landmarks": 855,
     "file": "/geo/districts/coxs_bazar.json"
   },
   "chandpur": {
     "district": "Chandpur",
     "division": "Chattogram Division",
-    "landmarks": 24,
+    "landmarks": 890,
     "file": "/geo/districts/chandpur.json"
   },
   "feni": {
     "district": "Feni",
     "division": "Chattogram Division",
-    "landmarks": 32,
+    "landmarks": 331,
     "file": "/geo/districts/feni.json"
   },
   "manikganj": {
     "district": "Manikganj",
     "division": "Dhaka Division",
-    "landmarks": 34,
+    "landmarks": 1595,
     "file": "/geo/districts/manikganj.json"
   },
   "jamalpur": {
     "district": "Jamalpur",
     "division": "Mymensingh Division",
-    "landmarks": 27,
+    "landmarks": 741,
     "file": "/geo/districts/jamalpur.json"
   },
   "khagrachari": {
     "district": "Khagrachari",
     "division": "Chattogram Division",
-    "landmarks": 15,
+    "landmarks": 362,
     "file": "/geo/districts/khagrachari.json"
   },
   "nilphamari": {
     "district": "Nilphamari",
     "division": "Rangpur Division",
-    "landmarks": 56,
+    "landmarks": 1079,
     "file": "/geo/districts/nilphamari.json"
   },
   "gaibandha": {
     "district": "Gaibandha",
     "division": "Rangpur Division",
-    "landmarks": 35,
+    "landmarks": 1318,
     "file": "/geo/districts/gaibandha.json"
   },
   "munshiganj": {
     "district": "Munshiganj",
     "division": "Dhaka Division",
-    "landmarks": 33,
+    "landmarks": 611,
     "file": "/geo/districts/munshiganj.json"
   },
   "gopalganj": {
     "district": "Gopalganj",
     "division": "Dhaka Division",
-    "landmarks": 27,
+    "landmarks": 769,
     "file": "/geo/districts/gopalganj.json"
   },
   "jhenaidah": {
     "district": "Jhenaidah",
     "division": "Khulna Division",
-    "landmarks": 39,
+    "landmarks": 1416,
     "file": "/geo/districts/jhenaidah.json"
   },
   "jhalokati": {
     "district": "Jhalokati",
     "division": "Barishal Division",
-    "landmarks": 20,
+    "landmarks": 524,
     "file": "/geo/districts/jhalokati.json"
   },
   "sherpur": {
     "district": "Sherpur",
     "division": "Mymensingh Division",
-    "landmarks": 58,
+    "landmarks": 1026,
     "file": "/geo/districts/sherpur.json"
   },
   "narail": {
     "district": "Narail",
     "division": "Khulna Division",
-    "landmarks": 14,
+    "landmarks": 406,
     "file": "/geo/districts/narail.json"
   },
   "gazipur": {
     "district": "Gazipur",
     "division": "Dhaka Division",
-    "landmarks": 11,
+    "landmarks": 773,
     "file": "/geo/districts/gazipur.json"
   },
   "madaripur": {
     "district": "Madaripur",
     "division": "Dhaka Division",
-    "landmarks": 18,
+    "landmarks": 602,
     "file": "/geo/districts/madaripur.json"
   },
   "lakshmipur": {
     "district": "Lakshmipur",
     "division": "Chattogram Division",
-    "landmarks": 7,
+    "landmarks": 436,
     "file": "/geo/districts/lakshmipur.json"
   },
   "magura": {
     "district": "Magura",
     "division": "Khulna Division",
-    "landmarks": 50,
+    "landmarks": 500,
     "file": "/geo/districts/magura.json"
   },
   "meherpur": {
     "district": "Meherpur",
     "division": "Khulna Division",
-    "landmarks": 2,
+    "landmarks": 84,
     "file": "/geo/districts/meherpur.json"
   }
 }

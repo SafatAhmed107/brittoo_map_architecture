@@ -103,7 +103,7 @@ export async function initGeoEngine(): Promise<void> {
     let json: { features: ThanaFeature[] } | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v5');
+      const cache = await caches.open('geo-engine-v6');
       const cacheKey = '/geo/bd_thanas.min.geojson';
       let response = await cache.match(cacheKey);
 
@@ -193,7 +193,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
     let landmarks: LandmarkItem[] | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v5');
+      const cache = await caches.open('geo-engine-v6');
       const cacheKey = '/geo/bd_landmarks.json';
       let response = await cache.match(cacheKey);
 
@@ -219,7 +219,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
         keys: [
           { name: 'name', weight: 0.5 },
           { name: 'name_bn', weight: 0.45 },
-          { name: 'alt_names', weight: 0.3 },
+          { name: 'alt_names', weight: 0.35 },
           { name: 'thana', weight: 0.25 },
           { name: 'district', weight: 0.2 },
           { name: 'category', weight: 0.1 },
@@ -350,7 +350,7 @@ export async function loadDistrictData(districtName: string): Promise<boolean> {
     const url = `/geo/districts/${slug}.json`;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v5');
+      const cache = await caches.open('geo-engine-v6');
       let response = await cache.match(url);
       if (!response) {
         response = await fetch(url);

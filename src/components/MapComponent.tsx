@@ -501,7 +501,8 @@ export default function MapComponent() {
           'circle-color': [
             'match',
             ['get', 'category'],
-            'education', '#10b981',   // Emerald
+            'hall', '#10b981',        // Emerald Green for University Residential Halls
+            'education', '#14b8a6',   // Teal
             'healthcare', '#ef4444',  // Rose Red
             'commercial', '#f59e0b',  // Amber Gold
             'transit', '#3b82f6',     // Electric Blue
@@ -549,7 +550,8 @@ export default function MapComponent() {
         const p = feat.properties as any;
         const coords: [number, number] = geom.coordinates;
 
-        const catEmoji = p.category === 'education' ? '🎓' : p.category === 'healthcare' ? '🏥' : p.category === 'commercial' ? '🛒' : p.category === 'transit' ? '🚆' : '📍';
+        const catEmoji = p.category === 'hall' ? '🏛️' : p.category === 'education' ? '🎓' : p.category === 'healthcare' ? '🏥' : p.category === 'commercial' ? '🛒' : p.category === 'transit' ? '🚆' : '📍';
+        const catLabel = p.category === 'hall' ? 'Residential Hall' : (p.category || 'Landmark');
 
         const popup = new maplibregl.Popup({ offset: 12, closeButton: true, className: 'glass-landmark-popup' })
           .setLngLat(coords)
@@ -557,7 +559,7 @@ export default function MapComponent() {
             <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px 2px; min-width: 190px;">
               <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                 <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 7px; border-radius: 4px;">
-                  ${catEmoji} ${p.category || 'Landmark'}
+                  ${catEmoji} ${catLabel}
                 </span>
               </div>
               <div style="font-weight: 700; font-size: 14px; color: #f8fafc; margin-bottom: 2px; line-height: 1.3;">
@@ -906,6 +908,13 @@ export default function MapComponent() {
 
   const getLandmarkBadge = (type?: string) => {
     if (!type) return <span className="badge badge-cyan">Landmark</span>;
+    if (type === 'hall' || type === 'dormitory' || type.toLowerCase().includes('hall')) {
+      return (
+        <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(16, 185, 129, 0.22)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+          🏛️ Residential Hall
+        </span>
+      );
+    }
     if (type.includes('University')) {
       return (
         <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
@@ -1735,8 +1744,8 @@ export default function MapComponent() {
               </div>
             ) : (
               nearbyInstitutions.map((item, idx) => {
-                const catEmoji = item.category === 'education' ? '🎓' : item.category === 'healthcare' ? '🏥' : item.category === 'commercial' ? '🛒' : item.category === 'transit' ? '🚆' : '📍';
-                const catColor = item.category === 'education' ? '#34d399' : item.category === 'healthcare' ? '#f43f5e' : item.category === 'commercial' ? '#fbbf24' : '#38bdf8';
+                const catEmoji = item.category === 'hall' ? '🏛️' : item.category === 'education' ? '🎓' : item.category === 'healthcare' ? '🏥' : item.category === 'commercial' ? '🛒' : item.category === 'transit' ? '🚆' : '📍';
+                const catColor = item.category === 'hall' ? '#10b981' : item.category === 'education' ? '#34d399' : item.category === 'healthcare' ? '#f43f5e' : item.category === 'commercial' ? '#fbbf24' : '#38bdf8';
 
                 return (
                   <div
@@ -1786,7 +1795,7 @@ export default function MapComponent() {
                         {item.distKm} km
                       </span>
                       <span style={{ fontSize: '10px', textTransform: 'capitalize', color: 'var(--text-muted)' }}>
-                        {item.category}
+                        {item.category === 'hall' ? 'Residential Hall' : item.category}
                       </span>
                     </div>
                   </div>

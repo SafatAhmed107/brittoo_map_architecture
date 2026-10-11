@@ -1,0 +1,1992 @@
+const fs = require('fs');
+const path = require('path');
+
+// Master Registry of University Residential Halls in Bangladesh
+const UNIVERSITY_HALLS = [
+  // ==========================================
+  // 1. BUET (Bangladesh University of Engineering and Technology) - Dhaka
+  // ==========================================
+  {
+    id: 'hall-buet-ahsanullah',
+    name: 'Ahsanullah Hall, BUET',
+    name_bn: 'আহসানউল্লাহ হল, বুয়েট',
+    alt_names: ['Ahsanullah Hall', 'আহসান উল্লাহ হল', 'BUET Ahsanullah', 'Ahsanullah'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7275,
+    lng: 90.3905,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-titumir',
+    name: 'Titumir Hall, BUET',
+    name_bn: 'তিতুমীর হল, বুয়েট',
+    alt_names: ['Titumir Hall', 'তিতুমীর হল', 'BUET Titumir', 'Titumir'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7282,
+    lng: 90.3908,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-rashid',
+    name: 'Dr. M. A. Rashid Hall, BUET',
+    name_bn: 'ড. এম. এ. রশীদ হল, বুয়েট',
+    alt_names: ['Rashid Hall', 'এম এ রশীদ হল', 'রশীদ হল', 'BUET Rashid Hall', 'MA Rashid Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7289,
+    lng: 90.3912,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-nazrul',
+    name: 'Kazi Nazrul Islam Hall, BUET',
+    name_bn: 'কাজী নজরুল ইসলাম হল, বুয়েট',
+    alt_names: ['Nazrul Hall', 'নজরুল ইসলাম হল', 'নজরুল হল', 'BUET Nazrul Hall', 'Kazi Nazrul Islam Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7268,
+    lng: 90.3902,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-shahid-smrity',
+    name: 'Shahid Smrity Hall, BUET',
+    name_bn: 'শহীদ স্মৃতি হল, বুয়েট',
+    alt_names: ['Shahid Smriti Hall', 'স্মৃতি হল', 'শহীদ স্মৃতি হল', 'BUET Shahid Smrity', 'Smrity Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7262,
+    lng: 90.3901,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-sherebangla',
+    name: 'Sher-e-Bangla Hall, BUET',
+    name_bn: 'শের-ই-বাংলা হল, বুয়েট',
+    alt_names: ['Sher e Bangla Hall', 'শেরে বাংলা হল', 'শের ই বাংলা হল', 'BUET Sher e Bangla', 'SB Hall BUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7295,
+    lng: 90.3918,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-suhrawardy',
+    name: 'Suhrawardy Hall, BUET',
+    name_bn: 'সোহরাওয়ার্দী হল, বুয়েট',
+    alt_names: ['Suhrawardi Hall', 'সোহরাওয়ার্দী হল', 'BUET Suhrawardy', 'Suhrawardy'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7271,
+    lng: 90.3910,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-sony',
+    name: 'Sabekun Nahar Sony Hall, BUET',
+    name_bn: 'সাবেকুন নাহার সনি হল, বুয়েট',
+    alt_names: ['Sony Hall', 'সনি হল', 'Sabekun Nahar Sony Hall', 'BUET Sony Hall', 'BUET Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7258,
+    lng: 90.3914,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-buet-fazilatunnesa',
+    name: 'Bangamata Sheikh Fazilatunnesa Mujib Hall, BUET',
+    name_bn: 'বঙ্গমাতা শেখ ফজিলাতুন্নেছা মুজিব হল, বুয়েট',
+    alt_names: ['Fazilatunnesa Hall BUET', 'ফজিলাতুন্নেছা হল বুয়েট', 'Bangamata Hall BUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7252,
+    lng: 90.3919,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 2. University of Dhaka (DU / ঢাকা বিশ্ববিদ্যালয়) - Dhaka
+  // ==========================================
+  {
+    id: 'hall-du-salimullah',
+    name: 'Salimullah Muslim Hall (SM Hall), DU',
+    name_bn: 'সলিমুল্লাহ মুসলিম হল (এস এম হল), ঢাবি',
+    alt_names: ['SM Hall', 'এস এম হল', 'Salimullah Hall', 'সলিমুল্লাহ হল', 'Salimullah Muslim Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7279,
+    lng: 90.3958,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-shahidullah',
+    name: 'Dr. Muhammad Shahidullah Hall, DU',
+    name_bn: 'ড. মুহম্মদ শহীদুল্লাহ্ হল, ঢাবি',
+    alt_names: ['Shahidullah Hall', 'শহীদুল্লাহ হল', 'শহীদুল্লাহ্ হল', 'Shahidullah Hall DU', 'Muhammad Shahidullah Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7274,
+    lng: 90.4022,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-fazlul-huq',
+    name: 'Fazlul Huq Muslim Hall (FH Hall), DU',
+    name_bn: 'ফজলুল হক মুসলিম হল (এফ এইচ হল), ঢাবি',
+    alt_names: ['FH Hall', 'এফ এইচ হল', 'Fazlul Huq Hall', 'ফজলুল হক হল', 'Fazlul Haque Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7278,
+    lng: 90.4015,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-amar-ekushey',
+    name: 'Amar Ekushey Hall, DU',
+    name_bn: 'অমর একুশে হল, ঢাবি',
+    alt_names: ['Amar Ekushey Hall', 'অমর একুশে হল', 'Ekushey Hall', 'একুশে হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7265,
+    lng: 90.4030,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-jagannath',
+    name: 'Jagannath Hall, DU',
+    name_bn: 'জগন্নাথ হল, ঢাবি',
+    alt_names: ['Jagannath Hall', 'জগন্নাথ হল', 'Jagannath Hall DU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7295,
+    lng: 90.3968,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-surja-sen',
+    name: 'Masterda Surja Sen Hall, DU',
+    name_bn: 'মাস্টারদা সূর্য সেন হল, ঢাবি',
+    alt_names: ['Surja Sen Hall', 'সূর্য সেন হল', 'Surya Sen Hall', 'Masterda Surja Sen Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7335,
+    lng: 90.3925,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-mohsin',
+    name: 'Haji Muhammad Mohsin Hall, DU',
+    name_bn: 'হাজী মুহম্মদ মুহসীন হল, ঢাবি',
+    alt_names: ['Mohsin Hall', 'মুহসীন হল', 'মহসিন হল', 'Haji Mohsin Hall', 'Mohsin Hall DU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7330,
+    lng: 90.3918,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-jasimuddin',
+    name: 'Kabi Jasimuddin Hall, DU',
+    name_bn: 'কবি জসীম উদ্দীন হল, ঢাবি',
+    alt_names: ['Jasimuddin Hall', 'জসীম উদ্দীন হল', 'Kabi Jasimuddin Hall', 'Jashim Uddin Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7328,
+    lng: 90.3905,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-af-rahman',
+    name: 'Sir A. F. Rahman Hall, DU',
+    name_bn: 'স্যার এ. এফ. রহমান হল, ঢাবি',
+    alt_names: ['AF Rahman Hall', 'এ এফ রহমান হল', 'Sir AF Rahman Hall', 'AF Rahman'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7338,
+    lng: 90.3912,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, DU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, ঢাবি',
+    alt_names: ['Bangabandhu Hall DU', 'বঙ্গবন্ধু হল ঢাবি', 'Bangabandhu Sheikh Mujibur Rahman Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7342,
+    lng: 90.3901,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-zia',
+    name: 'Muktijoddha Ziaur Rahman Hall, DU',
+    name_bn: 'মুক্তিযোদ্ধা জিয়াউর রহমান হল, ঢাবি',
+    alt_names: ['Zia Hall DU', 'জিয়া হল ঢাবি', 'Muktijoddha Ziaur Rahman Hall', 'Ziaur Rahman Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7348,
+    lng: 90.3895,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-bijoy-ekattor',
+    name: 'Bijoy Ekattor Hall, DU',
+    name_bn: 'বিজয় একাত্তর হল, ঢাবি',
+    alt_names: ['Bijoy Ekattor Hall', 'বিজয় একাত্তর হল', 'Bijoy 71 Hall DU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7339,
+    lng: 90.3892,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-rokeya',
+    name: 'Rokeya Hall, DU',
+    name_bn: 'রোকেয়া হল, ঢাবি',
+    alt_names: ['Rokeya Hall', 'রোকেয়া হল', 'Begum Rokeya Hall DU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7315,
+    lng: 90.3960,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-shamsun-nahar',
+    name: 'Shamsun Nahar Hall, DU',
+    name_bn: 'শামসুন নাহার হল, ঢাবি',
+    alt_names: ['Shamsun Nahar Hall', 'শামসুন নাহার হল', 'Shamsunnahar Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7312,
+    lng: 90.3948,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-sufia-kamal',
+    name: 'Kabi Sufia Kamal Hall, DU',
+    name_bn: 'কবি সুফিয়া কামাল হল, ঢাবি',
+    alt_names: ['Sufia Kamal Hall DU', 'সুফিয়া কামাল হল ঢাবি', 'Kabi Sufia Kamal Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7289,
+    lng: 90.4042,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-kuwait-maitree',
+    name: 'Bangladesh-Kuwait Maitree Hall, DU',
+    name_bn: 'বাংলাদেশ-কুয়েত মৈত্রী হল, ঢাবি',
+    alt_names: ['Kuwait Maitree Hall', 'কুয়েত মৈত্রী হল', 'Bangladesh Kuwait Maitree Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7262,
+    lng: 90.3942,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-fazilatunnesa',
+    name: 'Begum Fazilatunnesa Mujib Hall, DU',
+    name_bn: 'বেগম ফজিলাতুন্নেছা মুজিব হল, ঢাবি',
+    alt_names: ['Fazilatunnesa Mujib Hall DU', 'ফজিলাতুন্নেছা মুজিব হল ঢাবি', 'Fazilatunnesa Hall DU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7258,
+    lng: 90.3938,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-hartog',
+    name: 'Sir P. J. Hartog International Hall, DU',
+    name_bn: 'স্যার পি জে হার্টগ আন্তর্জাতিক হল, ঢাবি',
+    alt_names: ['Hartog Hall', 'হার্টগ হল', 'PJ Hartog Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7282,
+    lng: 90.3945,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-du-iba-hostel',
+    name: 'IBA Hostel, DU',
+    name_bn: 'আইবিএ হোস্টেল, ঢাবি',
+    alt_names: ['IBA Hostel', 'আইবিএ হোস্টেল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7322,
+    lng: 90.3920,
+    thana: 'Shahbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 3. Jahangirnagar University (JU / জাহাঙ্গীরনগর বিশ্ববিদ্যালয়) - Savar, Dhaka
+  // ==========================================
+  {
+    id: 'hall-ju-al-beruni',
+    name: 'Al-Beruni Hall, JU',
+    name_bn: 'আল বেরুনী হল, জাবি',
+    alt_names: ['Al Beruni Hall', 'আল বেরুনী হল', 'Al-Beruni Hall JU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8821,
+    lng: 90.2675,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-mir-mosharraf',
+    name: 'Mir Mosharraf Hossain Hall (MMH Hall), JU',
+    name_bn: 'মীর মশাররফ হোসেন হল, জাবি',
+    alt_names: ['MMH Hall JU', 'মীর মশাররফ হোসেন হল', 'Mir Mosharraf Hossain Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8795,
+    lng: 90.2642,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-salam-barkat',
+    name: 'Shaheed Salam-Barkat Hall, JU',
+    name_bn: 'শহীদ সালাম-বরকত হল, জাবি',
+    alt_names: ['Salam Barkat Hall', 'সালাম বরকত হল', 'Shaheed Salam Barkat Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8812,
+    lng: 90.2688,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-kamaluddin',
+    name: 'A F M Kamaluddin Hall, JU',
+    name_bn: 'আ ফ ম কামালউদ্দিন হল, জাবি',
+    alt_names: ['Kamaluddin Hall JU', 'কামালউদ্দিন হল জাবি', 'AFM Kamaluddin Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8835,
+    lng: 90.2701,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-rafiq-jabbar',
+    name: 'Shaheed Rafiq-Jabbar Hall, JU',
+    name_bn: 'শহীদ রফিক-জব্বার হল, জাবি',
+    alt_names: ['Rafiq Jabbar Hall', 'রফিক জব্বার হল', 'Shaheed Rafiq Jabbar Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8850,
+    lng: 90.2715,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, JU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, জাবি',
+    alt_names: ['Bangabandhu Hall JU', 'বঙ্গবন্ধু হল জাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8862,
+    lng: 90.2725,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-tajuddin',
+    name: 'Tajuddin Ahmad Hall, JU',
+    name_bn: 'তাজউদ্দীন আহমদ হল, জাবি',
+    alt_names: ['Tajuddin Hall JU', 'তাজউদ্দীন হল জাবি', 'Tajuddin Ahmad Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8870,
+    lng: 90.2735,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-jahanara-imam',
+    name: 'Jahanara Imam Hall, JU',
+    name_bn: 'জাহানারা ইমাম হল, জাবি',
+    alt_names: ['Jahanara Imam Hall', 'জাহানারা ইমাম হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8815,
+    lng: 90.2735,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-pritilata',
+    name: 'Pritilata Hall, JU',
+    name_bn: 'প্রীতিলতা হল, জাবি',
+    alt_names: ['Pritilata Hall JU', 'প্রীতিলতা হল জাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8840,
+    lng: 90.2755,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-khaleda-zia',
+    name: 'Begum Khaleda Zia Hall, JU',
+    name_bn: 'বেগম খালেদা জিয়া হল, জাবি',
+    alt_names: ['Khaleda Zia Hall JU', 'খালেদা জিয়া হল জাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8855,
+    lng: 90.2762,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ju-sufia-kamal',
+    name: 'Kabi Sufia Kamal Hall, JU',
+    name_bn: 'কবি সুফিয়া কামাল হল, জাবি',
+    alt_names: ['Sufia Kamal Hall JU', 'সুফিয়া কামাল হল জাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.8882,
+    lng: 90.2790,
+    thana: 'Savar',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 4. Rajshahi University (RU / রাজশাহী বিশ্ববিদ্যালয়) - Rajshahi
+  // ==========================================
+  {
+    id: 'hall-ru-sherebangla',
+    name: 'Sher-e-Bangla Fazlul Haque Hall, RU',
+    name_bn: 'শের-ই-বাংলা ফজলুল হক হল, রাবি',
+    alt_names: ['Sher e Bangla Hall RU', 'শের ই বাংলা হল রাবি', 'SB Hall RU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3685,
+    lng: 88.6270,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-shah-makhdum',
+    name: 'Shah Makhdum Hall, RU',
+    name_bn: 'শাহ মখদুম হল, রাবি',
+    alt_names: ['Shah Makhdum Hall', 'শাহ মখদুম হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3695,
+    lng: 88.6285,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-nawab-abdul-latif',
+    name: 'Nawab Abdul Latif Hall, RU',
+    name_bn: 'নবাব আব্দুল লতিফ হল, রাবি',
+    alt_names: ['Abdul Latif Hall', 'আব্দুল লতিফ হল', 'Latif Hall RU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3705,
+    lng: 88.6300,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-syed-amir-ali',
+    name: 'Syed Amir Ali Hall, RU',
+    name_bn: 'সৈয়দ আমীর আলী হল, রাবি',
+    alt_names: ['Amir Ali Hall', 'আমীর আলী হল', 'Syed Amir Ali Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3712,
+    lng: 88.6315,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-zoha',
+    name: 'Shahid Shamsuzzoha Hall (Zoha Hall), RU',
+    name_bn: 'শহীদ শামসুজ্জোহা হল (জোহা হল), রাবি',
+    alt_names: ['Zoha Hall', 'জোহা হল', 'Shamsuzzoha Hall', 'শামসুজ্জোহা হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3725,
+    lng: 88.6330,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-habibur-rahman',
+    name: 'Shahid Habibur Rahman Hall, RU',
+    name_bn: 'শহীদ হবিবুর রহমান হল, রাবি',
+    alt_names: ['Habibur Rahman Hall', 'হবিবুর রহমান হল', 'Habib Hall RU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3740,
+    lng: 88.6345,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-motihar',
+    name: 'Motihar Hall, RU',
+    name_bn: 'মতিহার হল, রাবি',
+    alt_names: ['Motihar Hall', 'মতিহার হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3680,
+    lng: 88.6320,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-madar-bux',
+    name: 'Madar Bux Hall, RU',
+    name_bn: 'মাদার বখ্শ হল, রাবি',
+    alt_names: ['Madar Bux Hall', 'মাদার বখ্শ হল', 'মাদার বক্স হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3730,
+    lng: 88.6360,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-zia',
+    name: 'Shahid Ziaur Rahman Hall, RU',
+    name_bn: 'শহীদ জিয়াউর রহমান হল, রাবি',
+    alt_names: ['Zia Hall RU', 'জিয়া হল রাবি', 'Ziaur Rahman Hall RU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3755,
+    lng: 88.6375,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, RU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, রাবি',
+    alt_names: ['Bangabandhu Hall RU', 'বঙ্গবন্ধু হল রাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3768,
+    lng: 88.6390,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-mannujan',
+    name: 'Mannujan Hall, RU',
+    name_bn: 'মন্নুজান হল, রাবি',
+    alt_names: ['Mannujan Hall', 'মন্নুজান হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3670,
+    lng: 88.6290,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-rokeya',
+    name: 'Rokeya Hall, RU',
+    name_bn: 'রোকেয়া হল, রাবি',
+    alt_names: ['Rokeya Hall RU', 'রোকেয়া হল রাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3660,
+    lng: 88.6305,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-tapashi-rabeya',
+    name: 'Tapashi Rabeya Hall, RU',
+    name_bn: 'তাপসী রাবেয়া হল, রাবি',
+    alt_names: ['Tapashi Rabeya Hall', 'তাপসী রাবেয়া হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3650,
+    lng: 88.6320,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-khaleda-zia',
+    name: 'Begum Khaleda Zia Hall, RU',
+    name_bn: 'বেগম খালেদা জিয়া হল, রাবি',
+    alt_names: ['Khaleda Zia Hall RU', 'খালেদা জিয়া হল রাবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3640,
+    lng: 88.6335,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ru-rahmatunnesa',
+    name: 'Rahmatunnesa Hall, RU',
+    name_bn: 'রহমাতুন্নেসা হল, রাবি',
+    alt_names: ['Rahmatunnesa Hall', 'রহমাতুন্নেসা হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3630,
+    lng: 88.6350,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 5. Chittagong University (CU / চট্টগ্রাম বিশ্ববিদ্যালয়) - Chattogram
+  // ==========================================
+  {
+    id: 'hall-cu-alaol',
+    name: 'Alaol Hall, CU',
+    name_bn: 'আলাওল হল, চবি',
+    alt_names: ['Alaol Hall', 'আলাওল হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4715,
+    lng: 91.7870,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-af-rahman',
+    name: 'Sir A. F. Rahman Hall, CU',
+    name_bn: 'স্যার এ. এফ. রহমান হল, চবি',
+    alt_names: ['AF Rahman Hall CU', 'এ এফ রহমান হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4725,
+    lng: 91.7885,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-shahjalal',
+    name: 'Shahjalal Hall, CU',
+    name_bn: 'শাহজালাল হল, চবি',
+    alt_names: ['Shahjalal Hall CU', 'শাহজালাল হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4735,
+    lng: 91.7900,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-suhrawardy',
+    name: 'Suhrawardy Hall, CU',
+    name_bn: 'সোহরাওয়ার্দী হল, চবি',
+    alt_names: ['Suhrawardy Hall CU', 'সোহরাওয়ার্দী হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4745,
+    lng: 91.7915,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-shah-amanat',
+    name: 'Shah Amanat Hall, CU',
+    name_bn: 'শাহ আমানত হল, চবি',
+    alt_names: ['Shah Amanat Hall', 'শাহ আমানত হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4755,
+    lng: 91.7930,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-shamsun-nahar',
+    name: 'Shamsun Nahar Hall, CU',
+    name_bn: 'শামসুন নাহার হল, চবি',
+    alt_names: ['Shamsun Nahar Hall CU', 'শামসুন নাহার হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4695,
+    lng: 91.7860,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-pritilata',
+    name: 'Pritilata Hall, CU',
+    name_bn: 'প্রীতিলতা হল, চবি',
+    alt_names: ['Pritilata Hall CU', 'প্রীতিলতা হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4685,
+    lng: 91.7875,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-khaleda-zia',
+    name: 'Deshnetri Begum Khaleda Zia Hall, CU',
+    name_bn: 'দেশনেত্রী বেগম খালেদা জিয়া হল, চবি',
+    alt_names: ['Khaleda Zia Hall CU', 'খালেদা জিয়া হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4675,
+    lng: 91.7890,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, CU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, চবি',
+    alt_names: ['Bangabandhu Hall CU', 'বঙ্গবন্ধু হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4765,
+    lng: 91.7945,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-abdur-rab',
+    name: 'Shaheed Abdur Rab Hall, CU',
+    name_bn: 'শহীদ আব্দুর রব হল, চবি',
+    alt_names: ['Abdur Rab Hall', 'আব্দুর রব হল', 'Rob Hall CU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4775,
+    lng: 91.7960,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cu-surja-sen',
+    name: 'Masterda Surja Sen Hall, CU',
+    name_bn: 'মাস্টারদা সূর্যসেন হল, চবি',
+    alt_names: ['Surja Sen Hall CU', 'সূর্যসেন হল চবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4785,
+    lng: 91.7975,
+    thana: 'Hathazari',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 6. SUST (Shahjalal University of Science and Technology) - Sylhet
+  // ==========================================
+  {
+    id: 'hall-sust-shah-paran',
+    name: 'Shah Paran Hall, SUST',
+    name_bn: 'শাহ পরান হল, শাবিপ্রবি',
+    alt_names: ['Shah Paran Hall', 'শাহপরান হল', 'Shahparan Hall', 'SUST Shah Paran'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.9215,
+    lng: 91.8315,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+  {
+    id: 'hall-sust-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, SUST',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, শাবিপ্রবি',
+    alt_names: ['Bangabandhu Hall SUST', 'বঙ্গবন্ধু হল শাবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.9230,
+    lng: 91.8330,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+  {
+    id: 'hall-sust-syed-mujtaba',
+    name: 'Syed Mujtaba Ali Hall, SUST',
+    name_bn: 'সৈয়দ মুজতবা আলী হল, শাবিপ্রবি',
+    alt_names: ['Mujtaba Ali Hall', 'মুজতবা আলী হল', 'Syed Mujtaba Ali Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.9245,
+    lng: 91.8345,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+  {
+    id: 'hall-sust-first-ladies',
+    name: 'First Ladies Hall, SUST',
+    name_bn: 'প্রথম ছাত্রী হল, শাবিপ্রবি',
+    alt_names: ['First Ladies Hall', 'প্রথম ছাত্রী হল শাবিপ্রবি', 'Ladies Hall 1 SUST'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.9195,
+    lng: 91.8300,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+  {
+    id: 'hall-sust-sirajunnesa',
+    name: 'Begum Sirajunnesa Chowdhury Hall, SUST',
+    name_bn: 'বেগম সিরাজুন্নেসা চৌধুরী হল, শাবিপ্রবি',
+    alt_names: ['Sirajunnesa Hall', 'সিরাজুন্নেসা চৌধুরী হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.9180,
+    lng: 91.8285,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 7. RUET (Rajshahi University of Engineering & Technology) - Rajshahi
+  // ==========================================
+  {
+    id: 'hall-ruet-shahidul',
+    name: 'Shahid Shahidul Islam Hall, RUET',
+    name_bn: 'শহীদ শহীদুল ইসলাম হল, রুয়েট',
+    alt_names: ['Shahidul Hall', 'শহীদুল ইসলাম হল', 'Shahidul Islam Hall RUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3645,
+    lng: 88.6290,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ruet-muktadir',
+    name: 'Shahid Abdul Muktadir Hall, RUET',
+    name_bn: 'শহীদ আব্দুল মুকতাদির হল, রুয়েট',
+    alt_names: ['Muktadir Hall', 'আব্দুল মুকতাদির হল', 'Muktadir Hall RUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3655,
+    lng: 88.6305,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ruet-selim',
+    name: 'Shahid Selim Hall, RUET',
+    name_bn: 'শহীদ সেলিম হল, রুয়েট',
+    alt_names: ['Selim Hall RUET', 'সেলিম হল রুয়েট', 'Shahid Selim Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3665,
+    lng: 88.6320,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ruet-zia',
+    name: 'Shahid President Ziaur Rahman Hall, RUET',
+    name_bn: 'শহীদ প্রেসিডেন্ট জিয়াউর রহমান হল, রুয়েট',
+    alt_names: ['Zia Hall RUET', 'জিয়া হল রুয়েট', 'President Ziaur Rahman Hall RUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3680,
+    lng: 88.6335,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ruet-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, RUET',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, রুয়েট',
+    alt_names: ['Bangabandhu Hall RUET', 'বঙ্গবন্ধু হল রুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3690,
+    lng: 88.6350,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ruet-hasina',
+    name: 'Deshratna Sheikh Hasina Hall, RUET',
+    name_bn: 'দেশরত্ন শেখ হাসিনা হল, রুয়েট',
+    alt_names: ['Sheikh Hasina Hall RUET', 'শেখ হাসিনা হল রুয়েট', 'RUET Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3635,
+    lng: 88.6275,
+    thana: 'Motihar',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 8. CUET (Chittagong University of Engineering & Technology) - Chattogram
+  // ==========================================
+  {
+    id: 'hall-cuet-qek',
+    name: 'Dr. Qudrat-E-Khuda Hall (QEK Hall), CUET',
+    name_bn: 'ড. কুদরত-ই-খুদা হল, চুয়েট',
+    alt_names: ['QEK Hall', 'কুদরত ই খুদা হল', 'Qudrat E Khuda Hall CUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4615,
+    lng: 91.9710,
+    thana: 'Raozan',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cuet-shah',
+    name: 'Shaheed Mohammad Shah Hall, CUET',
+    name_bn: 'শহীদ মোহাম্মদ শাহ হল, চুয়েট',
+    alt_names: ['Shah Hall CUET', 'মোহাম্মদ শাহ হল', 'Mohammad Shah Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4625,
+    lng: 91.9725,
+    thana: 'Raozan',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cuet-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, CUET',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, চুয়েট',
+    alt_names: ['Bangabandhu Hall CUET', 'বঙ্গবন্ধু হল চুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4635,
+    lng: 91.9740,
+    thana: 'Raozan',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cuet-tareq-huda',
+    name: 'Tareq Huda Hall, CUET',
+    name_bn: 'তারেক হুদা হল, চুয়েট',
+    alt_names: ['Tareq Huda Hall', 'তারেক হুদা হল চুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4645,
+    lng: 91.9755,
+    thana: 'Raozan',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cuet-sufia-kamal',
+    name: 'Kabi Sufia Kamal Hall, CUET',
+    name_bn: 'কবি সুফিয়া কামাল হল, চুয়েট',
+    alt_names: ['Sufia Kamal Hall CUET', 'সুফিয়া কামাল হল চুয়েট', 'CUET Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.4605,
+    lng: 91.9695,
+    thana: 'Raozan',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 9. KUET (Khulna University of Engineering & Technology) - Khulna
+  // ==========================================
+  {
+    id: 'hall-kuet-fazlul-haque',
+    name: 'Fazlul Haque Hall (FH Hall), KUET',
+    name_bn: 'ফজলুল হক হল, কুয়েট',
+    alt_names: ['FH Hall KUET', 'ফজলুল হক হল কুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9005,
+    lng: 89.5020,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-lalan-shah',
+    name: 'Lalan Shah Hall, KUET',
+    name_bn: 'লালন শাহ হল, কুয়েট',
+    alt_names: ['Lalan Shah Hall', 'লালন শাহ হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9015,
+    lng: 89.5035,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-khan-jahan-ali',
+    name: 'Khan Jahan Ali Hall (KJA Hall), KUET',
+    name_bn: 'খান জাহান আলী হল, কুয়েট',
+    alt_names: ['KJA Hall KUET', 'খান জাহান আলী হল কুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9025,
+    lng: 89.5050,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-rashid',
+    name: 'Dr. M. A. Rashid Hall, KUET',
+    name_bn: 'ড. এম. এ. রশীদ হল, কুয়েট',
+    alt_names: ['Rashid Hall KUET', 'রশীদ হল কুয়েট', 'MA Rashid Hall KUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9035,
+    lng: 89.5065,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-amar-ekushey',
+    name: 'Amar Ekushey Hall, KUET',
+    name_bn: 'অমর একুশে হল, কুয়েট',
+    alt_names: ['Amar Ekushey Hall KUET', 'অমর একুশে হল কুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9045,
+    lng: 89.5080,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-rokeya',
+    name: 'Rokeya Hall, KUET',
+    name_bn: 'রোকেয়া হল, কুয়েট',
+    alt_names: ['Rokeya Hall KUET', 'রোকেয়া হল কুয়েট', 'KUET Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.8995,
+    lng: 89.5010,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-kuet-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, KUET',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, কুয়েট',
+    alt_names: ['Bangabandhu Hall KUET', 'বঙ্গবন্ধু হল কুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.9055,
+    lng: 89.5095,
+    thana: 'Khan Jahan Ali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 10. Khulna University (KU / খুলনা বিশ্ববিদ্যালয়) - Khulna
+  // ==========================================
+  {
+    id: 'hall-ku-khan-jahan-ali',
+    name: 'Khan Jahan Ali Hall, KU',
+    name_bn: 'খান জাহান আলী হল, খুবি',
+    alt_names: ['Khan Jahan Ali Hall KU', 'খান জাহান আলী হল খুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.8015,
+    lng: 89.5340,
+    thana: 'Kotwali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ku-ahsanullah',
+    name: 'Khan Bahadur Ahsanullah Hall, KU',
+    name_bn: 'খান বাহাদুর আহসানউল্লাহ হল, খুবি',
+    alt_names: ['Ahsanullah Hall KU', 'আহসানউল্লাহ হল খুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.8025,
+    lng: 89.5355,
+    thana: 'Kotwali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ku-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, KU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, খুবি',
+    alt_names: ['Bangabandhu Hall KU', 'বঙ্গবন্ধু হল খুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.8035,
+    lng: 89.5370,
+    thana: 'Kotwali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ku-aparajita',
+    name: 'Aparajita Hall, KU',
+    name_bn: 'অপরাজিতা হল, খুবি',
+    alt_names: ['Aparajita Hall', 'অপরাজিতা হল', 'KU Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.7995,
+    lng: 89.5325,
+    thana: 'Kotwali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-ku-fazilatunnesa',
+    name: 'Bangamata Begum Fazilatunnesa Mujib Hall, KU',
+    name_bn: 'বঙ্গমাতা বেগম ফজিলাতুন্নেছা মুজিব হল, খুবি',
+    alt_names: ['Fazilatunnesa Hall KU', 'ফজিলাতুন্নেছা মুজিব হল খুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.7985,
+    lng: 89.5310,
+    thana: 'Kotwali',
+    district: 'Khulna',
+    division: 'Khulna Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 11. Bangladesh Agricultural University (BAU) - Mymensingh
+  // ==========================================
+  {
+    id: 'hall-bau-ashraful-haque',
+    name: 'Ashraful Haque Hall, BAU',
+    name_bn: 'আশরাফুল হক হল, বাকৃবি',
+    alt_names: ['Ashraful Haque Hall', 'আশরাফুল হক হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7245,
+    lng: 90.4285,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-nazmul-ahsan',
+    name: 'Shaheed Nazmul Ahsan Hall, BAU',
+    name_bn: 'শহীদ নাজমুল আহসান হল, বাকৃবি',
+    alt_names: ['Nazmul Ahsan Hall', 'নাজমুল আহসান হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7255,
+    lng: 90.4300,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-jamal-hossain',
+    name: 'Shaheed Jamal Hossain Hall, BAU',
+    name_bn: 'শহীদ জামাল হোসেন হল, বাকৃবি',
+    alt_names: ['Jamal Hossain Hall', 'জামাল হোসেন হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7265,
+    lng: 90.4315,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-fazlul-haque',
+    name: 'Fazlul Haque Hall, BAU',
+    name_bn: 'ফজলুল হক হল, বাকৃবি',
+    alt_names: ['Fazlul Haque Hall BAU', 'ফজলুল হক হল বাকৃবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7275,
+    lng: 90.4330,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-suhrawardy',
+    name: 'Suhrawardy Hall, BAU',
+    name_bn: 'সোহরাওয়ার্দী হল, বাকৃবি',
+    alt_names: ['Suhrawardy Hall BAU', 'সোহরাওয়ার্দী হল বাকৃবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7285,
+    lng: 90.4345,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-isha-khan',
+    name: 'Isha Khan Hall, BAU',
+    name_bn: 'ঈশা খাঁ হল, বাকৃবি',
+    alt_names: ['Isha Khan Hall', 'ঈশা খাঁ হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7295,
+    lng: 90.4360,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, BAU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, বাকৃবি',
+    alt_names: ['Bangabandhu Hall BAU', 'বঙ্গবন্ধু হল বাকৃবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7315,
+    lng: 90.4390,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-sultana-razia',
+    name: 'Sultana Razia Hall, BAU',
+    name_bn: 'সুলতানা রাজিয়া হল, বাকৃবি',
+    alt_names: ['Sultana Razia Hall', 'সুলতানা রাজিয়া হল'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7235,
+    lng: 90.4270,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bau-rokeya',
+    name: 'Rokeya Hall, BAU',
+    name_bn: 'রোকেয়া হল, বাকৃবি',
+    alt_names: ['Rokeya Hall BAU', 'রোকেয়া হল বাকৃবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.7225,
+    lng: 90.4255,
+    thana: 'Mymensingh Sadar',
+    district: 'Mymensingh',
+    division: 'Mymensingh Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 12. DUET (Dhaka University of Engineering & Technology) - Gazipur
+  // ==========================================
+  {
+    id: 'hall-duet-fr-khan',
+    name: 'Dr. F. R. Khan Hall, DUET',
+    name_bn: 'ড. এফ. আর. খান হল, ডুয়েট',
+    alt_names: ['FR Khan Hall', 'এফ আর খান হল', 'FR Khan Hall DUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.9985,
+    lng: 90.4180,
+    thana: 'Gazipur Sadar',
+    district: 'Gazipur',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-duet-muktijoddha',
+    name: 'Shaheed Muktijoddha Hall, DUET',
+    name_bn: 'শহীদ মুক্তিযোদ্ধা হল, ডুয়েট',
+    alt_names: ['Muktijoddha Hall DUET', 'মুক্তিযোদ্ধা হল ডুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.9995,
+    lng: 90.4195,
+    thana: 'Gazipur Sadar',
+    district: 'Gazipur',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-duet-nazrul',
+    name: 'Kazi Nazrul Islam Hall, DUET',
+    name_bn: 'কাজী নজরুল ইসলাম হল, ডুয়েট',
+    alt_names: ['Nazrul Hall DUET', 'নজরুল হল ডুয়েট'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.0005,
+    lng: 90.4210,
+    thana: 'Gazipur Sadar',
+    district: 'Gazipur',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-duet-marie-curie',
+    name: 'Marie Curie Hall, DUET',
+    name_bn: 'মাদাম কুরি হল, ডুয়েট',
+    alt_names: ['Madam Curie Hall', 'মাদাম কুরি হল', 'Marie Curie Hall DUET'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.9975,
+    lng: 90.4165,
+    thana: 'Gazipur Sadar',
+    district: 'Gazipur',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 13. BUTEX (Bangladesh University of Textiles) - Tejgaon, Dhaka
+  // ==========================================
+  {
+    id: 'hall-butex-osmani',
+    name: 'MAG Osmani Hall, BUTEX',
+    name_bn: 'এম এ জি ওসমানী হল, বুটেক্স',
+    alt_names: ['Osmani Hall BUTEX', 'ওসমানী হল বুটেক্স', 'MAG Osmani Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7655,
+    lng: 90.3990,
+    thana: 'Tejgaon',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-butex-aziz',
+    name: 'Shahid Aziz Hall, BUTEX',
+    name_bn: 'শহীদ আজিজ হল, বুটেক্স',
+    alt_names: ['Aziz Hall BUTEX', 'আজিজ হল বুটেক্স', 'Shahid Aziz Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7665,
+    lng: 90.4005,
+    thana: 'Tejgaon',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-butex-nazrul',
+    name: 'Syed Nazrul Islam Hall, BUTEX',
+    name_bn: 'সৈয়দ নজরুল ইসলাম হল, বুটেক্স',
+    alt_names: ['Syed Nazrul Islam Hall', 'নজরুল ইসলাম হল বুটেক্স'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7675,
+    lng: 90.4020,
+    thana: 'Tejgaon',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 14. Comilla University (CoU) - Cumilla
+  // ==========================================
+  {
+    id: 'hall-cou-nazrul',
+    name: 'Kazi Nazrul Islam Hall, CoU',
+    name_bn: 'কাজী নজরুল ইসলাম হল, কুবি',
+    alt_names: ['Nazrul Hall CoU', 'নজরুল হল কুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.4215,
+    lng: 91.1380,
+    thana: 'Kotwali',
+    district: 'Cumilla',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cou-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, CoU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, কুবি',
+    alt_names: ['Bangabandhu Hall CoU', 'বঙ্গবন্ধু হল কুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.4225,
+    lng: 91.1395,
+    thana: 'Kotwali',
+    district: 'Cumilla',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cou-dhirendranath',
+    name: 'Shaheed Dhirendranath Datta Hall, CoU',
+    name_bn: 'শহীদ ধীরেন্দ্রনাথ দত্ত হল, কুবি',
+    alt_names: ['Dhirendranath Datta Hall', 'ধীরেন্দ্রনাথ দত্ত হল', 'Datta Hall CoU'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.4235,
+    lng: 91.1410,
+    thana: 'Kotwali',
+    district: 'Cumilla',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cou-faizunnesa',
+    name: 'Nawab Faizunnesa Choudhurani Hall, CoU',
+    name_bn: 'নওয়াব ফয়জুন্নেসা চৌধুরানী হল, কুবি',
+    alt_names: ['Faizunnesa Hall CoU', 'ফয়জুন্নেসা হল কুবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.4205,
+    lng: 91.1365,
+    thana: 'Kotwali',
+    district: 'Cumilla',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 15. University of Barishal (BU) - Barishal
+  // ==========================================
+  {
+    id: 'hall-bu-bangabandhu',
+    name: 'Bangabandhu Sheikh Mujibur Rahman Hall, BU',
+    name_bn: 'বঙ্গবন্ধু শেখ মুজিবুর রহমান হল, ববি',
+    alt_names: ['Bangabandhu Hall BU', 'বঙ্গবন্ধু হল ববি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.6585,
+    lng: 90.3540,
+    thana: 'Barishal Sadar',
+    district: 'Barishal',
+    division: 'Barishal Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bu-sherebangla',
+    name: 'Sher-e-Bangla Hall, BU',
+    name_bn: 'শের-ই-বাংলা হল, ববি',
+    alt_names: ['Sher e Bangla Hall BU', 'শেরে বাংলা হল ববি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.6595,
+    lng: 90.3555,
+    thana: 'Barishal Sadar',
+    district: 'Barishal',
+    division: 'Barishal Division',
+    isCore: true
+  },
+  {
+    id: 'hall-bu-fazilatunnesa',
+    name: 'Bangamata Sheikh Fazilatunnesa Mujib Hall, BU',
+    name_bn: 'বঙ্গমাতা শেখ ফজিলাতুন্নেছা মুজিব হল, ববি',
+    alt_names: ['Fazilatunnesa Hall BU', 'ফজিলাতুন্নেছা মুজিব হল ববি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.6565,
+    lng: 90.3510,
+    thana: 'Barishal Sadar',
+    district: 'Barishal',
+    division: 'Barishal Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 16. Jagannath University (JnU) - Dhaka
+  // ==========================================
+  {
+    id: 'hall-jnu-fazilatunnesa',
+    name: 'Begum Fazilatunnesa Mujib Hall, JnU',
+    name_bn: 'বেগম ফজিলাতুন্নেছা মুজিব হল, জবি',
+    alt_names: ['Fazilatunnesa Hall JnU', 'ফজিলাতুন্নেছা মুজিব হল জবি', 'JnU Girls Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7115,
+    lng: 90.4110,
+    thana: 'Kotwali',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 17. Medical College Residential Hostels
+  // ==========================================
+  {
+    id: 'hall-dmc-fazle-rabbi',
+    name: 'Dr. Fazle Rabbi Hall, DMC',
+    name_bn: 'ডা. ফজলে রাব্বী হল, ঢাকা মেডিকেল কলেজ',
+    alt_names: ['Fazle Rabbi Hall', 'ফজলে রাব্বী হল', 'DMC Fazle Rabbi Hall', 'DMC Hostel'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7225,
+    lng: 90.3950,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-dmc-alim-chowdhury',
+    name: 'Dr. Alim Chowdhury Hall, DMC',
+    name_bn: 'ডা. আলীম চৌধুরী হল, ঢাকা মেডিকেল কলেজ',
+    alt_names: ['Alim Chowdhury Hall', 'আলীম চৌধুরী হল', 'DMC Alim Chowdhury Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7235,
+    lng: 90.3965,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-dmc-milon',
+    name: 'Shaheed Dr. Milon Hall, DMC',
+    name_bn: 'শহীদ ডা. মিলন হল, ঢাকা মেডিকেল কলেজ',
+    alt_names: ['Dr Milon Hall', 'ডা. মিলন হল', 'Shaheed Dr Milon Hall'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.7245,
+    lng: 90.3980,
+    thana: 'Lalbagh',
+    district: 'Dhaka',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-cmc-main-hostel',
+    name: 'Main Hostel, Chattogram Medical College (CMC)',
+    name_bn: 'মেইন হোস্টেল, চট্টগ্রাম মেডিকেল কলেজ (সিএমসি)',
+    alt_names: ['CMC Hostel', 'সিএমসি হোস্টেল', 'Chattogram Medical College Hostel'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.3585,
+    lng: 91.8290,
+    thana: 'Panchlaish',
+    district: 'Chattogram',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-somc-shamsuddin',
+    name: 'Shahid Dr. Shamsuddin Hostel, SOMC Sylhet',
+    name_bn: 'শহীদ ডা. শামসুদ্দিন হোস্টেল, ওসমানী মেডিকেল কলেজ',
+    alt_names: ['SOMC Hostel', 'ওসমানী মেডিকেল হোস্টেল', 'Shamsuddin Hostel SOMC'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.8995,
+    lng: 91.8590,
+    thana: 'Sylhet Sadar',
+    district: 'Sylhet',
+    division: 'Sylhet Division',
+    isCore: true
+  },
+  {
+    id: 'hall-rmc-nurunnabi',
+    name: 'Shahid Dr. Kazi Nurunnabi Hostel, RMC Rajshahi',
+    name_bn: 'শহীদ ডা. কাজী নূরুন্নবী হোস্টেল, রাজশাহী মেডিকেল কলেজ',
+    alt_names: ['RMC Hostel', 'নূরুন্নবী হোস্টেল', 'Rajshahi Medical College Hostel'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.3710,
+    lng: 88.5840,
+    thana: 'Rajpara',
+    district: 'Rajshahi',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-sbmc-hostel',
+    name: 'Main Hostel, Sher-e-Bangla Medical College (SBMC)',
+    name_bn: 'মেইন হোস্টেল, শের-ই-বাংলা মেডিকেল কলেজ',
+    alt_names: ['SBMC Hostel', 'এসবিএমসি হোস্টেল', 'Barisal Medical College Hostel'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.6885,
+    lng: 90.3580,
+    thana: 'Barishal Sadar',
+    district: 'Barishal',
+    division: 'Barishal Division',
+    isCore: true
+  },
+
+  // ==========================================
+  // 18. Other Science & Technology Universities
+  // ==========================================
+  {
+    id: 'hall-mbstu-zia',
+    name: 'Shahid Ziaur Rahman Hall, MBSTU',
+    name_bn: 'শহীদ জিয়াউর রহমান হল, মাভাবিপ্রবি',
+    alt_names: ['Zia Hall MBSTU', 'জিয়া হল মাভাবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.2385,
+    lng: 89.8910,
+    thana: 'Tangail Sadar',
+    district: 'Tangail',
+    division: 'Dhaka Division',
+    isCore: true
+  },
+  {
+    id: 'hall-nstu-salam',
+    name: 'Abdus Salam Hall, NSTU',
+    name_bn: 'আব্দুস সালাম হল, নোবিপ্রবি',
+    alt_names: ['Salam Hall NSTU', 'সালাম হল নোবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 22.7945,
+    lng: 91.1030,
+    thana: 'Noakhali Sadar',
+    district: 'Noakhali',
+    division: 'Chattogram Division',
+    isCore: true
+  },
+  {
+    id: 'hall-hstu-tajuddin',
+    name: 'Tajuddin Ahmed Hall, HSTU',
+    name_bn: 'তাজউদ্দীন আহমেদ হল, হাবিপ্রবি',
+    alt_names: ['Tajuddin Hall HSTU', 'তাজউদ্দীন হল হাবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 25.6985,
+    lng: 88.6550,
+    thana: 'Dinajpur Sadar',
+    district: 'Dinajpur',
+    division: 'Rangpur Division',
+    isCore: true
+  },
+  {
+    id: 'hall-just-meherullah',
+    name: 'Munshi Mohammad Meherullah Hall, JUST',
+    name_bn: 'মুন্সী মোহাম্মদ মেহেরুল্লাহ হল, যবিপ্রবি',
+    alt_names: ['Meherullah Hall JUST', 'মেহেরুল্লাহ হল যবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 23.2325,
+    lng: 89.1265,
+    thana: 'Jashore Sadar',
+    district: 'Jashore',
+    division: 'Khulna Division',
+    isCore: true
+  },
+  {
+    id: 'hall-pust-smrity',
+    name: 'Shahid Smrity Hall, PUST',
+    name_bn: 'শহীদ স্মৃতি হল, পাবিপ্রবি',
+    alt_names: ['Smrity Hall PUST', 'স্মৃতি হল পাবিপ্রবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 24.0135,
+    lng: 89.2800,
+    thana: 'Pabna Sadar',
+    district: 'Pabna',
+    division: 'Rajshahi Division',
+    isCore: true
+  },
+  {
+    id: 'hall-brur-mukhtar',
+    name: 'Shahid Mukhtar Elahi Hall, BRUR',
+    name_bn: 'শহীদ মুখতার ইলাহী হল, বেরোবি',
+    alt_names: ['Mukhtar Elahi Hall BRUR', 'মুখতার ইলাহী হল বেরোবি'],
+    category: 'hall',
+    type: 'dormitory',
+    lat: 25.7295,
+    lng: 89.2630,
+    thana: 'Rangpur Sadar',
+    district: 'Rangpur',
+    division: 'Rangpur Division',
+    isCore: true
+  }
+];
+
+function slugify(name) {
+  if (!name) return 'unknown';
+  return name.toLowerCase()
+    .replace(/'/g, '')
+    .replace(/[^a-z0-9]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
+}
+
+async function integrateHalls() {
+  console.log(`🏛️ Integrating ${UNIVERSITY_HALLS.length} University Residential Halls into edge data...`);
+
+  // 1. Load Core bd_landmarks.json
+  const corePath = path.join(__dirname, '../public/geo/bd_landmarks.json');
+  let coreLandmarks = [];
+  if (fs.existsSync(corePath)) {
+    coreLandmarks = JSON.parse(fs.readFileSync(corePath, 'utf8'));
+  }
+
+  // Remove any stale halls if present
+  const hallIds = new Set(UNIVERSITY_HALLS.map(h => h.id));
+  coreLandmarks = coreLandmarks.filter(l => !hallIds.has(l.id));
+
+  // Add all university halls at the very top of core landmarks
+  UNIVERSITY_HALLS.forEach(h => {
+    coreLandmarks.unshift(h);
+  });
+
+  fs.writeFileSync(corePath, JSON.stringify(coreLandmarks));
+  console.log(`✅ Updated ${corePath}: Now has ${coreLandmarks.length} landmarks.`);
+
+  // 2. Load and Update District Clusters
+  const districtsDir = path.join(__dirname, '../public/geo/districts');
+  const districtHallsMap = new Map();
+
+  UNIVERSITY_HALLS.forEach(h => {
+    const slug = slugify(h.district);
+    if (!districtHallsMap.has(slug)) districtHallsMap.set(slug, []);
+    districtHallsMap.get(slug).push(h);
+  });
+
+  for (const [slug, halls] of districtHallsMap.entries()) {
+    const distPath = path.join(districtsDir, `${slug}.json`);
+    if (fs.existsSync(distPath)) {
+      const data = JSON.parse(fs.readFileSync(distPath, 'utf8'));
+      const existingIds = new Set(data.landmarks.map(l => l.id));
+      let added = 0;
+      halls.forEach(h => {
+        if (!existingIds.has(h.id)) {
+          data.landmarks.unshift(h);
+          added++;
+        }
+      });
+      data.landmarkCount = data.landmarks.length;
+      fs.writeFileSync(distPath, JSON.stringify(data));
+      console.log(`✓ Added ${added} halls to ${slug}.json (Total: ${data.landmarkCount})`);
+    }
+  }
+
+  // 3. Update WebGL Layer (landmarks_layer.geojson)
+  const layerPath = path.join(__dirname, '../public/geo/landmarks_layer.geojson');
+  if (fs.existsSync(layerPath)) {
+    const layer = JSON.parse(fs.readFileSync(layerPath, 'utf8'));
+    const existingLayerIds = new Set(layer.features.map(f => f.properties?.id));
+
+    UNIVERSITY_HALLS.forEach(h => {
+      if (!existingLayerIds.has(h.id)) {
+        layer.features.unshift({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [h.lng, h.lat]
+          },
+          properties: {
+            id: h.id,
+            name: h.name,
+            name_bn: h.name_bn,
+            category: 'hall',
+            type: 'dormitory',
+            thana: h.thana,
+            district: h.district
+          }
+        });
+      }
+    });
+
+    fs.writeFileSync(layerPath, JSON.stringify(layer));
+    console.log(`✅ Updated ${layerPath}: Now has ${layer.features.length} WebGL features.`);
+  }
+
+  console.log('🎉 ALL University Residential Halls successfully integrated into the edge side!');
+}
+
+integrateHalls();

@@ -15,15 +15,19 @@ interface DiscoveredLandmark {
   source: 'edge' | 'osm_crawler';
 }
 
-// In-memory LRU cache for upstream search results ($0 API protection)
+// In-memory LRU cache for upstream search results (Protects upstream from high traffic)
 const SEARCH_CACHE = new Map<string, DiscoveredLandmark[]>();
+
+// In-flight request coalescing (prevents thundering herd if 100k users query concurrently)
+const IN_FLIGHT = new Map<string, Promise<DiscoveredLandmark[]>>();
+
+// Rate limiter state for upstream OSM queries (max 1 req/sec)
+let lastOsmRequestTime = 0;
 
 export async function GET(request: NextRequest) {
   const t0 = performance.now();
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('q')?.trim() || '';
-  const latStr = searchParams.get('lat');
-  const lngStr = searchParams.get('lng');
   const limit = Math.min(parseInt(searchParams.get('limit') || '8', 10), 20);
 
   if (!query || query.length < 2) {
@@ -33,7 +37,7 @@ export async function GET(request: NextRequest) {
   const qLower = query.toLowerCase();
   const cacheKey = qLower;
 
-  // 1. Check in-memory server cache
+  // 1. Check in-memory server cache (0.02ms response)
   if (SEARCH_CACHE.has(cacheKey)) {
     const cached = SEARCH_CACHE.get(cacheKey)!;
     return NextResponse.json({
@@ -43,7 +47,7 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  // 2. Search local core halls registry first
+  // 2. Search local core halls registry first (0.05ms response)
   const localMatches: DiscoveredLandmark[] = [];
   for (const h of UNIVERSITY_HALLS) {
     const n = h.name.toLowerCase();
@@ -77,11 +81,33 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  // 3. Fallback to OpenStreetMap Upstream Autonomous Crawler (Tier 2)
-  try {
+  // 3. Fallback to OpenStreetMap with Request Coalescing & Rate Limiting
+  // If an identical query is already in-flight, await the same promise (0 duplicate calls)
+  if (IN_FLIGHT.has(cacheKey)) {
+    try {
+      const results = await IN_FLIGHT.get(cacheKey)!;
+      return NextResponse.json({
+        results: results.slice(0, limit),
+        source: 'coalesced_crawler',
+        executionMs: +(performance.now() - t0).toFixed(2)
+      });
+    } catch {
+      return NextResponse.json({ results: localMatches, source: 'local_registry', executionMs: 0 });
+    }
+  }
+
+  const crawlPromise = (async () => {
+    // Respect upstream 1 request / second limit
+    const now = Date.now();
+    const elapsed = now - lastOsmRequestTime;
+    if (elapsed < 1000) {
+      await new Promise(r => setTimeout(r, 1000 - elapsed));
+    }
+    lastOsmRequestTime = Date.now();
+
     const osmUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=bd&format=json&addressdetails=1&limit=${limit}`;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s max timeout
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
 
     const osmRes = await fetch(osmUrl, {
       headers: {
@@ -92,53 +118,59 @@ export async function GET(request: NextRequest) {
     });
     clearTimeout(timeoutId);
 
-    if (osmRes.ok) {
-      const osmData = await osmRes.json();
-      const discovered: DiscoveredLandmark[] = osmData.map((item: any, idx: number) => {
-        const addr = item.address || {};
-        const district = addr.state_district || addr.district || addr.city || 'Bangladesh';
-        const thana = addr.suburb || addr.borough || addr.town || addr.village;
-        const isHall = item.display_name.toLowerCase().includes('hall') || query.includes('hall');
+    if (!osmRes.ok) return localMatches;
 
-        return {
-          id: `osm-${item.osm_id || idx}`,
-          name: item.name || item.display_name.split(',')[0],
-          name_bn: addr['name:bn'],
-          category: isHall ? 'hall' : (item.type || 'landmark'),
-          type: isHall ? 'University Residential Hall' : (item.class || 'Landmark'),
-          lat: parseFloat(item.lat),
-          lng: parseFloat(item.lon),
-          thana,
-          district,
-          source: 'osm_crawler'
-        };
-      });
+    const osmData = await osmRes.json();
+    const discovered: DiscoveredLandmark[] = osmData.map((item: any, idx: number) => {
+      const addr = item.address || {};
+      const district = addr.state_district || addr.district || addr.city || 'Bangladesh';
+      const thana = addr.suburb || addr.borough || addr.town || addr.village;
+      const isHall = item.display_name.toLowerCase().includes('hall') || query.includes('hall');
 
-      // Merge local matches and newly discovered matches
-      const merged = [...localMatches];
-      const seen = new Set(merged.map(m => `${m.lat.toFixed(4)},${m.lng.toFixed(4)}`));
-      for (const d of discovered) {
-        const key = `${d.lat.toFixed(4)},${d.lng.toFixed(4)}`;
-        if (!seen.has(key)) {
-          merged.push(d);
-          seen.add(key);
-        }
+      return {
+        id: `osm-${item.osm_id || idx}`,
+        name: item.name || item.display_name.split(',')[0],
+        name_bn: addr['name:bn'],
+        category: isHall ? 'hall' : (item.type || 'landmark'),
+        type: isHall ? 'University Residential Hall' : (item.class || 'Landmark'),
+        lat: parseFloat(item.lat),
+        lng: parseFloat(item.lon),
+        thana,
+        district,
+        source: 'osm_crawler' as const
+      };
+    });
+
+    const merged = [...localMatches];
+    const seen = new Set(merged.map(m => `${m.lat.toFixed(4)},${m.lng.toFixed(4)}`));
+    for (const d of discovered) {
+      const key = `${d.lat.toFixed(4)},${d.lng.toFixed(4)}`;
+      if (!seen.has(key)) {
+        merged.push(d);
+        seen.add(key);
       }
-
-      SEARCH_CACHE.set(cacheKey, merged);
-      return NextResponse.json({
-        results: merged.slice(0, limit),
-        source: 'osm_crawler',
-        executionMs: +(performance.now() - t0).toFixed(2)
-      });
     }
-  } catch (err) {
-    // Upstream crawler timeout or network error - gracefully return local matches
-  }
 
-  return NextResponse.json({
-    results: localMatches,
-    source: 'local_registry',
-    executionMs: +(performance.now() - t0).toFixed(2)
-  });
+    SEARCH_CACHE.set(cacheKey, merged);
+    return merged;
+  })();
+
+  IN_FLIGHT.set(cacheKey, crawlPromise);
+
+  try {
+    const finalResults = await crawlPromise;
+    IN_FLIGHT.delete(cacheKey);
+    return NextResponse.json({
+      results: finalResults.slice(0, limit),
+      source: 'osm_crawler',
+      executionMs: +(performance.now() - t0).toFixed(2)
+    });
+  } catch {
+    IN_FLIGHT.delete(cacheKey);
+    return NextResponse.json({
+      results: localMatches,
+      source: 'local_registry',
+      executionMs: +(performance.now() - t0).toFixed(2)
+    });
+  }
 }

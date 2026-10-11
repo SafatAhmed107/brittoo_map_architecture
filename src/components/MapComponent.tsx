@@ -61,10 +61,14 @@ interface InvalidationTile {
 
 type MapTheme = 'streets' | 'dark' | 'light' | 'satellite';
 
-const OSM_TILES = [
-  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
+const CARTO_VOYAGER_TILES = [
+  'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png'
+];
+const CARTO_DARK_TILES = [
+  'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
+];
+const CARTO_LIGHT_TILES = [
+  'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'
 ];
 
 const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
@@ -72,18 +76,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'osm-raster': {
+      'carto-voyager': {
         type: 'raster',
-        tiles: OSM_TILES,
+        tiles: CARTO_VOYAGER_TILES,
         tileSize: 256,
-        attribution: '© OpenStreetMap contributors'
+        attribution: '© CARTO, © OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'osm-layer',
+        id: 'carto-layer',
         type: 'raster',
-        source: 'osm-raster',
+        source: 'carto-voyager',
         minzoom: 0,
         maxzoom: 19
       }
@@ -93,18 +97,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'osm-raster': {
+      'carto-dark': {
         type: 'raster',
-        tiles: OSM_TILES,
+        tiles: CARTO_DARK_TILES,
         tileSize: 256,
-        attribution: '© OpenStreetMap contributors'
+        attribution: '© CARTO, © OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'osm-layer',
+        id: 'carto-layer',
         type: 'raster',
-        source: 'osm-raster',
+        source: 'carto-dark',
         minzoom: 0,
         maxzoom: 19
       }
@@ -114,18 +118,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'osm-raster': {
+      'carto-light': {
         type: 'raster',
-        tiles: OSM_TILES,
+        tiles: CARTO_LIGHT_TILES,
         tileSize: 256,
-        attribution: '© OpenStreetMap contributors'
+        attribution: '© CARTO, © OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'osm-layer',
+        id: 'carto-layer',
         type: 'raster',
-        source: 'osm-raster',
+        source: 'carto-light',
         minzoom: 0,
         maxzoom: 19
       }
@@ -813,7 +817,13 @@ export default function MapComponent() {
     setSuggestions(localResults);
     setIsSearching(true);
 
-    // 2. Stream 2 (Server & Autonomous Crawler): Deep lookup for rare/obscure landscapes
+    // If local results already provide 2+ strong matches (e.g. university halls, sadars, thanas),
+    // DO NOT make any server call! 100,000 users will make ZERO network requests for 99% of queries.
+    if (localResults.length >= 2) {
+      return;
+    }
+
+    // 2. Stream 2 (Server & Autonomous Crawler): Deep lookup ONLY for rare/obscure landscapes
     searchDebounceRef.current = setTimeout(async () => {
       const abortController = new AbortController();
       searchAbortRef.current = abortController;

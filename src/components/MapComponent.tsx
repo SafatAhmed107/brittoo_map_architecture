@@ -785,18 +785,28 @@ export default function MapComponent() {
     });
   }, [showLandmarksLayer]);
 
-  // Search input handler
+  const searchDebounceRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Search input handler with smooth micro-debounce
   const handleSearchInput = (q: string) => {
     setSearchQuery(q);
     setSelectedSearchIndex(-1);
+
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current);
+    }
+
     if (!q.trim()) {
       setSuggestions([]);
       setIsSearching(false);
       return;
     }
-    const results = searchPlaces(q, 8, selectedCoordsRef.current);
-    setSuggestions(results);
-    setIsSearching(true);
+
+    searchDebounceRef.current = setTimeout(() => {
+      const results = searchPlaces(q, 8, selectedCoordsRef.current);
+      setSuggestions(results);
+      setIsSearching(true);
+    }, 35);
   };
 
   const handleSelectLandmark = (item: LandmarkItem) => {
@@ -986,7 +996,7 @@ export default function MapComponent() {
             value={searchQuery}
             onChange={(e) => handleSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search landmark (e.g. BUET, Curzon, Dhanmondi, SUST, GEC)..."
+            placeholder="Search landmark or hall (e.g. Rashid Hall, SM Hall, BUET, DU, Dhanmondi)..."
             style={{
               flex: 1,
               background: 'transparent',

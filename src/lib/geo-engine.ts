@@ -95,6 +95,61 @@ let allTreeItems: RBushItem[] = [];
 let searchIndex: Fuse<LandmarkItem> | null = null;
 let landmarksData: LandmarkItem[] = [];
 
+// Token & Prefix Inverted Index for sub-millisecond instant autocomplete
+const tokenIndex = new Map<string, Set<number>>();
+
+const KEYBOARD_NEIGHBORS: Record<string, string> = {
+  a: 'qwsz', b: 'vghn', c: 'xdfv', d: 'serfcx', e: 'wsdr', f: 'drtgvc',
+  g: 'ftyhbv', h: 'gyujnb', i: 'ujko', j: 'huikmn', k: 'jiolm', l: 'kop',
+  m: 'njk', n: 'bhjm', o: 'iklp', p: 'ol', q: 'wa', r: 'edft', s: 'awedxz',
+  t: 'rfgy', u: 'yhji', v: 'cfgb', w: 'qase', x: 'zsdc', y: 'tghu', z: 'asx'
+};
+
+function buildTokenIndex(items: LandmarkItem[]) {
+  tokenIndex.clear();
+  const add = (tok: string, idx: number) => {
+    if (tok.length < 2) return;
+    let s = tokenIndex.get(tok);
+    if (!s) {
+      s = new Set();
+      tokenIndex.set(tok, s);
+    }
+    s.add(idx);
+  };
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const text = [
+      item.name,
+      item.name_bn || '',
+      ...(item.alt_names || []),
+      item.thana || '',
+      item.district || ''
+    ].join(' ').toLowerCase();
+
+    const words = text.split(/[\s,().\-_/]+/).filter(w => w.length >= 2);
+    for (const w of words) {
+      add(w, i);
+      const maxPrefix = Math.min(w.length, 12);
+      for (let len = 2; len < maxPrefix; len++) {
+        add(w.slice(0, len), i);
+      }
+    }
+  }
+}
+
+function getTypoVariants(tok: string): string[] {
+  const vars: string[] = [];
+  for (let i = 0; i < tok.length; i++) {
+    const ch = tok[i];
+    const neighbors = KEYBOARD_NEIGHBORS[ch] || '';
+    for (let j = 0; j < neighbors.length; j++) {
+      vars.push(tok.slice(0, i) + neighbors[j] + tok.slice(i + 1));
+    }
+  }
+  return vars;
+}
+
 // ---------- Initialize Spatial Geo Engine (Cache API + RBush) ----------
 export async function initGeoEngine(): Promise<void> {
   if (thanaGeoJSON && allTreeItems.length > 0) return;
@@ -103,7 +158,7 @@ export async function initGeoEngine(): Promise<void> {
     let json: { features: ThanaFeature[] } | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v6');
+      const cache = await caches.open('geo-engine-v7');
       const cacheKey = '/geo/bd_thanas.min.geojson';
       let response = await cache.match(cacheKey);
 
@@ -193,7 +248,7 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
     let landmarks: LandmarkItem[] | null = null;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v6');
+      const cache = await caches.open('geo-engine-v7');
       const cacheKey = '/geo/bd_landmarks.json';
       let response = await cache.match(cacheKey);
 
@@ -215,17 +270,19 @@ export async function initSearchIndex(): Promise<LandmarkItem[]> {
 
     if (landmarks) {
       landmarksData = landmarks;
+      buildTokenIndex(landmarks);
       searchIndex = new Fuse(landmarks, {
         keys: [
           { name: 'name', weight: 0.5 },
           { name: 'name_bn', weight: 0.45 },
-          { name: 'alt_names', weight: 0.35 },
+          { name: 'alt_names', weight: 0.4 },
           { name: 'thana', weight: 0.25 },
           { name: 'district', weight: 0.2 },
           { name: 'category', weight: 0.1 },
           { name: 'type', weight: 0.1 }
         ],
-        threshold: 0.38,
+        threshold: 0.48,
+        ignoreLocation: true,
         includeScore: true,
         shouldSort: true
       });
@@ -350,7 +407,7 @@ export async function loadDistrictData(districtName: string): Promise<boolean> {
     const url = `/geo/districts/${slug}.json`;
 
     if (typeof window !== 'undefined' && 'caches' in window) {
-      const cache = await caches.open('geo-engine-v6');
+      const cache = await caches.open('geo-engine-v7');
       let response = await cache.match(url);
       if (!response) {
         response = await fetch(url);
@@ -379,8 +436,11 @@ export async function loadDistrictData(districtName: string): Promise<boolean> {
       }
       loadedDistricts.add(slug);
 
-      if (added > 0 && searchIndex) {
-        searchIndex.setCollection(landmarksData);
+      if (added > 0) {
+        buildTokenIndex(landmarksData);
+        if (searchIndex) {
+          searchIndex.setCollection(landmarksData);
+        }
       }
       return true;
     }
@@ -390,42 +450,100 @@ export async function loadDistrictData(districtName: string): Promise<boolean> {
   return false;
 }
 
-// ---------- Instant In-Memory Proximity-Biased Autocomplete ----------
+// ---------- Instant In-Memory Proximity-Biased Autocomplete (< 1ms) ----------
 export function searchPlaces(
   query: string,
   limit = 7,
   userCoords?: { lat: number; lng: number }
 ): LandmarkItem[] {
-  if (!searchIndex || !query.trim()) return [];
+  if (!landmarksData.length || !query.trim()) return [];
 
-  const searchLimit = userCoords ? Math.min(limit * 3, 25) : limit;
-  const results = searchIndex.search(query.trim(), { limit: searchLimit });
+  const qClean = query.toLowerCase().trim();
+  const tokens = qClean.split(/[\s,().\-_/]+/).filter(t => t.length >= 2);
 
-  if (!userCoords || results.length <= 1) {
-    return results.slice(0, limit).map(r => r.item);
+  // 1. Fast Set Intersection via Token/Prefix Index (< 0.05ms)
+  let candidateIds: Set<number> | null = null;
+  for (const t of tokens) {
+    let ids = tokenIndex.get(t);
+    if (!ids) {
+      // Check 1-char keyboard adjacent typo variant (e.g. "radhid" -> "rashid" where d <-> s)
+      const typos = getTypoVariants(t);
+      for (const tv of typos) {
+        if (tokenIndex.has(tv)) {
+          ids = tokenIndex.get(tv);
+          break;
+        }
+      }
+    }
+    if (!ids) {
+      candidateIds = new Set();
+      break;
+    }
+    if (candidateIds === null) {
+      candidateIds = new Set(ids);
+    } else {
+      const next = new Set<number>();
+      for (const id of candidateIds) {
+        if (ids.has(id)) next.add(id);
+      }
+      candidateIds = next;
+    }
   }
 
-  const { lat: uLat, lng: uLng } = userCoords;
-  const cosLat = Math.cos((uLat * Math.PI) / 180);
+  let matches: { item: LandmarkItem; score: number }[] = [];
+  const isHallQuery = qClean.includes('hall') || qClean.includes('হল');
 
-  // Proximity-decay ranking: lower score is better in Fuse.js
-  const ranked = results.map(r => {
-    const dLat = (r.item.lat - uLat) * 111.0;
-    const dLng = (r.item.lng - uLng) * 111.0 * cosLat;
-    const distKm = Math.sqrt(dLat * dLat + dLng * dLng);
+  if (candidateIds && candidateIds.size > 0) {
+    for (const id of candidateIds) {
+      const item = landmarksData[id];
+      let score = 0;
+      const nLower = item.name.toLowerCase();
+      const altJoined = (item.alt_names || []).join(' ').toLowerCase();
 
-    const baseScore = r.score ?? 0.4;
-    const adjustedScore = baseScore * (1 + distKm * 0.035);
+      if (nLower === qClean || altJoined.includes(qClean)) score += 2000;
+      else if (nLower.startsWith(qClean)) score += 1000;
+      else if (nLower.includes(qClean)) score += 500;
+      else score += 100;
 
-    return {
-      item: r.item,
-      adjustedScore,
-      distKm
-    };
-  });
+      if (isHallQuery && (item.category === 'hall' || item.type?.includes('Hall') || item.type === 'dormitory')) {
+        score += 400;
+      }
+      matches.push({ item, score });
+    }
+    matches.sort((a, b) => b.score - a.score);
+  }
 
-  ranked.sort((a, b) => a.adjustedScore - b.adjustedScore);
-  return ranked.slice(0, limit).map(r => r.item);
+  // 2. Fallback to fuzzy Bitap ONLY if candidate matches are completely empty
+  if (matches.length === 0 && searchIndex) {
+    const fuzzy = searchIndex.search(qClean, { limit });
+    matches = fuzzy.map(f => {
+      let fScore = (1 - (f.score ?? 0.4)) * 100;
+      if (isHallQuery && (f.item.category === 'hall' || f.item.type?.includes('Hall') || f.item.type === 'dormitory')) {
+        fScore += 300;
+      }
+      return { item: f.item, score: fScore };
+    });
+  }
+
+  // 3. Proximity-decay ranking when userCoords is provided
+  if (userCoords && matches.length > 1) {
+    const { lat: uLat, lng: uLng } = userCoords;
+    const cosLat = Math.cos((uLat * Math.PI) / 180);
+
+    const ranked = matches.map(m => {
+      const dLat = (m.item.lat - uLat) * 111.0;
+      const dLng = (m.item.lng - uLng) * 111.0 * cosLat;
+      const distKm = Math.sqrt(dLat * dLat + dLng * dLng);
+      // Gentle proximity weighting so close places score higher without burying exact matches
+      const finalScore = m.score / (1 + distKm * 0.012);
+      return { item: m.item, finalScore };
+    });
+
+    ranked.sort((a, b) => b.finalScore - a.finalScore);
+    return ranked.slice(0, limit).map(r => r.item);
+  }
+
+  return matches.slice(0, limit).map(m => m.item);
 }
 
 // ---------- Instant In-Memory Radius Institution Filter ----------

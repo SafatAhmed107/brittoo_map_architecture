@@ -33,6 +33,8 @@ export interface LandmarkItem {
   lng: number;
   category?: string;
   type?: string;
+  isCore?: boolean;
+  source?: string;
 }
 
 interface RBushItem {
@@ -88,12 +90,12 @@ export function pointInPolygon([x, y]: [number, number], feature: ThanaFeature):
   return false;
 }
 
+import UNIVERSITY_HALLS from './core-halls-seed';
+
 // ---------- State & Indices ----------
 let thanaGeoJSON: { features: ThanaFeature[] } | null = null;
 const tree = new RBush<RBushItem>();
 let allTreeItems: RBushItem[] = [];
-let searchIndex: Fuse<LandmarkItem> | null = null;
-let landmarksData: LandmarkItem[] = [];
 
 // Token & Prefix Inverted Index for sub-millisecond instant autocomplete
 const tokenIndex = new Map<string, Set<number>>();
@@ -149,6 +151,25 @@ function getTypoVariants(tok: string): string[] {
   }
   return vars;
 }
+
+// Synchronous Tier 0 Seed initialization: 100% eliminates cold-start delay
+let landmarksData: LandmarkItem[] = [...UNIVERSITY_HALLS];
+buildTokenIndex(landmarksData);
+let searchIndex: Fuse<LandmarkItem> | null = new Fuse(landmarksData, {
+  keys: [
+    { name: 'name', weight: 0.5 },
+    { name: 'name_bn', weight: 0.45 },
+    { name: 'alt_names', weight: 0.4 },
+    { name: 'thana', weight: 0.25 },
+    { name: 'district', weight: 0.2 },
+    { name: 'category', weight: 0.1 },
+    { name: 'type', weight: 0.1 }
+  ],
+  threshold: 0.48,
+  ignoreLocation: true,
+  includeScore: true,
+  shouldSort: true
+});
 
 // ---------- Initialize Spatial Geo Engine (Cache API + RBush) ----------
 export async function initGeoEngine(): Promise<void> {

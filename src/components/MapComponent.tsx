@@ -61,14 +61,10 @@ interface InvalidationTile {
 
 type MapTheme = 'streets' | 'dark' | 'light' | 'satellite';
 
-const CARTO_VOYAGER_TILES = [
-  'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png'
-];
-const CARTO_DARK_TILES = [
-  'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
-];
-const CARTO_LIGHT_TILES = [
-  'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'
+const OSM_TILES = [
+  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
 ];
 
 const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
@@ -76,18 +72,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'carto-voyager': {
+      'osm-raster': {
         type: 'raster',
-        tiles: CARTO_VOYAGER_TILES,
+        tiles: OSM_TILES,
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors'
+        attribution: '© OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'carto-layer',
+        id: 'osm-layer',
         type: 'raster',
-        source: 'carto-voyager',
+        source: 'osm-raster',
         minzoom: 0,
         maxzoom: 19
       }
@@ -97,18 +93,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'carto-dark': {
+      'osm-raster': {
         type: 'raster',
-        tiles: CARTO_DARK_TILES,
+        tiles: OSM_TILES,
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors'
+        attribution: '© OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'carto-layer',
+        id: 'osm-layer',
         type: 'raster',
-        source: 'carto-dark',
+        source: 'osm-raster',
         minzoom: 0,
         maxzoom: 19
       }
@@ -118,18 +114,18 @@ const MAP_STYLES: Record<MapTheme, maplibregl.StyleSpecification> = {
     version: 8,
     glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
-      'carto-light': {
+      'osm-raster': {
         type: 'raster',
-        tiles: CARTO_LIGHT_TILES,
+        tiles: OSM_TILES,
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors'
+        attribution: '© OpenStreetMap contributors'
       }
     },
     layers: [
       {
-        id: 'carto-layer',
+        id: 'osm-layer',
         type: 'raster',
-        source: 'carto-light',
+        source: 'osm-raster',
         minzoom: 0,
         maxzoom: 19
       }
